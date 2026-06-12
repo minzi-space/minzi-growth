@@ -5,205 +5,249 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>敏子的成长空间</title>
 <style>
+  :root {
+    --bg: #f9f7f4;
+    --card: #fff;
+    --text: #3a3a3a;
+    --text-light: #999;
+    --accent: #e17055;
+    --accent2: #fdcb6e;
+    --green: #66bb6a;
+    --blue: #42a5f5;
+    --red: #e53935;
+    --orange: #ff9800;
+    --radius: 18px;
+    --shadow: 0 2px 16px rgba(0,0,0,0.06);
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Serif SC", serif;
-    background: #f5f2ed;
-    color: #3a3a3a;
-    line-height: 1.6;
-    max-width: 500px;
-    margin: 0 auto;
-    min-height: 100vh;
+    background: var(--bg); color: var(--text); line-height: 1.7;
+    max-width: 500px; margin: 0 auto; min-height: 100vh;
   }
 
   /* 头部 */
   .header {
-    background: linear-gradient(160deg, #2d3436 0%, #434a54 40%, #596275 100%);
-    padding: 50px 28px 36px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(165deg, #1e272e 0%, #2d3436 50%, #353b48 100%);
+    padding: 44px 24px 32px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ""; position: absolute; top: -60%; left: -30%;
+    width: 160%; height: 160%;
+    background: radial-gradient(ellipse at 30% 25%, rgba(253,203,110,0.08) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 70%, rgba(225,112,85,0.06) 0%, transparent 55%);
   }
   .header::after {
-    content: "";
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 24px;
-    background: #f5f2ed;
-    border-radius: 24px 24px 0 0;
+    content: ""; position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 28px; background: var(--bg); border-radius: 28px 28px 0 0;
   }
-  .header .avatar {
-    width: 72px; height: 72px;
-    background: linear-gradient(135deg, #fdcb6e, #e17055);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 16px;
-    font-size: 2em;
-    box-shadow: 0 4px 20px rgba(253,203,110,0.3);
+  .avatar-wrap {
+    position: relative; z-index: 1;
+    width: 80px; height: 80px; margin: 0 auto 14px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 2.2em; box-shadow: 0 6px 24px rgba(253,203,110,0.25);
   }
-  .header h1 {
-    font-size: 1.5em; font-weight: 700; color: #fff;
-    letter-spacing: 1px; margin-bottom: 4px;
+  .header h1 { font-size: 1.6em; font-weight: 700; color: #fff; position: relative; z-index: 1; letter-spacing: 2px; }
+  .header .subtitle { font-size: 0.85em; color: rgba(255,255,255,0.5); position: relative; z-index: 1; margin-top: 4px; }
+
+  /* 统计栏 */
+  .stats-bar {
+    display: flex; gap: 12px; padding: 0 20px;
+    margin: -16px 0 8px; position: relative; z-index: 2;
   }
-  .header .bio {
-    font-size: 0.85em; color: rgba(255,255,255,0.6);
-    letter-spacing: 1px;
+  .stat-box {
+    flex: 1; background: var(--card); border-radius: 14px;
+    padding: 14px 10px; text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .stat-box .num { font-size: 1.5em; font-weight: 800; color: var(--accent); }
+  .stat-box .label { font-size: 0.7em; color: var(--text-light); margin-top: 2px; }
+
+  /* 主内容 */
+  .main { padding: 0 16px 80px; }
+
+  /* 标签筛选 */
+  .filter-bar {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin: 12px 0 16px;
+  }
+  .filter-chip {
+    font-size: 0.78em; padding: 6px 16px; border-radius: 20px;
+    border: 1.5px solid #e0dcd5; background: var(--card);
+    color: var(--text-light); cursor: pointer;
+    transition: all 0.25s; font-family: inherit; letter-spacing: 0.5px;
+  }
+  .filter-chip.active, .filter-chip:hover {
+    border-color: var(--accent); color: var(--accent);
+    background: #fff5f2;
   }
 
-  /* 统计区 */
-  .stats {
-    display: flex; justify-content: center; gap: 28px;
-    margin: -8px 20px 20px;
-    position: relative; z-index: 2;
-  }
-  .stat-item {
-    text-align: center;
-    background: #fff;
-    border-radius: 14px;
-    padding: 12px 18px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    min-width: 60px;
-  }
-  .stat-item .num { font-size: 1.3em; font-weight: 700; color: #e17055; }
-  .stat-item .label { font-size: 0.7em; color: #999; margin-top: 2px; }
-
-  /* 内容区 */
-  .content { padding: 0 16px 80px; }
-
-  .section-title {
-    font-size: 0.82em; font-weight: 600; color: #b2b2b2;
-    letter-spacing: 2px; text-transform: uppercase;
-    margin: 20px 0 12px; padding-left: 4px;
+  /* 时间线 */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: ""; position: absolute; left: 10px; top: 8px; bottom: 8px;
+    width: 2px; background: linear-gradient(to bottom, var(--accent2), #e0dcd5);
   }
 
-  /* 卡片 */
-  .card {
-    display: block;
-    background: #fff;
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 12px;
-    text-decoration: none;
-    color: inherit;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  /* 内容卡片 */
+  .post {
+    position: relative; margin-bottom: 18px;
+    background: var(--card); border-radius: var(--radius);
+    padding: 22px 20px; box-shadow: var(--shadow);
+    text-decoration: none; color: inherit; display: block;
     transition: transform 0.2s, box-shadow 0.2s;
-    position: relative;
-    overflow: hidden;
   }
-  .card:active {
-    transform: scale(0.98);
-    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
-  }
-  .card .card-icon {
-    font-size: 2em; margin-bottom: 10px;
-  }
-  .card .card-tag {
-    display: inline-block;
-    font-size: 0.7em;
-    padding: 2px 10px;
-    border-radius: 12px;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-  }
-  .card .card-tag.reading { background: #e8f5e9; color: #388e3c; }
-  .card .card-tag.parenting { background: #fff3e0; color: #e65100; }
-  .card .card-tag.study { background: #e3f2fd; color: #1565c0; }
-  .card .card-tag.culture { background: #fce4ec; color: #c62828; }
+  .post:active { transform: scale(0.985); box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
 
-  .card h3 {
-    font-size: 1.1em; font-weight: 700; margin-bottom: 4px;
-    color: #2d3436;
+  /* 时间线圆点 */
+  .post::before {
+    content: ""; position: absolute;
+    left: -22px; top: 26px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--card); border: 2.5px solid var(--accent2);
+    z-index: 1;
   }
-  .card p {
-    font-size: 0.82em; color: #888;
-    line-height: 1.5;
+  .post:first-child::before { border-color: var(--accent); }
+
+  /* 日期 */
+  .post .date {
+    font-size: 0.7em; color: var(--text-light);
+    letter-spacing: 0.5px; margin-bottom: 6px;
+  }
+  /* 分类标签 */
+  .post .category {
+    display: inline-block; font-size: 0.68em; letter-spacing: 1px;
+    padding: 3px 10px; border-radius: 10px; margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .cat-reading { background: #e8f5e9; color: #388e3c; }
+  .cat-parenting { background: #fff3e0; color: #e65100; }
+  .cat-story { background: #fce4ec; color: #c62828; }
+
+  .post h3 { font-size: 1.08em; font-weight: 700; margin-bottom: 4px; color: #2d3436; }
+  .post .excerpt { font-size: 0.82em; color: var(--text-light); line-height: 1.5; }
+  .post .read-more {
+    font-size: 0.78em; color: var(--accent); font-weight: 600;
+    margin-top: 8px; display: inline-block;
+  }
+  .post .icon { font-size: 1.6em; float: right; margin-top: -8px; opacity: 0.7; }
+
+  /* 互动引导 */
+  .cta-banner {
+    background: linear-gradient(135deg, #fef9ef, #fdf3e0);
+    border: 1.5px dashed #e9c46a;
+    border-radius: var(--radius); padding: 20px; margin-top: 24px;
+    text-align: center;
+  }
+  .cta-banner h4 { font-size: 0.95em; color: #6b4c1e; margin-bottom: 4px; }
+  .cta-banner p { font-size: 0.78em; color: #8b7355; line-height: 1.6; }
+  .cta-banner .wechat-tag {
+    display: inline-block; margin-top: 8px; padding: 4px 14px;
+    background: #fff; border-radius: 14px; font-size: 0.78em;
+    color: #6b4c1e; font-weight: 600; border: 1px solid #e9c46a;
   }
 
   /* 底部 */
   .footer {
-    text-align: center; padding: 24px; color: #ccc; font-size: 0.75em;
+    text-align: center; padding: 28px 20px 32px;
+    color: #ccc; font-size: 0.75em; line-height: 2;
   }
-  .footer a { color: #e17055; text-decoration: none; }
-
-  /* 标签条 */
-  .accent-bar {
-    position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-    border-radius: 4px 0 0 4px;
-  }
-  .accent-bar.green { background: #66bb6a; }
-  .accent-bar.orange { background: #ff9800; }
-  .accent-bar.red { background: #e53935; }
-  .accent-bar.blue { background: #42a5f5; }
+  .footer a { color: var(--accent); text-decoration: none; }
 
   @media (max-width: 400px) {
-    .header { padding: 40px 20px 30px; }
-    .stats { gap: 16px; }
-    .card { padding: 18px; }
+    .header { padding: 36px 18px 26px; }
+    .stats-bar { padding: 0 12px; }
+    .main { padding: 0 12px 60px; }
+    .post { padding: 18px 16px; }
   }
 </style>
 </head>
 <body>
 
-<!-- 头部 -->
 <div class="header">
-  <div class="avatar">🌱</div>
+  <div class="avatar-wrap">🌱</div>
   <h1>敏子的成长空间</h1>
-  <p class="bio">阅读 · 学习 · 育儿 · 分享</p>
+  <p class="subtitle">用阅读点亮生活 · 用记录见证成长</p>
 </div>
 
-<!-- 统计 -->
-<div class="stats">
-  <div class="stat-item">
-    <div class="num">3</div>
-    <div class="label">篇笔记</div>
+<div class="stats-bar">
+  <div class="stat-box"><div class="num">3</div><div class="label">篇内容</div></div>
+  <div class="stat-box"><div class="num">3</div><div class="label">个分类</div></div>
+  <div class="stat-box"><div class="num">∞</div><div class="label">持续更新</div></div>
+</div>
+
+<div class="main">
+
+  <!-- 筛选 -->
+  <div class="filter-bar">
+    <button class="filter-chip active" data-filter="all">全部</button>
+    <button class="filter-chip" data-filter="reading">📖 读书笔记</button>
+    <button class="filter-chip" data-filter="parenting">👨‍👩‍👧 育儿成长</button>
+    <button class="filter-chip" data-filter="story">🎭 绘本共读</button>
   </div>
-  <div class="stat-item">
-    <div class="num">∞</div>
-    <div class="label">持续更新</div>
+
+  <!-- 时间线 -->
+  <div class="timeline">
+
+    <a class="post" data-cat="reading" href="认知觉醒_学习笔记.html">
+      <div class="icon">🧠</div>
+      <div class="date">2026年6月12日</div>
+      <span class="category cat-reading">读书笔记</span>
+      <h3>《认知觉醒》学习笔记</h3>
+      <p class="excerpt">周岭 著 · 10个核心概念全景拆解：三重脑、焦虑根源、元认知、专注力、学习力、行动力……开启自我改变的原动力。</p>
+      <span class="read-more">阅读全文 →</span>
+    </a>
+
+    <a class="post" data-cat="parenting" href="青春期30讲_第5-6讲.html">
+      <div class="icon">🌿</div>
+      <div class="date">2026年6月12日</div>
+      <span class="category cat-parenting">家长课件</span>
+      <h3>青春期30讲 · 第5-6讲</h3>
+      <p class="excerpt">王金海 主讲 · "叛逆是独立的开始" + "发脾气是本能，控制脾气是本领" · 给青春期父母的实用教养指南。</p>
+      <span class="read-more">阅读全文 →</span>
+    </a>
+
+    <a class="post" data-cat="story" href="七仙女下凡_领读课件.html">
+      <div class="icon">🧚</div>
+      <div class="date">2026年6月12日</div>
+      <span class="category cat-story">戏曲绘本</span>
+      <h3>《七仙女下凡》领读指南</h3>
+      <p class="excerpt">中国中福会出版社 · 黄梅戏融合《天仙配》· 领读人：敏敏 · 适合6岁+亲子共读的交互式幻灯片。</p>
+      <span class="read-more">阅读全文 →</span>
+    </a>
+
   </div>
-</div>
 
-<!-- 内容列表 -->
-<div class="content">
-
-  <div class="section-title">📖 读书笔记</div>
-
-  <a class="card" href="认知觉醒_学习笔记.html">
-    <div class="accent-bar green"></div>
-    <div class="card-icon">🧠</div>
-    <span class="card-tag reading">读书笔记</span>
-    <h3>《认知觉醒》学习笔记</h3>
-    <p>周岭 著 · 10个核心概念：三重脑、焦虑根源、元认知、专注力、学习力……开启自我改变的原动力</p>
-  </a>
-
-  <div class="section-title">👨‍👩‍👧 育儿成长</div>
-
-  <a class="card" href="青春期30讲_第5-6讲.html">
-    <div class="accent-bar orange"></div>
-    <div class="card-icon">🌿</div>
-    <span class="card-tag parenting">家长课件</span>
-    <h3>青春期30讲 · 第5-6讲</h3>
-    <p>王金海 主讲 · 叛逆是独立的开始 / 发脾气是本能控制脾气是本领 · 给青春期家长的实用指南</p>
-  </a>
-
-  <div class="section-title">🎭 绘本共读</div>
-
-  <a class="card" href="七仙女下凡_领读课件.html">
-    <div class="accent-bar red"></div>
-    <div class="card-icon">🧚</div>
-    <span class="card-tag culture">戏曲绘本</span>
-    <h3>《七仙女下凡》领读指南</h3>
-    <p>中国中福会出版社 · 黄梅戏融合 · 领读人：敏敏 · 适合6岁+亲子共读</p>
-  </a>
+  <!-- 互动引导 -->
+  <div class="cta-banner">
+    <h4>💬 想和敏敏交流？</h4>
+    <p>欢迎在公众号后台留言，或添加微信一起探讨<br>阅读、育儿、成长的话题～</p>
+    <span class="wechat-tag">📱 公众号：敏子的成长空间</span>
+  </div>
 
 </div>
 
-<!-- 底部 -->
 <div class="footer">
   <p>🌱 敏子的成长空间</p>
-  <p style="margin-top:4px;">每一篇笔记都是一颗种子，正在慢慢生根发芽</p>
+  <p>每一篇笔记都是一颗种子，正在慢慢生根发芽</p>
+  <p style="margin-top:6px; font-size:0.9em;">本站由 <a href="https://github.com/minzi-space/minzi-growth">GitHub Pages</a> 驱动</p>
 </div>
+
+<script>
+// 分类筛选
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    const filter = chip.dataset.filter;
+    document.querySelectorAll('.post').forEach(post => {
+      post.style.display = (filter === 'all' || post.dataset.cat === filter) ? '' : 'none';
+    });
+  });
+});
+</script>
 
 </body>
 </html>
