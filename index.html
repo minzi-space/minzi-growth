@@ -6,35 +6,204 @@
 <title>敏子的成长空间</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Serif SC", serif;
+    background: #f5f2ed;
+    color: #3a3a3a;
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto;
     min-height: 100vh;
+  }
+
+  /* 头部 */
+  .header {
+    background: linear-gradient(160deg, #2d3436 0%, #434a54 40%, #596275 100%);
+    padding: 50px 28px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 24px;
+    background: #f5f2ed;
+    border-radius: 24px 24px 0 0;
+  }
+  .header .avatar {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, #fdcb6e, #e17055);
+    border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 2em;
+    box-shadow: 0 4px 20px rgba(253,203,110,0.3);
   }
+  .header h1 {
+    font-size: 1.5em; font-weight: 700; color: #fff;
+    letter-spacing: 1px; margin-bottom: 4px;
+  }
+  .header .bio {
+    font-size: 0.85em; color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+  }
+
+  /* 统计区 */
+  .stats {
+    display: flex; justify-content: center; gap: 28px;
+    margin: -8px 20px 20px;
+    position: relative; z-index: 2;
+  }
+  .stat-item {
+    text-align: center;
+    background: #fff;
+    border-radius: 14px;
+    padding: 12px 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    min-width: 60px;
+  }
+  .stat-item .num { font-size: 1.3em; font-weight: 700; color: #e17055; }
+  .stat-item .label { font-size: 0.7em; color: #999; margin-top: 2px; }
+
+  /* 内容区 */
+  .content { padding: 0 16px 80px; }
+
+  .section-title {
+    font-size: 0.82em; font-weight: 600; color: #b2b2b2;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin: 20px 0 12px; padding-left: 4px;
+  }
+
+  /* 卡片 */
   .card {
-    background: white; border-radius: 20px; padding: 60px 40px;
-    max-width: 500px; width: 90%; text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    display: block;
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
   }
-  .card h1 { font-size: 2em; color: #333; margin-bottom: 10px; }
-  .card .subtitle { color: #888; font-size: 1.1em; margin-bottom: 30px; }
-  .card .emoji { font-size: 4em; margin-bottom: 20px; }
-  .card .info { color: #666; line-height: 2; font-size: 1em; }
-  .card a { color: #667eea; text-decoration: none; }
-  .card a:hover { text-decoration: underline; }
+  .card:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  }
+  .card .card-icon {
+    font-size: 2em; margin-bottom: 10px;
+  }
+  .card .card-tag {
+    display: inline-block;
+    font-size: 0.7em;
+    padding: 2px 10px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .card .card-tag.reading { background: #e8f5e9; color: #388e3c; }
+  .card .card-tag.parenting { background: #fff3e0; color: #e65100; }
+  .card .card-tag.study { background: #e3f2fd; color: #1565c0; }
+  .card .card-tag.culture { background: #fce4ec; color: #c62828; }
+
+  .card h3 {
+    font-size: 1.1em; font-weight: 700; margin-bottom: 4px;
+    color: #2d3436;
+  }
+  .card p {
+    font-size: 0.82em; color: #888;
+    line-height: 1.5;
+  }
+
+  /* 底部 */
+  .footer {
+    text-align: center; padding: 24px; color: #ccc; font-size: 0.75em;
+  }
+  .footer a { color: #e17055; text-decoration: none; }
+
+  /* 标签条 */
+  .accent-bar {
+    position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+    border-radius: 4px 0 0 4px;
+  }
+  .accent-bar.green { background: #66bb6a; }
+  .accent-bar.orange { background: #ff9800; }
+  .accent-bar.red { background: #e53935; }
+  .accent-bar.blue { background: #42a5f5; }
+
+  @media (max-width: 400px) {
+    .header { padding: 40px 20px 30px; }
+    .stats { gap: 16px; }
+    .card { padding: 18px; }
+  }
 </style>
 </head>
 <body>
-<div class="card">
-  <div class="emoji">🌱</div>
+
+<!-- 头部 -->
+<div class="header">
+  <div class="avatar">🌱</div>
   <h1>敏子的成长空间</h1>
-  <p class="subtitle">记录学习、阅读与生活的点滴</p>
-  <p class="info">
-    这里是我的知识花园 🏡<br>
-    每一篇笔记都是一颗种子<br>
-    正在慢慢生根发芽……
-  </p>
+  <p class="bio">阅读 · 学习 · 育儿 · 分享</p>
 </div>
+
+<!-- 统计 -->
+<div class="stats">
+  <div class="stat-item">
+    <div class="num">3</div>
+    <div class="label">篇笔记</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">∞</div>
+    <div class="label">持续更新</div>
+  </div>
+</div>
+
+<!-- 内容列表 -->
+<div class="content">
+
+  <div class="section-title">📖 读书笔记</div>
+
+  <a class="card" href="认知觉醒_学习笔记.html">
+    <div class="accent-bar green"></div>
+    <div class="card-icon">🧠</div>
+    <span class="card-tag reading">读书笔记</span>
+    <h3>《认知觉醒》学习笔记</h3>
+    <p>周岭 著 · 10个核心概念：三重脑、焦虑根源、元认知、专注力、学习力……开启自我改变的原动力</p>
+  </a>
+
+  <div class="section-title">👨‍👩‍👧 育儿成长</div>
+
+  <a class="card" href="青春期30讲_第5-6讲.html">
+    <div class="accent-bar orange"></div>
+    <div class="card-icon">🌿</div>
+    <span class="card-tag parenting">家长课件</span>
+    <h3>青春期30讲 · 第5-6讲</h3>
+    <p>王金海 主讲 · 叛逆是独立的开始 / 发脾气是本能控制脾气是本领 · 给青春期家长的实用指南</p>
+  </a>
+
+  <div class="section-title">🎭 绘本共读</div>
+
+  <a class="card" href="七仙女下凡_领读课件.html">
+    <div class="accent-bar red"></div>
+    <div class="card-icon">🧚</div>
+    <span class="card-tag culture">戏曲绘本</span>
+    <h3>《七仙女下凡》领读指南</h3>
+    <p>中国中福会出版社 · 黄梅戏融合 · 领读人：敏敏 · 适合6岁+亲子共读</p>
+  </a>
+
+</div>
+
+<!-- 底部 -->
+<div class="footer">
+  <p>🌱 敏子的成长空间</p>
+  <p style="margin-top:4px;">每一篇笔记都是一颗种子，正在慢慢生根发芽</p>
+</div>
+
 </body>
 </html>
