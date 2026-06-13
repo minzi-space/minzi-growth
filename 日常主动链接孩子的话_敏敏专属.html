@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日常主动链接孩子的话 · 敏敏专属</title>
+<style>
+:root {
+  --boy: #5B8FA8;
+  --girl: #D4869C;
+  --bg: #F9F7F4;
+  --card: #FFFFFF;
+  --text: #3A3A3A;
+  --sub: #888;
+  --accent: #E8B86D;
+  --border: #EBE5DF;
+  --red: #D9534F;
+  --green: #4A9E6B;
+  --shadow: 0 1px 8px rgba(0,0,0,0.05);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+}
+.header {
+  text-align: center; padding: 36px 20px 28px;
+  background: linear-gradient(135deg, var(--boy) 0%, var(--girl) 100%);
+  color: #fff; border-radius: 0 0 16px 16px;
+}
+.header h1 { font-size: 24px; font-weight: 700; letter-spacing: 1px; }
+.header .sub { font-size: 14px; opacity: .85; margin-top: 6px; }
+.header .meta { font-size: 12px; opacity: .6; margin-top: 8px; }
+.container { max-width: 640px; margin: 0 auto; padding: 20px 16px 60px; }
+
+.intro {
+  background: var(--card); border-radius: 12px; padding: 20px 22px;
+  margin-bottom: 20px; box-shadow: var(--shadow);
+  border-left: 4px solid var(--accent);
+}
+.intro h2 { font-size: 16px; color: var(--boy); margin-bottom: 10px; }
+.intro p { font-size: 13px; color: var(--text); line-height: 1.8; margin-bottom: 6px; }
+.intro strong { color: var(--red); }
+
+.section-label {
+  font-size: 18px; font-weight: 700; text-align: center;
+  margin: 28px 0 14px; padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+}
+.section-label .tag {
+  display: inline-block; font-size: 11px; padding: 2px 10px;
+  border-radius: 10px; margin-left: 8px; vertical-align: middle;
+}
+.section-label .tag.boy { background: #E8F0F4; color: var(--boy); }
+.section-label .tag.girl { background: #FBE8ED; color: var(--girl); }
+.section-label .tag.both { background: #FFF5E6; color: #C4956A; }
+
+.scene-group {
+  background: var(--card); border-radius: 12px;
+  margin-bottom: 14px; box-shadow: var(--shadow); overflow: hidden;
+}
+.scene-header {
+  padding: 12px 18px; font-size: 14px; font-weight: 700;
+  background: #FAFAFA; border-bottom: 1px solid var(--border);
+}
+.scene-header .icon { margin-right: 6px; }
+.line-list { padding: 8px 0; }
+.line-item {
+  padding: 10px 18px; font-size: 13px; line-height: 1.6;
+  border-bottom: 1px dashed #F0ECE6;
+  display: flex; align-items: flex-start; gap: 8px;
+}
+.line-item:last-child { border-bottom: none; }
+.line-item .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 7px;
+}
+.line-item .dot.boy { background: var(--boy); }
+.line-item .dot.girl { background: var(--girl); }
+.line-item .dot.both { background: var(--accent); }
+.line-item .quote { font-style: italic; }
+.line-item .note {
+  font-size: 11px; color: var(--sub); margin-top: 2px; font-style: normal;
+}
+
+.compare-card {
+  background: var(--card); border-radius: 12px;
+  margin-bottom: 14px; box-shadow: var(--shadow); overflow: hidden;
+}
+.compare-row {
+  display: flex; align-items: center; padding: 10px 16px;
+  border-bottom: 1px dashed #F0ECE6; font-size: 13px;
+}
+.compare-row:last-child { border-bottom: none; }
+.compare-bad {
+  flex: 1; color: var(--red); text-decoration: line-through;
+  text-decoration-color: rgba(217,83,79,0.4);
+}
+.compare-arrow {
+  font-size: 16px; color: var(--sub); margin: 0 10px; flex-shrink: 0;
+}
+.compare-good { flex: 1; color: var(--green); font-weight: 500; }
+
+.footer {
+  text-align: center; padding: 30px 20px;
+  color: var(--sub); font-size: 12px;
+  border-top: 1px solid var(--border); margin-top: 30px;
+}
+.footer strong { color: var(--boy); }
+
+@media (max-width: 400px) {
+  .container { padding: 14px 10px 40px; }
+  .compare-row { flex-direction: column; gap: 4px; }
+  .compare-arrow { transform: rotate(90deg); margin: 2px 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>日常主动链接孩子的话</h1>
+  <p class="sub">不用等话题，随手就能说</p>
+  <p class="meta">哥哥13岁 · 妹妹6岁 · 敏敏专属</p>
+</div>
+
+<div class="container">
+
+  <div class="intro">
+    <h2>📌 怎么用这份清单</h2>
+    <p>这些话不是"台词"，是<strong>提醒你开口的钩子</strong>。不用背，扫一遍有个印象，遇到合适的场景自然就用出来了。</p>
+    <p>关键不是说了什么，是你<strong>主动走向他</strong>的那个姿态——"我想到你了，我想跟你说话"。这个姿态本身就是在说：你很重要。</p>
+  </div>
+
+  <!-- ==================== 场景一：放学见面 ==================== -->
+  <div class="section-label">放学见面 <span class="tag both">通用</span></div>
+
+  <div class="scene-group">
+    <div class="scene-header"><span class="icon">🚪</span>刚接到孩子的那一刻</div>
+    <div class="line-list">
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"嘿！见到你真开心。"</span><div class="note">不是"作业写了吗"，是你见到他的第一反应。让他知道你见到他是高兴的。</div></div></div>
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"来抱一个！一天没见都想你了。"</span><div class="note">6岁孩子用身体语言最直接。</div></div></div>
+      <div class="line-item"><div class="dot boy"></div><div><span class="quote">"今天有没有什么好玩的事？先说好玩的。"</span><div class="note">"先说好玩的"这四个字很关键——告诉他今天你可以不谈学习。</div></div></div>
+    </div>
+  </div>
+
+  <div class="compare-card">
+    <div class="compare-row">
+      <div class="compare-bad">"作业多不多？"</div>
+      <div class="compare-arrow">→</div>
+      <div class="compare-good">"今天有什么好玩的？"</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-bad">"考了多少分？"</div>
+      <div class="compare-arrow">→</div>
+      <div class="compare-good">"今天有没有让你笑的事？"</div>
+    </div>
+  </div>
+
+  <!-- ==================== 场景二：吃饭时 ==================== -->
+  <div class="section-label">吃饭时 <span class="tag both">通用</span></div>
+
+  <div class="scene-group">
+    <div class="scene-header"><span class="icon">🍽️</span>饭桌上的轻松切入</div>
+    <div class="line-list">
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"我有个事想听听你的意见……"</span><div class="note">让他觉得自己的想法被需要。不管什么话题，"想听你的意见"这五个字对青春期孩子杀伤力巨大。</div></div></div>
+      <div class="line-item"><div class="dot boy"></div><div><span class="quote">"今天我们班/公司发生了一件事……你觉得如果是你怎么办？"</span><div class="note">用你自己的故事当引子，把话语权交给他。</div></div></div>
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"这个菜你觉得好不好吃？你来当评委打分！"</span><div class="note">6岁孩子喜欢"当评委""当老师"这类角色，给她话语权。</div></div></div>
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"如果今天可以重来一次，你最想重做哪件事？"</span><div class="note">比问"今天怎么样"更有画面感，更容易打开话匣子。</div></div></div>
+    </div>
+  </div>
+
+  <!-- ==================== 场景三：他玩游戏/玩玩具时 ==================== -->
+  <div class="section-label">他玩游戏 / 她玩玩具时</div>
+
+  <div class="scene-group">
+    <div class="scene-header"><span class="icon">🎮</span>哥哥打游戏时</div>
+    <div class="line-list">
+      <div class="line-item"><div class="dot boy"></div><div><span class="quote">"你在打什么？给我看看画面。"</span><div class="note">不是"别玩了"，是"我对你正在做的事感兴趣"。</div></div></div>
+      <div class="line-item"><div class="dot boy"></div><div><span class="quote">"这一关你过了吗？最难的地方在哪？"</span><div class="note">让他展示自己的能力，而不是被审视。</div></div></div>
+      <div class="line-item"><div class="dot boy"></div><div><span class="quote">"你在这个游戏里算什么段位？厉害吗？"</span><div class="note">用他的语言体系聊他的世界。</div></div></div>
+    </div>
+  </div>
+
+  <div class="scene-group">
+    <div class="scene-header"><span class="icon">🧸</span>妹妹玩玩具时</div>
+    <div class="line-list">
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"你在搭什么呀？能给我当助手吗？"</span><div class="note">不是旁观，是参与。让她给你分配任务。</div></div></div>
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"你这个小人是哪个故事里的？给我讲讲。"</span><div class="note">进入她的想象世界，而不是把她拉回现实。</div></div></div>
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"我来当病人，你来当医生好不好？"</span><div class="note">她最喜欢的就是当"有权力"的角色，配合她。</div></div></div>
+    </div>
+  </div>
+
+  <!-- ==================== 场景四：睡前 ==================== -->
+  <div class="section-label">睡前 <span class="tag both">通用</span></div>
+
+  <div class="scene-group">
+    <div class="scene-header"><span class="icon">🌙</span>一天结束前，最适合走心的时刻</div>
+    <div class="line-list">
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"今天有没有什么时刻你觉得特别爽/特别酷？"</span><div class="note">"爽"和"酷"比"开心"更能打动青春期孩子。</div></div></div>
+      <div class="line-item"><div class="dot boy"></div><div><span class="quote">"今天有没有什么事想吐槽？我保证只听不说。"</span><div class="note">睡前是防备心最低的时候，"我保证只听不说"是通行证。</div></div></div>
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"今天你的心里住的是开心怪兽还是难过怪兽？"</span><div class="note">延续情绪小怪兽的语言，她一听就懂。</div></div></div>
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"晚安，妈妈最喜欢你……"（说一个具体的）</span><div class="note">每天换一个——"最喜欢你笑的样子""最喜欢你今天帮我拿拖鞋"——让她带着被爱着的感觉入睡。</div></div></div>
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"谢谢你今天……"（说一件他今天做的事）</span><div class="note">感谢比夸奖更让人觉得自己有价值。哪怕只是"谢谢你今天把碗放进了水池"。</div></div></div>
+    </div>
+  </div>
+
+  <!-- ==================== 场景五：发现他/她情绪不好 ==================== -->
+  <div class="section-label">发现他/她情绪不好</div>
+
+  <div class="scene-group">
+    <div class="scene-header"><span class="icon">😤</span>哥哥情绪不好时</div>
+    <div class="line-list">
+      <div class="line-item"><div class="dot boy"></div><div><span class="quote">"我注意到你今天好像不太开心，想说了随时找我。"</span><div class="note">不强求他此刻就说，但让他知道你看到了、你在。</div></div></div>
+      <div class="line-item"><div class="dot boy"></div><div><span class="quote">"我不问发生了什么，但我在这里。"</span><div class="note">青春期男孩最怕被追问，这句话同时给了空间和安全感。</div></div></div>
+      <div class="line-item"><div class="dot boy"></div><div><span class="quote">"要不要出去走走？什么都不说也行。"</span><div class="note">并肩走比面对面更容易打开话匣子。不用对视的压力小很多。</div></div></div>
+    </div>
+  </div>
+
+  <div class="scene-group">
+    <div class="scene-header"><span class="icon">😢</span>妹妹情绪不好时</div>
+    <div class="line-list">
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"妈妈看到了，你很难过对不对？来抱抱。"</span><div class="note">先确认感受，再给身体安抚。不要急着解决问题。</div></div></div>
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"难过怪兽又来了是不是？它这次是什么颜色的？"</span><div class="note">用她已经熟悉的"情绪小怪兽"语言，把抽象情绪具象化。</div></div></div>
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"你先哭一会儿，妈妈陪你。哭完我们再想办法。"</span><div class="note">允许她哭，就是允许她的感受存在。敏感孩子最怕"别哭了"。</div></div></div>
+    </div>
+  </div>
+
+  <div class="compare-card">
+    <div class="compare-row">
+      <div class="compare-bad">"怎么了？说啊！"</div>
+      <div class="compare-arrow">→</div>
+      <div class="compare-good">"想说了随时找我。"</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-bad">"别哭了！"</div>
+      <div class="compare-arrow">→</div>
+      <div class="compare-good">"妈妈陪着你。"</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-bad">"这点小事至于吗？"</div>
+      <div class="compare-arrow">→</div>
+      <div class="compare-good">"妈妈看到你很难过。"</div>
+    </div>
+  </div>
+
+  <!-- ==================== 场景六：日常碎片时刻 ==================== -->
+  <div class="section-label">日常碎片时刻 <span class="tag both">通用</span></div>
+
+  <div class="scene-group">
+    <div class="scene-header"><span class="icon">✨</span>走路、坐车、排队……随手就能说的</div>
+    <div class="line-list">
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"你猜我今天遇到什么了？"</span><div class="note">先分享你的，再问他。对话是对等的。</div></div></div>
+      <div class="line-item"><div class="dot boy"></div><div><span class="quote">"如果你有超能力，你选什么？"</span><div class="note">这种无聊问题反而是青春期男孩愿意接的——安全、好玩、不涉及隐私。</div></div></div>
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"我们来玩'你更喜欢'游戏——你更喜欢冰淇淋还是蛋糕？"</span><div class="note">二选一游戏对6岁孩子特别好使，她永远有答案。</div></div></div>
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"你今天帮了谁？谁帮了你？"</span><div class="note">让他/她注意到自己是有能力帮助别人的——价值感的来源。</div></div></div>
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"你觉得世界上最厉害的职业是什么？"</span><div class="note">不评判答案，只追问"为什么"。</div></div></div>
+    </div>
+  </div>
+
+  <!-- ==================== 场景七：他/她做了好事时 ==================== -->
+  <div class="section-label">他/她做了好事时</div>
+
+  <div class="scene-group">
+    <div class="scene-header"><span class="icon">🌟</span>抓住每一个可以确认"你很棒"的瞬间</div>
+    <div class="line-list">
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"我注意到你今天……（具体的事），这叫（品质词）。"</span><div class="note">不说"你真棒"，说"你今天把玩具收好了，这叫有责任心"。给行为命名，比笼统夸奖有用100倍。</div></div></div>
+      <div class="line-item"><div class="dot boy"></div><div><span class="quote">"这件事你做得比我强。"</span><div class="note">承认孩子比自己强，是对青春期男孩最大的尊重。</div></div></div>
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"谢谢你帮我……你真是妈妈的小帮手。"</span><div class="note">"谢谢你帮了忙"比"你真乖"更有力量——前者说你有价值，后者说你听话。</div></div></div>
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"你是怎么想到的？"</span><div class="note">当他说了一个好主意，别只说"不错"，问他怎么想到的——这是对他思考过程的最高尊重。</div></div></div>
+    </div>
+  </div>
+
+  <!-- ==================== 场景八：想表达爱时 ==================== -->
+  <div class="section-label">想表达爱时 <span class="tag both">通用</span></div>
+
+  <div class="scene-group">
+    <div class="scene-header"><span class="icon">❤️</span>不需要理由，就是告诉他/她"我爱你"</div>
+    <div class="line-list">
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"你知道我为什么喜欢你吗？因为……"（说一个具体的）</span><div class="note">"因为"后面的内容要具体——"因为你笑起来眼睛弯弯的""因为你帮妹妹拿东西的时候特别温柔"。</div></div></div>
+      <div class="line-item"><div class="dot boy"></div><div><span class="quote">"不管成绩怎么样，你都是我最骄傲的儿子。"</span><div class="note">成绩不好的孩子太需要听到这句话了。你可能觉得不说他也知道，但他不知道。</div></div></div>
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"妈妈最喜欢你今天……"（每天换一个）</span><div class="note">让她带着"今天妈妈又发现了我一个优点"的感觉入睡。</div></div></div>
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"有你当我的孩子，我觉得特别幸运。"</span><div class="note">不是"你要争气"，是"你已经是我的幸运"。完全不同的信号。</div></div></div>
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"如果让你再选一次妈妈，你还选我吗？"（等她说选你之后）"我也选你！"</span><div class="note">6岁孩子会毫不犹豫说选你。这个小游戏比"我爱你"更有互动感。</div></div></div>
+    </div>
+  </div>
+
+  <!-- ==================== 场景九：吵架后修复 ==================== -->
+  <div class="section-label">吵架后修复 <span class="tag both">通用</span></div>
+
+  <div class="scene-group">
+    <div class="scene-header"><span class="icon">🤝</span>吵完架，怎么重新连接</div>
+    <div class="line-list">
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"刚才妈妈语气不好，对不起。我们重新来？"</span><div class="note">先道歉不代表你错了，代表你愿意修复关系。孩子最怕的不是吵架，是吵完以后没人来修复。</div></div></div>
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"我刚才说的那句话不是真心的，我其实想说的是……"</span><div class="note">区分"气话"和"真心话"，让孩子知道你刚才的狠话不代表你真的那么想。</div></div></div>
+      <div class="line-item"><div class="dot boy"></div><div><span class="quote">"我们都有点激动了。等你准备好了，我们再聊。"</span><div class="note">给他时间和空间，不逼他当场和好。</div></div></div>
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"妈妈刚才凶了你，你还愿意抱抱我吗？"</span><div class="note">主动示弱，把选择权交给她。敏感孩子需要确认——你凶了我，但你还爱我。</div></div></div>
+    </div>
+  </div>
+
+  <div class="compare-card">
+    <div class="compare-row">
+      <div class="compare-bad">"刚才的事就算了。"</div>
+      <div class="compare-arrow">→</div>
+      <div class="compare-good">"刚才妈妈语气不好，对不起。"</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-bad">"你还生气呢？"（不耐烦）</div>
+      <div class="compare-arrow">→</div>
+      <div class="compare-good">"还在难过对吗？妈妈陪你。"</div>
+    </div>
+  </div>
+
+  <!-- ==================== 场景十：发现他进步了 ==================== -->
+  <div class="section-label">发现他/她进步了 <span class="tag both">通用</span></div>
+
+  <div class="scene-group">
+    <div class="scene-header"><span class="icon">📈</span>哪怕一点点进步，也要被看见</div>
+    <div class="line-list">
+      <div class="line-item"><div class="dot both"></div><div><span class="quote">"你这次比上次多了一分/快了一分钟，你是怎么做到的？"</span><div class="note">不关注"还不够好"，关注"比上次好了"。问他"怎么做到的"是对进步过程的最高认可。</div></div></div>
+      <div class="line-item"><div class="dot boy"></div><div><span class="quote">"这件事搁以前你可能做不了，现在你做到了。"</span><div class="note">帮他看到自己的成长——用过去的自己做参照，不用别人。</div></div></div>
+      <div class="line-item"><div class="dot girl"></div><div><span class="quote">"你今天勇敢了一点点哦！来，放一颗豆子！"</span><div class="note">链接到勇气储蓄罐，让进步被实物记录。</div></div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>敏敏，这些话你不用全记住。<strong>记住一个原则就够了：主动走向他。</strong></p>
+    <p>你走向他的那一刻，他在心里说："妈妈想我了。"</p>
+    <p>这就够了。</p>
+    <p style="margin-top:12px;">—— 小圆 ❤️</p>
+  </div>
+
+</div>
+</body>
+</html>
