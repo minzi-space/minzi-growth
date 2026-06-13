@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>敏敏的亲子沟通指南 · 哥哥篇（13岁）</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f0f4f7;
+    color: #333;
+    font-size: 13px;
+    line-height: 1.55;
+    padding: 12px;
+  }
+  .container { max-width: 640px; margin: 0 auto; }
+
+  /* 顶部 */
+  .header {
+    background: linear-gradient(135deg, #5B8FA8 0%, #7AADC0 100%);
+    color: #fff;
+    padding: 16px 18px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .header h1 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .header .subtitle { font-size: 11px; opacity: .9; }
+  .header .stages {
+    font-size: 10px; opacity: .8; margin-top: 6px;
+    display: flex; justify-content: center; gap: 6px; flex-wrap: wrap;
+  }
+  .header .stages span { background: rgba(255,255,255,.18); padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+
+  /* 通用卡片 */
+  .card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    border-left: 3px solid #5B8FA8;
+  }
+
+  /* 自检清单 */
+  .checklist .item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 5px 0; border-bottom: 1px solid #eef2f5;
+    font-size: 12px;
+  }
+  .checklist .item:last-child { border-bottom: none; }
+  .checklist .num {
+    background: #5B8FA8; color: #fff; border-radius: 50%;
+    width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;
+    font-size: 10px; flex-shrink: 0; margin-top: 1px;
+  }
+  .checklist .ask { color: #c0392b; font-weight: 600; }
+  .checklist .fix { color: #5B8FA8; margin-left: 2px; }
+
+  /* 炸毛应急 */
+  .emergency {
+    background: #FFF3E0; border-left-color: #E67E22;
+    text-align: center; font-size: 13px; font-weight: 600; padding: 10px 14px;
+  }
+  .emergency .icon { font-size: 16px; }
+
+  /* 实践班应急小抄 */
+  .muscle-memory {
+    background: linear-gradient(135deg, #FFF8E1, #FFF3CD);
+    border: 2px solid #E8B86D;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .muscle-memory h3 {
+    font-size: 14px; color: #C4956A; margin-bottom: 10px;
+    text-align: center;
+  }
+  .muscle-memory h3 .badge {
+    background: #E8B86D; color: #fff; font-size: 10px;
+    padding: 2px 8px; border-radius: 8px; margin-left: 6px;
+  }
+  .muscle-memory .step {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 6px 0; border-bottom: 1px dashed #F0E4CC;
+    font-size: 12px; line-height: 1.6;
+  }
+  .muscle-memory .step:last-child { border-bottom: none; }
+  .muscle-memory .step-num {
+    background: #E8B86D; color: #fff; border-radius: 50%;
+    width: 22px; height: 22px; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+  .muscle-memory .step-body { flex: 1; }
+  .muscle-memory .step-body .trigger { font-weight: 700; color: #C0392B; }
+  .muscle-memory .step-body .action { color: #27AE60; font-weight: 600; }
+  .muscle-memory .step-body .from { font-size: 10px; color: #999; margin-top: 1px; }
+  .muscle-memory .one-liner {
+    text-align: center; font-size: 13px; font-weight: 700;
+    color: #C4956A; padding-top: 8px; margin-top: 4px;
+    border-top: 1px solid #F0E4CC;
+  }
+
+  /* 14天卡片 */
+  .day-card {
+    border-left-color: #5B8FA8;
+    padding: 10px 12px; margin-bottom: 10px;
+  }
+  .day-card .day-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+  }
+  .day-card .day-num {
+    background: #5B8FA8; color: #fff; border-radius: 50%;
+    width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0;
+  }
+  .day-card .day-title { font-size: 14px; font-weight: 700; color: #3A6B82; }
+  .day-card .mindset {
+    font-size: 12px; color: #5B8FA8; background: #EFF6F9;
+    padding: 6px 8px; border-radius: 4px; margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .day-card .mindset::before { content: "🧠 "; }
+  .day-card .topic {
+    font-size: 12px; margin-bottom: 4px;
+  }
+  .day-card .topic .topic-title { font-weight: 700; color: #444; }
+  .day-card .topic .topic-theme { color: #777; }
+  .day-card .topic-questions {
+    font-size: 11px; color: #666; padding-left: 12px; margin-bottom: 6px;
+  }
+  .day-card .topic-questions li { margin-bottom: 1px; }
+  .day-card .contrast {
+    font-size: 11px; display: flex; flex-wrap: wrap; gap: 4px; align-items: baseline;
+    background: #fafafa; padding: 5px 8px; border-radius: 4px;
+  }
+  .day-card .contrast .bad { color: #c0392b; text-decoration: line-through; }
+  .day-card .contrast .good { color: #27ae60; font-weight: 600; }
+  .day-card .contrast .arrow { color: #999; margin: 0 2px; }
+
+  /* 朗读按钮 */
+  .speak-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: #5B8FA8; color: #fff; border: none;
+    border-radius: 12px; padding: 4px 10px; font-size: 10px;
+    cursor: pointer; margin-left: 8px; opacity: .8;
+    transition: opacity .2s; vertical-align: middle;
+  }
+  .speak-btn:hover { opacity: 1; }
+  .speak-btn.playing { background: #E67E22; }
+  .speak-btn:disabled { opacity: .4; cursor: default; }
+  .global-speak {
+    display: block; margin: 0 auto 12px;
+    background: #5B8FA8; color: #fff; border: none;
+    border-radius: 16px; padding: 8px 24px; font-size: 13px;
+    cursor: pointer; font-weight: 600; letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(91,143,168,.25);
+    transition: all .2s;
+  }
+  .global-speak:hover { background: #4A7A91; transform: translateY(-1px); }
+  .global-speak.playing { background: #E67E22; animation: pulse 1.2s infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 2px 8px rgba(230,126,34,.25); } 50% { box-shadow: 0 2px 20px rgba(230,126,34,.45); } }
+
+  /* 章节标题 */
+  .section-title {
+    font-size: 13px; font-weight: 700; color: #3A6B82;
+    margin: 12px 0 8px; padding-left: 8px; border-left: 3px solid #5B8FA8;
+  }
+
+  /* 底部署名 */
+  .footer {
+    text-align: center; color: #999; font-size: 11px;
+    padding: 12px 0 6px;
+  }
+
+  @media (max-width: 400px) {
+    body { padding: 8px; font-size: 12px; }
+    .card { padding: 10px 12px; }
+    .day-card { padding: 8px 10px; }
+    .header { padding: 14px 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== 顶部 ===== -->
+  <div class="header">
+    <h1>敏敏的亲子沟通指南 · 哥哥篇（13岁）</h1>
+    <div class="subtitle">14天，每天5分钟，找回和儿子的连接</div>
+    <div class="stages">
+      <span>Day1-3 破冰</span><span>Day4-7 发现</span><span>Day8-11 赋能</span><span>Day12-14 内化</span>
+    </div>
+  </div>
+
+  <!-- ===== 实践班应急小抄 ===== -->
+  <div class="muscle-memory">
+    <h3>🧠 实践班应急小抄 <span class="badge">王金海·肌肉记忆</span></h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <span class="trigger">开口前，摸一下喉咙</span><br>
+        喉咙发紧、声音往上冲 → <span class="action">深呼吸一次，把话咽回去</span> → 然后只问："<span class="action">你怎么想的？</span>"<br>
+        <span class="from">对应：情绪管理 + 赋能沟通</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <span class="trigger">想批评时，先描述一个事实</span><br>
+        不是"你又磨蹭" → 是"<span class="action">我看到你书打开了但笔还没拿</span>"<br>
+        <span class="from">对应：破解逆反心理</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <span class="trigger">辅导结束，找一件他做对了的事说出来</span><br>
+        "<span class="action">今天你虽然不想来，但还是坐下来了——这很难得</span>"<br>
+        <span class="from">对应：赋能沟通 + 爱与规则</span>
+      </div>
+    </div>
+    <div class="one-liner">💡 不是八节课，就三个动作。做到一个就赚到一个。</div>
+  </div>
+
+  <!-- ===== 敏敏自检清单 ===== -->
+  <div class="section-title">📋 敏敏自检清单（每天对照一次）</div>
+  <div class="card checklist">
+    <div class="item"><span class="num">1</span><span><span class="ask">我是不是又在催？</span> <span class="fix">→ 只观察不催促，描述事实而非下达指令</span></span></div>
+    <div class="item"><span class="num">2</span><span><span class="ask">我是不是在说教？</span> <span class="fix">→ 闭嘴倾听，点头比开口更有力量</span></span></div>
+    <div class="item"><span class="num">3</span><span><span class="ask">我是不是在否定他的感受？</span> <span class="fix">→ 先共情再引导，"听起来你……"开头</span></span></div>
+    <div class="item"><span class="num">4</span><span><span class="ask">我是不是拿他和别人比？</span> <span class="fix">→ 只和他的昨天比，看见每一个微小的进步</span></span></div>
+    <div class="item"><span class="num">5</span><span><span class="ask">我今天有没有纯粹地表达爱？</span> <span class="fix">→ 不附带任何条件的拥抱、微笑或一句"有你真好"</span></span></div>
+  </div>
+
+  <!-- ===== 炸毛应急法则 ===== -->
+  <div class="card emergency">
+    <span class="icon">⚡</span> <strong>炸毛应急法则：</strong>闭嘴 → 深呼吸3次 → 走开5分钟 → 回来只说"妈妈刚才有点急，我们重新聊"
+  </div>
+
+  <!-- ===== 14天卡片 ===== -->
+  <div class="section-title">📅 14天沟通卡片 <button class="global-speak" id="speakAll" title="连续朗读全部14天">🔊 朗读全部（通勤听）</button></div>
+
+  <!-- Day 1 -->
+  <div class="card day-card" id="day1">
+    <div class="day-header"><span class="day-num">1</span><span class="day-title">游戏探秘</span><button class="speak-btn" onclick="speakCard('day1',this)">🔊</button></div>
+    <div class="mindset">你不是去审查游戏，你是去参观他的世界。游戏的吸引力背后，藏着他渴望的成就感和掌控感。</div>
+    <div class="topic">
+      <span class="topic-title">💬 话题</span>
+      <span class="topic-theme">—— 让他带你走进他喜欢的游戏世界</span>
+    </div>
+    <ul class="topic-questions">
+      <li>① 你最喜欢哪个游戏？能给我看看吗？</li>
+      <li>② 这个游戏最厉害的地方是什么？</li>
+      <li>③ 你在游戏里最得意的成就是什么？</li>
+    </ul>
+    <div class="contrast">
+      <span class="bad">"整天就知道打游戏！"</span>
+      <span class="arrow">→</span>
+      <span class="good">"这个游戏看起来挺有挑战的，教教妈妈？"</span>
+    </div>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="card day-card" id="day2">
+    <div class="day-header"><span class="day-num">2</span><span class="day-title">朋友圈</span><button class="speak-btn" onclick="speakCard('day2',this)">🔊</button></div>
+    <div class="mindset">不问成绩问朋友，让他知道你关心的不是分数，而是他这个人。朋友是青春期孩子最重要的情感支撑。</div>
+    <div class="topic">
+      <span class="topic-title">💬 话题</span>
+      <span class="topic-theme">—— 了解他的社交圈，但不评判</span>
+    </div>
+    <ul class="topic-questions">
+      <li>① 班上和你关系最好的同学是谁呀？</li>
+      <li>② 你们平时在一起最喜欢做什么？</li>
+      <li>③ 有没有什么搞笑的班级八卦跟我分享？</li>
+    </ul>
+    <div class="contrast">
+      <span class="bad">"别跟那些成绩差的混在一起！"</span>
+      <span class="arrow">→</span>
+      <span class="good">"你这个朋友身上有什么特别的地方吸引你？"</span>
+    </div>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="card day-card" id="day3">
+    <div class="day-header"><span class="day-num">3</span><span class="day-title">假如你是大人</span><button class="speak-btn" onclick="speakCard('day3',this)">🔊</button></div>
+    <div class="mindset">给他想象的权利，他会不经意间说出真实想法。这个假设让他感到被尊重为独立的个体。</div>
+    <div class="topic">
+      <span class="topic-title">💬 话题</span>
+      <span class="topic-theme">—— 用假设性提问了解他的价值观</span>
+    </div>
+    <ul class="topic-questions">
+      <li>① 假如明天你变成大人了，第一件事想做什么？</li>
+      <li>② 你觉得大人最自由的地方是什么？</li>
+      <li>③ 如果你是爸爸/妈妈，你会怎么管孩子？</li>
+    </ul>
+    <div class="contrast">
+      <span class="bad">"你懂什么，等你长大就知道了！"</span>
+      <span class="arrow">→</span>
+      <span class="good">"你的想法挺有意思的，再跟我说说？"</span>
+    </div>
+  </div>
+
+  <!-- Day 4 -->
+  <div class="card day-card" id="day4">
+    <div class="day-header"><span class="day-num">4</span><span class="day-title">高光时刻</span><button class="speak-btn" onclick="speakCard('day4',this)">🔊</button></div>
+    <div class="mindset">帮他回忆自己曾经很棒的时刻，这是建立自信最温柔的方式。青春期的孩子需要被提醒：你一直都很棒。</div>
+    <div class="topic">
+      <span class="topic-title">💬 话题</span>
+      <span class="topic-theme">—— 引导他回忆自己的闪光时刻</span>
+    </div>
+    <ul class="topic-questions">
+      <li>① 你觉得自己做过最酷的一件事是什么？</li>
+      <li>② 有没有哪次你帮了别人，自己特别开心？</li>
+      <li>③ 从小到大，你觉得自己进步最大的是什么？</li>
+    </ul>
+    <div class="contrast">
+      <span class="bad">"你看看你以前多好，现在怎么变成这样？"</span>
+      <span class="arrow">→</span>
+      <span class="good">"我还记得你那次……，那时候你真的让我很骄傲。"</span>
+    </div>
+  </div>
+
+  <!-- Day 5 -->
+  <div class="card day-card" id="day5">
+    <div class="day-header"><span class="day-num">5</span><span class="day-title">吐槽大会</span><button class="speak-btn" onclick="speakCard('day5',this)">🔊</button></div>
+    <div class="mindset">让他安全地吐槽你，这是建立平等关系的关键一步。忍住不辩解、不解释，你就赢了一大半。</div>
+    <div class="topic">
+      <span class="topic-title">💬 话题</span>
+      <span class="topic-theme">—— 给他一个安全的吐槽空间</span>
+    </div>
+    <ul class="topic-questions">
+      <li>① 你觉得妈妈最烦人的地方是什么？</li>
+      <li>② 有没有什么话你一直想跟我说但不敢说？</li>
+      <li>③ 你希望妈妈改掉什么习惯？</li>
+    </ul>
+    <div class="contrast">
+      <span class="bad">"我这么做还不是为你好！"</span>
+      <span class="arrow">→</span>
+      <span class="good">"谢谢你告诉我这些，妈妈会认真想想。"</span>
+    </div>
+  </div>
+
+  <!-- Day 6 -->
+  <div class="card day-card" id="day6">
+    <div class="day-header"><span class="day-num">6</span><span class="day-title">他的偶像</span><button class="speak-btn" onclick="speakCard('day6',this)">🔊</button></div>
+    <div class="mindset">偶像是一面镜子，照出他向往的样子。了解他的偶像，就是了解他内心的渴望和价值观。</div>
+    <div class="topic">
+      <span class="topic-title">💬 话题</span>
+      <span class="topic-theme">—— 通过偶像了解他的精神世界</span>
+    </div>
+    <ul class="topic-questions">
+      <li>① 你现在最欣赏的人是谁？（明星/UP主/运动员都行）</li>
+      <li>② 你觉得他身上最吸引你的品质是什么？</li>
+      <li>③ 如果有一天你像他一样，你最想做什么？</li>
+    </ul>
+    <div class="contrast">
+      <span class="bad">"追这些有什么用，能当饭吃吗？"</span>
+      <span class="arrow">→</span>
+      <span class="good">"这个人的经历挺有意思的，你觉得他最值得学的是什么？"</span>
+    </div>
+  </div>
+
+  <!-- Day 7 -->
+  <div class="card day-card" id="day7">
+    <div class="day-header"><span class="day-num">7</span><span class="day-title">妈妈小时候</span><button class="speak-btn" onclick="speakCard('day7',this)">🔊</button></div>
+    <div class="mindset">分享你的糗事和失败，让他知道你不是完美的神，而是一个真实的人。脆弱拉近距离。</div>
+    <div class="topic">
+      <span class="topic-title">💬 话题</span>
+      <span class="topic-theme">—— 用你的童年故事拉近亲子距离</span>
+    </div>
+    <ul class="topic-questions">
+      <li>① 我小时候干过一件特别蠢的事……你想听吗？</li>
+      <li>② 我像你这么大的时候，最怕的是什么？</li>
+      <li>③ 你觉得妈妈的童年和你的有什么不一样？</li>
+    </ul>
+    <div class="contrast">
+      <span class="bad">"我们那时候哪有你这么好的条件！"</span>
+      <span class="arrow">→</span>
+      <span class="good">"我那时候也跟你一样，经常……"</span>
+    </div>
+  </div>
+
+  <!-- Day 8 -->
+  <div class="card day-card" id="day8">
+    <div class="day-header"><span class="day-num">8</span><span class="day-title">失败博物馆</span><button class="speak-btn" onclick="speakCard('day8',this)">🔊</button></div>
+    <div class="mindset">失败不是污点，是成长的印记。教会他和自己和解，比教会他成功更重要。</div>
+    <div class="topic">
+      <span class="topic-title">💬 话题</span>
+      <span class="topic-theme">—— 重新定义失败的价值</span>
+    </div>
+    <ul class="topic-questions">
+      <li>① 你最近有没有什么搞砸了的事？</li>
+      <li>② 从那次失败里你学到了什么？</li>
+      <li>③ 如果重新来一次，你会怎么做？</li>
+    </ul>
+    <div class="contrast">
+      <span class="bad">"你看看，早就跟你说了不听！"</span>
+      <span class="arrow">→</span>
+      <span class="good">"搞砸了没关系，重要的是你从中学到了什么。"</span>
+    </div>
+  </div>
+
+  <!-- Day 9 -->
+  <div class="card day-card" id="day9">
+    <div class="day-header"><span class="day-num">9</span><span class="day-title">独一无二的优势</span><button class="speak-btn" onclick="speakCard('day9',this)">🔊</button></div>
+    <div class="mindset">每个孩子都有自己的超能力，你的任务是帮他发现它。不是补短板，而是扬长板。</div>
+    <div class="topic">
+      <span class="topic-title">💬 话题</span>
+      <span class="topic-theme">—— 帮他看见自己独特的闪光点</span>
+    </div>
+    <ul class="topic-questions">
+      <li>① 你觉得什么事你做起来特别轻松，别人却觉得难？</li>
+      <li>② 别人一般会夸你什么？</li>
+      <li>③ 如果给你一个超能力，你最想要什么？为什么？</li>
+    </ul>
+    <div class="contrast">
+      <span class="bad">"你这孩子除了玩还会什么？"</span>
+      <span class="arrow">→</span>
+      <span class="good">"我发现你在______方面特别有天赋，你自己感觉到了吗？"</span>
+    </div>
+  </div>
+
+  <!-- Day 10 -->
+  <div class="card day-card" id="day10">
+    <div class="day-header"><span class="day-num">10</span><span class="day-title">换位实验室</span><button class="speak-btn" onclick="speakCard('day10',this)">🔊</button></div>
+    <div class="mindset">角色互换是最快的共情练习。当你扮演他，他才真正感觉到你愿意走进他的世界。</div>
+    <div class="topic">
+      <span class="topic-title">💬 话题</span>
+      <span class="topic-theme">—— 用角色互换建立真正的共情</span>
+    </div>
+    <ul class="topic-questions">
+      <li>① 今天你来当妈妈，我来当你，你想怎么安排这一天？</li>
+      <li>② 你觉得当大人最难的是什么？当小孩最难的是什么？</li>
+      <li>③ 如果你是妈妈，看到孩子玩手机很久，你会怎么说？</li>
+    </ul>
+    <div class="contrast">
+      <span class="bad">"你知道妈妈多辛苦吗？"</span>
+      <span class="arrow">→</span>
+      <span class="good">"如果你是我，这种情况下你会怎么做？"</span>
+    </div>
+  </div>
+
+  <!-- Day 11 -->
+  <div class="card day-card" id="day11">
+    <div class="day-header"><span class="day-num">11</span><span class="day-title">小步胜利法</span><button class="speak-btn" onclick="speakCard('day11',this)">🔊</button></div>
+    <div class="mindset">大目标让人焦虑，小胜利带来动力。帮他拆解任务，每一步成功都在建立"我能行"的信念。</div>
+    <div class="topic">
+      <span class="topic-title">💬 话题</span>
+      <span class="topic-theme">—— 用微小的进步建立持续的动力</span>
+    </div>
+    <ul class="topic-questions">
+      <li>① 最近有没有什么事，你觉得只要迈出第一步就能搞定？</li>
+      <li>② 如果把这个大任务切成3小块，你会先做哪一块？</li>
+      <li>③ 今天做成了什么小事，值得给自己点个赞？</li>
+    </ul>
+    <div class="contrast">
+      <span class="bad">"这么简单的事都做不好！"</span>
+      <span class="arrow">→</span>
+      <span class="good">"你看，今天比昨天多做了5分钟，这就是进步！"</span>
+    </div>
+  </div>
+
+  <!-- Day 12 -->
+  <div class="card day-card" id="day12">
+    <div class="day-header"><span class="day-num">12</span><span class="day-title">学霸不是天生的</span><button class="speak-btn" onclick="speakCard('day12',this)">🔊</button></div>
+    <div class="mindset">打破"天赋决定论"，让他相信努力和方法比聪明更重要。成长型思维是终身财富。</div>
+    <div class="topic">
+      <span class="topic-title">💬 话题</span>
+      <span class="topic-theme">—— 建立成长型思维，打破天赋迷思</span>
+    </div>
+    <ul class="topic-questions">
+      <li>① 你觉得成绩好的人，是天生的还是后天努力的？</li>
+      <li>② 你有没有过一开始觉得难，后来慢慢学会的经历？</li>
+      <li>③ 如果给你一个学霸的学习方法，你愿意试试吗？</li>
+    </ul>
+    <div class="contrast">
+      <span class="bad">"人家聪明是天生的，你比不了。"</span>
+      <span class="arrow">→</span>
+      <span class="good">"你还没学会，只是因为你还没找到对的方法。"</span>
+    </div>
+  </div>
+
+  <!-- Day 13 -->
+  <div class="card day-card" id="day13">
+    <div class="day-header"><span class="day-num">13</span><span class="day-title">为什么而学</span><button class="speak-btn" onclick="speakCard('day13',this)">🔊</button></div>
+    <div class="mindset">学习的意义不是分数，是探索世界的工具。帮他找到属于他自己的学习动力，而非你的焦虑。</div>
+    <div class="topic">
+      <span class="topic-title">💬 话题</span>
+      <span class="topic-theme">—— 帮他找到学习的真实意义</span>
+    </div>
+    <ul class="topic-questions">
+      <li>① 如果不考虑考试，你最想学什么？</li>
+      <li>② 你觉得现在学的知识，以后什么时候可能用到？</li>
+      <li>③ 如果学习是一场游戏，你觉得自己现在在第几关？</li>
+    </ul>
+    <div class="contrast">
+      <span class="bad">"不好好学习以后扫大街都没人要！"</span>
+      <span class="arrow">→</span>
+      <span class="good">"你未来想做的事，需要现在学哪些东西来铺垫？"</span>
+    </div>
+  </div>
+
+  <!-- Day 14 -->
+  <div class="card day-card" id="day14">
+    <div class="day-header"><span class="day-num">14</span><span class="day-title">感恩三件事</span><button class="speak-btn" onclick="speakCard('day14',this)">🔊</button></div>
+    <div class="mindset">感恩不是大道理，是每天发现生活中的小确幸。积极心理学证明：感恩练习能持久提升幸福感。</div>
+    <div class="topic">
+      <span class="topic-title">💬 话题</span>
+      <span class="topic-theme">—— 用感恩练习为14天画上温暖的句号</span>
+    </div>
+    <ul class="topic-questions">
+      <li>① 今天有没有发生什么让你开心的小事？</li>
+      <li>② 最近有没有谁帮了你，让你觉得温暖？</li>
+      <li>③ 回顾这14天，你最喜欢哪一次和妈妈的聊天？</li>
+    </ul>
+    <div class="contrast">
+      <span class="bad">"你看看别人家孩子多懂事！"</span>
+      <span class="arrow">→</span>
+      <span class="good">"谢谢你做我的孩子，这14天让我重新认识了你。"</span>
+    </div>
+  </div>
+
+  <!-- ===== 底部署名 ===== -->
+  <div class="footer">—— 小圆 ❤️</div>
+
+</div>
+
+<script>
+let currentUtterance = null;
+let isSpeakingAll = false;
+let speakAllBtn = null;
+
+function getCardText(card) {
+  let text = '';
+  const dayTitle = card.querySelector('.day-title');
+  if (dayTitle) text += dayTitle.textContent.trim() + '。';
+  const mindset = card.querySelector('.mindset');
+  if (mindset) text += mindset.textContent.replace('🧠 ','').trim() + '。';
+  const topic = card.querySelector('.topic');
+  if (topic) text += topic.textContent.replace('💬 话题','话题').trim() + '。';
+  const questions = card.querySelectorAll('.topic-questions li');
+  questions.forEach((q,i) => { text += '第' + (i+1) + '个问题：' + q.textContent.trim() + '。'; });
+  const contrast = card.querySelector('.contrast');
+  if (contrast) {
+    const bad = contrast.querySelector('.bad');
+    const good = contrast.querySelector('.good');
+    if (bad && good) text += '避免说：' + bad.textContent.trim() + '。换成说：' + good.textContent.trim() + '。';
+  }
+  return text;
+}
+
+function speak(text, btn) {
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'zh-CN';
+  utterance.rate = 0.95;
+  utterance.pitch = 1.0;
+  // 优先选择女声
+  const voices = window.speechSynthesis.getVoices();
+  const zhVoice = voices.find(v => v.lang.startsWith('zh') && v.name.includes('Female')) ||
+                  voices.find(v => v.lang.startsWith('zh-CN')) ||
+                  voices.find(v => v.lang.startsWith('zh'));
+  if (zhVoice) utterance.voice = zhVoice;
+  currentUtterance = utterance;
+  if (btn) {
+    btn.classList.add('playing');
+    btn.textContent = '⏸';
+  }
+  utterance.onend = () => {
+    if (btn) { btn.classList.remove('playing'); btn.textContent = '🔊'; }
+    currentUtterance = null;
+  };
+  utterance.onerror = () => {
+    if (btn) { btn.classList.remove('playing'); btn.textContent = '🔊'; }
+    currentUtterance = null;
+  };
+  window.speechSynthesis.speak(utterance);
+}
+
+function stopSpeak() {
+  window.speechSynthesis.cancel();
+  currentUtterance = null;
+  isSpeakingAll = false;
+  if (speakAllBtn) { speakAllBtn.classList.remove('playing'); speakAllBtn.textContent = '🔊 朗读全部（通勤听）'; }
+  document.querySelectorAll('.speak-btn').forEach(b => { b.classList.remove('playing'); b.textContent = '🔊'; });
+}
+
+function speakCard(id, btn) {
+  if (currentUtterance && btn.classList.contains('playing')) {
+    stopSpeak();
+    return;
+  }
+  stopSpeak();
+  if (isSpeakingAll) { isSpeakingAll = false; if (speakAllBtn) { speakAllBtn.classList.remove('playing'); speakAllBtn.textContent = '🔊 朗读全部（通勤听）'; } }
+  const card = document.getElementById(id);
+  if (!card) return;
+  const text = getCardText(card);
+  speak(text, btn);
+}
+
+async function speakAll() {
+  if (isSpeakingAll) { stopSpeak(); return; }
+  stopSpeak();
+  isSpeakingAll = true;
+  speakAllBtn = document.getElementById('speakAll');
+  speakAllBtn.classList.add('playing');
+  speakAllBtn.textContent = '⏸ 停止朗读';
+  const days = ['day1','day2','day3','day4','day5','day6','day7','day8','day9','day10','day11','day12','day13','day14'];
+  for (let i = 0; i < days.length; i++) {
+    if (!isSpeakingAll) break;
+    const card = document.getElementById(days[i]);
+    if (!card) continue;
+    const dayNum = i + 1;
+    const text = '第' + dayNum + '天。' + getCardText(card);
+    await new Promise((resolve) => {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'zh-CN';
+      utterance.rate = 0.95;
+      utterance.pitch = 1.0;
+      const voices = window.speechSynthesis.getVoices();
+      const zhVoice = voices.find(v => v.lang.startsWith('zh') && v.name.includes('Female')) ||
+                      voices.find(v => v.lang.startsWith('zh-CN')) ||
+                      voices.find(v => v.lang.startsWith('zh'));
+      if (zhVoice) utterance.voice = zhVoice;
+      currentUtterance = utterance;
+      utterance.onend = () => { currentUtterance = null; resolve(); };
+      utterance.onerror = () => { currentUtterance = null; resolve(); };
+      window.speechSynthesis.speak(utterance);
+    });
+    if (isSpeakingAll && i < days.length - 1) {
+      await new Promise(r => setTimeout(r, 800));
+    }
+  }
+  isSpeakingAll = false;
+  if (speakAllBtn) { speakAllBtn.classList.remove('playing'); speakAllBtn.textContent = '🔊 朗读全部（通勤听）'; }
+  currentUtterance = null;
+}
+
+// 预加载语音列表
+window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+window.speechSynthesis.getVoices();
+
+// 初始化全部朗读按钮
+document.addEventListener('DOMContentLoaded', () => {
+  speakAllBtn = document.getElementById('speakAll');
+  speakAllBtn.addEventListener('click', speakAll);
+});
+</script>
+</body>
+</html>

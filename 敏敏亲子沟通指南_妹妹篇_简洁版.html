@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>敏敏的亲子沟通指南 · 妹妹篇（6岁）</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  background:#fdf2f5;color:#4a3040;line-height:1.5;font-size:13px;
+  max-width:640px;margin:0 auto;padding:16px 12px 24px;
+}
+/* 顶部 */
+.header{text-align:center;margin-bottom:16px;}
+.header h1{font-size:18px;color:#D4869C;font-weight:700;margin-bottom:4px;}
+.header .sub{font-size:11px;color:#999;margin-bottom:6px;}
+.header .stages{font-size:10px;color:#aaa;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;}
+.header .stages span{background:#fce4ec;color:#D4869C;padding:2px 8px;border-radius:10px;white-space:nowrap;}
+
+/* 板块标题 */
+.sec-title{font-size:14px;color:#D4869C;font-weight:700;margin:16px 0 8px;padding-left:8px;border-left:3px solid #D4869C;}
+
+/* 自检清单 */
+.checklist{background:#fff;border-radius:10px;padding:10px 14px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.checklist .item{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid #f5f0f0;font-size:12px;}
+.checklist .item:last-child{border-bottom:none;}
+.checklist .item .num{color:#D4869C;font-weight:700;min-width:18px;font-size:12px;}
+.checklist .item .q{color:#666;flex:1;}
+.checklist .item .fix{color:#D4869C;font-weight:600;white-space:nowrap;font-size:11px;}
+
+/* 实践班应急小抄 */
+.muscle-memory{
+  background:linear-gradient(135deg,#FFF8E1,#FFF3CD);
+  border:2px solid #E8B86D;border-radius:10px;
+  padding:12px 14px;margin-bottom:14px;
+}
+.muscle-memory h3{
+  font-size:14px;color:#C4956A;margin-bottom:8px;text-align:center;
+}
+.muscle-memory h3 .badge{
+  background:#E8B86D;color:#fff;font-size:10px;
+  padding:2px 8px;border-radius:8px;margin-left:6px;
+}
+.muscle-memory .step{
+  display:flex;align-items:flex-start;gap:8px;
+  padding:5px 0;border-bottom:1px dashed #F0E4CC;
+  font-size:12px;line-height:1.5;
+}
+.muscle-memory .step:last-child{border-bottom:none;}
+.muscle-memory .step-num{
+  background:#E8B86D;color:#fff;border-radius:50%;
+  width:20px;height:20px;display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px;
+}
+.muscle-memory .step-body{flex:1;}
+.muscle-memory .step-body .trigger{font-weight:700;color:#C0392B;}
+.muscle-memory .step-body .action{color:#27AE60;font-weight:600;}
+.muscle-memory .step-body .from{font-size:10px;color:#999;margin-top:1px;}
+.muscle-memory .one-liner{
+  text-align:center;font-size:12px;font-weight:700;
+  color:#C4956A;padding-top:6px;margin-top:4px;
+  border-top:1px solid #F0E4CC;
+}
+
+/* 炸毛 */
+.zhamao{background:linear-gradient(135deg,#D4869C,#e8a0b3);color:#fff;border-radius:10px;padding:12px 14px;margin-bottom:16px;text-align:center;font-size:13px;font-weight:600;box-shadow:0 2px 6px rgba(212,134,156,0.2);}
+
+/* 卡片 */
+.card{background:#fff;border-radius:10px;padding:10px 14px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,0.04);border-left:3px solid #D4869C;}
+.card .day{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.card .day-num{background:#D4869C;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;}
+.card .day-title{font-size:14px;font-weight:700;color:#4a3040;}
+.card .xinfan{font-size:12px;color:#D4869C;margin-bottom:4px;line-height:1.4;}
+.card .xinfan::before{content:"🧠 ";}
+.card .topic-label{font-size:11px;color:#999;margin-bottom:2px;}
+.card .topic-label::before{content:"💬 ";}
+.card .topic-title{font-size:12px;font-weight:600;color:#4a3040;margin-bottom:2px;}
+.card .topic-qs{font-size:11px;color:#777;line-height:1.5;margin-bottom:6px;}
+.card .sentence{font-size:11px;margin-bottom:0;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap;}
+.card .sentence .bad{color:#e57373;text-decoration:line-through;text-decoration-color:#e57373;}
+.card .sentence .arrow{color:#999;font-size:10px;}
+.card .sentence .good{color:#43a047;font-weight:600;}
+
+/* 朗读按钮 */
+.speak-btn{
+  display:inline-flex;align-items:center;gap:4px;
+  background:#D4869C;color:#fff;border:none;
+  border-radius:12px;padding:3px 8px;font-size:10px;
+  cursor:pointer;margin-left:6px;opacity:.8;vertical-align:middle;
+}
+.speak-btn:hover{opacity:1;}
+.speak-btn.playing{background:#E67E22;}
+.global-speak{
+  display:block;margin:6px auto 0;
+  background:#D4869C;color:#fff;border:none;
+  border-radius:16px;padding:6px 20px;font-size:12px;
+  cursor:pointer;font-weight:600;letter-spacing:1px;
+  box-shadow:0 2px 8px rgba(212,134,156,.25);
+}
+.global-speak:hover{background:#C47A8C;transform:translateY(-1px);}
+.global-speak.playing{background:#E67E22;animation:pulse 1.2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 2px 8px rgba(230,126,34,.25)}50%{box-shadow:0 2px 20px rgba(230,126,34,.45)}}
+
+/* 底部 */
+.footer{text-align:center;margin-top:20px;font-size:12px;color:#D4869C;font-weight:600;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>敏敏的亲子沟通指南 · 妹妹篇</h1>
+  <div class="sub">6岁 · 敏感细腻女孩 · 14天亲密沟通计划</div>
+  <div class="stages">
+    <span>Day 1-3 破冰</span><span>Day 4-7 接纳</span><span>Day 8-11 赋能</span><span>Day 12-14 巩固</span>
+  </div>
+</div>
+
+<!-- 实践班应急小抄 -->
+<div class="muscle-memory">
+  <h3>🧠 实践班应急小抄 <span class="badge">王金海·肌肉记忆</span></h3>
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <span class="trigger">开口前，摸一下喉咙</span><br>
+      喉咙发紧、声音要冲 → <span class="action">深呼吸，蹲下来</span> → 然后说："<span class="action">妈妈在，慢慢说</span>"<br>
+      <span class="from">对应：情绪管理 + 赋能沟通</span>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <span class="trigger">想批评时，先描述一个事实</span><br>
+      不是"你怎么又乱扔" → 是"<span class="action">我看到积木还在地上，我们一起送它回家好不好？</span>"<br>
+      <span class="from">对应：破解逆反心理（幼儿版）</span>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <span class="trigger">任何互动结束，找一件她做对了的事说出来</span><br>
+      "<span class="action">你刚才自己把鞋子摆好了，这叫有条理，妈妈看到了</span>"<br>
+      <span class="from">对应：赋能沟通 + 爱与规则</span>
+    </div>
+  </div>
+  <div class="one-liner">💡 不是八节课，就三个动作。对敏感孩子，蹲下来比说什么都重要。</div>
+</div>
+
+<div class="sec-title">敏敏自检清单</div>
+<div class="checklist">
+  <div class="item"><span class="num">1</span><span class="q">我是不是又急着给方案了？</span><span class="fix">→ 先听完整</span></div>
+  <div class="item"><span class="num">2</span><span class="q">我是不是在否定她的感受？</span><span class="fix">→ 先共情："我知道你很难过"</span></div>
+  <div class="item"><span class="num">3</span><span class="q">我是不是用了比较和评价？</span><span class="fix">→ 描述事实，不说"你总是"</span></div>
+  <div class="item"><span class="num">4</span><span class="q">我是不是在催她快点？</span><span class="fix">→ 给她缓冲时间："再过3分钟"</span></div>
+  <div class="item"><span class="num">5</span><span class="q">我今天有没有让她感觉被爱？</span><span class="fix">→ 每天至少一次无条件的肯定</span></div>
+</div>
+
+<div class="zhamao">
+  ⚡ 炸毛应急法则：先闭嘴，蹲下来，抱一抱，说"妈妈在"——四个动作，五秒钟。
+</div>
+
+<div class="sec-title">14天沟通卡片 <button class="global-speak" id="speakAll">🔊 朗读全部（通勤听）</button></div>
+
+<!-- Day 1 -->
+<div class="card" id="gday1">
+  <div class="day"><span class="day-num">Day 1</span><span class="day-title">今天最开心的事</span><button class="speak-btn" onclick="speakCard('gday1',this)">🔊</button></div>
+  <div class="xinfan">不追问、不评判，先让她愿意说。敏感孩子需要"安全地开口"。</div>
+  <div class="topic-label"></div>
+  <div class="topic-title">主题：用"开心"作为安全入口，让孩子主动分享</div>
+  <div class="topic-qs">① 今天有没有让你笑出来的事？ ② 哪个瞬间你觉得自己很棒？ ③ 如果今天有一种颜色，是什么颜色？</div>
+  <div class="sentence"><span class="bad">"今天在幼儿园学了什么？"</span><span class="arrow">→</span><span class="good">"今天有没有让你觉得心里暖暖的事？"</span></div>
+</div>
+
+<!-- Day 2 -->
+<div class="card" id="gday2">
+  <div class="day"><span class="day-num">Day 2</span><span class="day-title">玩具总动员</span><button class="speak-btn" onclick="speakCard('gday2',this)">🔊</button></div>
+  <div class="xinfan">通过玩具走进她的内心世界。敏感孩子对物品有很深的情感投射。</div>
+  <div class="topic-label"></div>
+  <div class="topic-title">主题：借玩具之名，聊她的小世界</div>
+  <div class="topic-qs">① 你最喜欢哪个玩具？它叫什么名字？ ② 如果它会说话，它会跟你说什么？ ③ 你今天和它一起做了什么？</div>
+  <div class="sentence"><span class="bad">"别抱着玩具不撒手，该收了。"</span><span class="arrow">→</span><span class="good">"它在等你跟它说晚安哦，我们一起送它回家吧。"</span></div>
+</div>
+
+<!-- Day 3 -->
+<div class="card" id="gday3">
+  <div class="day"><span class="day-num">Day 3</span><span class="day-title">秘密暗号</span><button class="speak-btn" onclick="speakCard('gday3',this)">🔊</button></div>
+  <div class="xinfan">建立属于你们的私密连接，让敏感孩子获得专属安全感。</div>
+  <div class="topic-label"></div>
+  <div class="topic-title">主题：创造只有你俩懂的暗号，建立独特亲密感</div>
+  <div class="topic-qs">① 我们设定一个秘密手势好不好？ ② 当你想妈妈的时候用什么暗号？ ③ 妈妈想抱抱你的时候用什么暗号？</div>
+  <div class="sentence"><span class="bad">"别哭了，有什么好哭的。"</span><span class="arrow">→</span><span class="good">（做暗号手势）"妈妈收到你的信号了，过来抱抱。"</span></div>
+</div>
+
+<!-- Day 4 -->
+<div class="card" id="gday4">
+  <div class="day"><span class="day-num">Day 4</span><span class="day-title">小小梦想家</span><button class="speak-btn" onclick="speakCard('gday4',this)">🔊</button></div>
+  <div class="xinfan">敏感孩子内心丰富，梦想是了解她最好的窗口。不评判大小，只欣赏想象。</div>
+  <div class="topic-label"></div>
+  <div class="topic-title">主题：聊聊她想成为什么样的人，做什么样的事</div>
+  <div class="topic-qs">① 你长大想做什么？ ② 如果你有魔法，你最想变出什么？ ③ 你希望世界变成什么样子？</div>
+  <div class="sentence"><span class="bad">"当公主有什么用，要学点有用的。"</span><span class="arrow">→</span><span class="good">"哇，你想当什么样的公主？她有什么超能力？"</span></div>
+</div>
+
+<!-- Day 5 -->
+<div class="card" id="gday5">
+  <div class="day"><span class="day-num">Day 5</span><span class="day-title">接纳不开心</span><button class="speak-btn" onclick="speakCard('gday5',this)">🔊</button></div>
+  <div class="xinfan">允许她不高兴，这是建立情绪安全感的关键一步。情绪没有对错。</div>
+  <div class="topic-label"></div>
+  <div class="topic-title">主题：告诉她"不开心也可以"，情绪是被允许的</div>
+  <div class="topic-qs">① 今天有没有让你不开心的事？ ② 不开心的时候身体哪里不舒服？ ③ 妈妈不开心的时候也会这样，你想听听吗？</div>
+  <div class="sentence"><span class="bad">"别不开心了，笑一个嘛。"</span><span class="arrow">→</span><span class="good">"我看到你不太开心，没关系，妈妈陪你坐一会儿。"</span></div>
+</div>
+
+<!-- Day 6 -->
+<div class="card" id="gday6">
+  <div class="day"><span class="day-num">Day 6</span><span class="day-title">情绪小怪兽</span><button class="speak-btn" onclick="speakCard('gday6',this)">🔊</button></div>
+  <div class="xinfan">给情绪命名是管理情绪的第一步。用游戏化的方式帮她说出感受。</div>
+  <div class="topic-label"></div>
+  <div class="topic-title">主题：用"情绪小怪兽"认识各种情绪，学会命名感受</div>
+  <div class="topic-qs">① 今天你心里来了什么颜色的小怪兽？ ② 它长什么样子？大不大？ ③ 我们给它画出来好不好？</div>
+  <div class="sentence"><span class="bad">"又闹脾气，你怎么这么多事。"</span><span class="arrow">→</span><span class="good">"红色小怪兽又来找你了吗？我们来看看它想说什么。"</span></div>
+</div>
+
+<!-- Day 7 -->
+<div class="card" id="gday7">
+  <div class="day"><span class="day-num">Day 7</span><span class="day-title">一起做件事</span><button class="speak-btn" onclick="speakCard('gday7',this)">🔊</button></div>
+  <div class="xinfan">陪伴的质量比数量重要。敏感孩子通过"一起做"感受被重视。</div>
+  <div class="topic-label"></div>
+  <div class="topic-title">主题：放下手机，全心全意陪她做一件她选的事</div>
+  <div class="topic-qs">① 今天你想和妈妈一起做什么？ ② 你希望妈妈怎么陪你？ ③ 我们约定一个"专属时光"好不好？</div>
+  <div class="sentence"><span class="bad">"等妈妈忙完这个。"（一直忙）</span><span class="arrow">→</span><span class="good">"妈妈设个10分钟闹钟，响了就来陪你，说到做到。"</span></div>
+</div>
+
+<!-- Day 8 -->
+<div class="card" id="gday8">
+  <div class="day"><span class="day-num">Day 8</span><span class="day-title">"没事的"练习</span><button class="speak-btn" onclick="speakCard('gday8',this)">🔊</button></div>
+  <div class="xinfan">敏感孩子容易把小事放大。教她说"没事的"，但先要让她觉得真的没事。</div>
+  <div class="topic-label"></div>
+  <div class="topic-title">主题：练习面对小挫折时说"没事的"，建立心理韧性</div>
+  <div class="topic-qs">① 今天有没有什么事你觉得很大但其实很小的？ ② 如果好朋友遇到同样的事，你会怎么安慰她？ ③ 我们一起说三遍"没事的"好不好？</div>
+  <div class="sentence"><span class="bad">"这点小事有什么好哭的。"</span><span class="arrow">→</span><span class="good">"我知道你觉得很难过，来，我们一起说'没事的，会好的'。"</span></div>
+</div>
+
+<!-- Day 9 -->
+<div class="card" id="gday9">
+  <div class="day"><span class="day-num">Day 9</span><span class="day-title">优点放大镜</span><button class="speak-btn" onclick="speakCard('gday9',this)">🔊</button></div>
+  <div class="xinfan">敏感孩子需要明确的正面反馈来建立自信。具体描述，而非笼统表扬。</div>
+  <div class="topic-label"></div>
+  <div class="topic-title">主题：用放大镜找她的优点，具体说出来</div>
+  <div class="topic-qs">① 你觉得你今天做得很棒的一件事是什么？ ② 妈妈发现你今天______，你知道吗？ ③ 你最喜欢自己的哪个优点？</div>
+  <div class="sentence"><span class="bad">"你真棒！"（笼统）</span><span class="arrow">→</span><span class="good">"妈妈看到你把玩具收好了，而且摆得很整齐，这很不容易。"</span></div>
+</div>
+
+<!-- Day 10 -->
+<div class="card" id="gday10">
+  <div class="day"><span class="day-num">Day 10</span><span class="day-title">被拒绝也没关系</span><button class="speak-btn" onclick="speakCard('gday10',this)">🔊</button></div>
+  <div class="xinfan">敏感孩子被拒绝时容易自我否定。让她知道拒绝不等于她不好。</div>
+  <div class="topic-label"></div>
+  <div class="topic-title">主题：帮她理解"别人拒绝的不是我这个人"</div>
+  <div class="topic-qs">① 有没有人跟你说过"不行"？那时候你什么感觉？ ② 妈妈小时候也被拒绝过，你想听吗？ ③ "不行"只是说这件事，不是说你这个人对不对？</div>
+  <div class="sentence"><span class="bad">"人家不跟你玩就算了，别那么小气。"</span><span class="arrow">→</span><span class="good">"被拒绝的时候确实很难过，但不是你不好，只是刚好不合适。"</span></div>
+</div>
+
+<!-- Day 11 -->
+<div class="card" id="gday11">
+  <div class="day"><span class="day-num">Day 11</span><span class="day-title">勇气储蓄罐</span><button class="speak-btn" onclick="speakCard('gday11',this)">🔊</button></div>
+  <div class="xinfan">把勇敢的时刻"存起来"，敏感孩子需要可见的成长证据。</div>
+  <div class="topic-label"></div>
+  <div class="topic-title">主题：收集她勇敢的瞬间，让勇气看得见</div>
+  <div class="topic-qs">① 今天你做了什么需要一点勇气的事？ ② 我们把它写在纸条上放进储蓄罐好不好？ ③ 你觉得自己比以前勇敢了吗？</div>
+  <div class="sentence"><span class="bad">"你怎么连这个都不敢。"</span><span class="arrow">→</span><span class="good">"试试看，不管结果怎么样，敢尝试就是勇敢。"</span></div>
+</div>
+
+<!-- Day 12 -->
+<div class="card" id="gday12">
+  <div class="day"><span class="day-num">Day 12</span><span class="day-title">"我很重要"清单</span><button class="speak-btn" onclick="speakCard('gday12',this)">🔊</button></div>
+  <div class="xinfan">敏感孩子需要确认自己的存在价值。让她看到她对身边人的意义。</div>
+  <div class="topic-label"></div>
+  <div class="topic-title">主题：列出她让这个世界变好的那些小事</div>
+  <div class="topic-qs">① 你觉得谁因为你而开心过？ ② 你今天帮助了谁？ ③ 如果世界上没有你，会少了什么？</div>
+  <div class="sentence"><span class="bad">"你管好自己就行了。"</span><span class="arrow">→</span><span class="good">"你刚刚帮妹妹捡了东西，她好开心，你对别人很重要。"</span></div>
+</div>
+
+<!-- Day 13 -->
+<div class="card" id="gday13">
+  <div class="day"><span class="day-num">Day 13</span><span class="day-title">情绪急救包</span><button class="speak-btn" onclick="speakCard('gday13',this)">🔊</button></div>
+  <div class="xinfan">提前准备好"情绪急救工具"，让她知道难过时有办法帮自己。</div>
+  <div class="topic-label"></div>
+  <div class="topic-title">主题：和她一起做一个情绪急救包，难过时有工具可用</div>
+  <div class="topic-qs">① 难过的时候做什么会让你好受一点？ ② 我们准备一个盒子，放上你喜欢的东西好不好？ ③ 下次难过时你想先试哪个？</div>
+  <div class="sentence"><span class="bad">"别哭了，哭有什么用。"</span><span class="arrow">→</span><span class="good">"难过了是吗？我们去看看急救包里有什么能帮忙的。"</span></div>
+</div>
+
+<!-- Day 14 -->
+<div class="card" id="gday14">
+  <div class="day"><span class="day-num">Day 14</span><span class="day-title">我爱你的一百种说法</span><button class="speak-btn" onclick="speakCard('gday14',this)">🔊</button></div>
+  <div class="xinfan">爱要多样化表达。敏感孩子需要不断确认被爱，用各种方式说给她听。</div>
+  <div class="topic-label"></div>
+  <div class="topic-title">主题：一起发现说"我爱你"的不同方式</div>
+  <div class="topic-qs">① 除了"我爱你"，还有什么话会让你觉得被爱？ ② 妈妈做什么动作的时候你觉得最温暖？ ③ 我们来比赛，看谁能想出最多说爱的方式？</div>
+  <div class="sentence"><span class="bad">"我不是说过爱你了吗，还要怎么样。"</span><span class="arrow">→</span><span class="good">"今天妈妈用_______的方式爱你，你感觉到了吗？"</span></div>
+</div>
+
+<div class="footer">—— 小圆 ❤️</div>
+
+<script>
+let currentUtterance=null,isSpeakingAll=false,speakAllBtn=null;
+
+function getCardText(card){
+  let t='';
+  const tt=card.querySelector('.day-title');
+  if(tt)t+=tt.textContent.trim()+'。';
+  const xf=card.querySelector('.xinfan');
+  if(xf)t+=xf.textContent.replace('🧠 ','').trim()+'。';
+  const ttl=card.querySelector('.topic-title');
+  if(ttl)t+='主题：'+ttl.textContent.trim()+'。';
+  const qs=card.querySelector('.topic-qs');
+  if(qs)t+='引导问题：'+qs.textContent.trim()+'。';
+  const st=card.querySelector('.sentence');
+  if(st){
+    const bd=st.querySelector('.bad'),gd=st.querySelector('.good');
+    if(bd&&gd)t+='避免说：'+bd.textContent.trim()+'。换成说：'+gd.textContent.trim()+'。';
+  }
+  return t;
+}
+
+function speak(text,btn){
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='zh-CN';u.rate=0.95;
+  const voices=window.speechSynthesis.getVoices();
+  const zv=voices.find(v=>v.lang.startsWith('zh')&&v.name.includes('Female'))||voices.find(v=>v.lang.startsWith('zh-CN'))||voices.find(v=>v.lang.startsWith('zh'));
+  if(zv)u.voice=zv;
+  currentUtterance=u;
+  if(btn){btn.classList.add('playing');btn.textContent='⏸';}
+  u.onend=()=>{if(btn){btn.classList.remove('playing');btn.textContent='🔊';}currentUtterance=null;};
+  u.onerror=()=>{if(btn){btn.classList.remove('playing');btn.textContent='🔊';}currentUtterance=null;};
+  window.speechSynthesis.speak(u);
+}
+
+function stopSpeak(){
+  window.speechSynthesis.cancel();currentUtterance=null;isSpeakingAll=false;
+  if(speakAllBtn){speakAllBtn.classList.remove('playing');speakAllBtn.textContent='🔊 朗读全部（通勤听）';}
+  document.querySelectorAll('.speak-btn').forEach(b=>{b.classList.remove('playing');b.textContent='🔊';});
+}
+
+function speakCard(id,btn){
+  if(currentUtterance&&btn.classList.contains('playing')){stopSpeak();return;}
+  stopSpeak();
+  if(isSpeakingAll){isSpeakingAll=false;if(speakAllBtn){speakAllBtn.classList.remove('playing');speakAllBtn.textContent='🔊 朗读全部（通勤听）';}}
+  const card=document.getElementById(id);
+  if(!card)return;
+  speak(getCardText(card),btn);
+}
+
+async function speakAll(){
+  if(isSpeakingAll){stopSpeak();return;}
+  stopSpeak();isSpeakingAll=true;
+  speakAllBtn=document.getElementById('speakAll');
+  speakAllBtn.classList.add('playing');speakAllBtn.textContent='⏸ 停止朗读';
+  const days=Array.from({length:14},(_,i)=>'gday'+(i+1));
+  for(let i=0;i<days.length;i++){
+    if(!isSpeakingAll)break;
+    const card=document.getElementById(days[i]);
+    if(!card)continue;
+    const text='第'+(i+1)+'天。'+getCardText(card);
+    await new Promise(resolve=>{
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang='zh-CN';u.rate=0.95;
+      const voices=window.speechSynthesis.getVoices();
+      const zv=voices.find(v=>v.lang.startsWith('zh')&&v.name.includes('Female'))||voices.find(v=>v.lang.startsWith('zh-CN'))||voices.find(v=>v.lang.startsWith('zh'));
+      if(zv)u.voice=zv;
+      currentUtterance=u;
+      u.onend=()=>{currentUtterance=null;resolve();};
+      u.onerror=()=>{currentUtterance=null;resolve();};
+      window.speechSynthesis.speak(u);
+    });
+    if(isSpeakingAll&&i<days.length-1)await new Promise(r=>setTimeout(r,800));
+  }
+  isSpeakingAll=false;
+  if(speakAllBtn){speakAllBtn.classList.remove('playing');speakAllBtn.textContent='🔊 朗读全部（通勤听）';}
+  currentUtterance=null;
+}
+
+window.speechSynthesis.onvoiceschanged=()=>{window.speechSynthesis.getVoices();};
+window.speechSynthesis.getVoices();
+document.addEventListener('DOMContentLoaded',()=>{
+  speakAllBtn=document.getElementById('speakAll');
+  speakAllBtn.addEventListener('click',speakAll);
+});
+</script>
+
+</body>
+</html>
