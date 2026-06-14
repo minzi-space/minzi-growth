@@ -1,0 +1,9 @@
+{
+  "pages": [
+    {
+      "webid": "index",
+      "name": "首页",
+      "uri": "index.html"
+    }
+  ]
+}

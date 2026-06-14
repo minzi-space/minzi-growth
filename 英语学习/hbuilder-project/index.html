@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>译林英语Quiz</title>
+  <style>
+    * { margin:0; padding:0; }
+    html, body { width:100%; height:100%; overflow:hidden; }
+  </style>
+</head>
+<body>
+<iframe src="quiz.html" style="width:100%;height:100%;border:none;"></iframe>
+<script>
+  // 全屏沉浸
+  document.addEventListener('plusready', function() {
+    plus.navigator.closeSplashscreen();
+    plus.navigator.setStatusBarStyle('light');
+    var bar = plus.webview.currentWebview();
+    // 隐藏滚动条
+    document.body.style.overflow = 'hidden';
+  });
+</script>
+</body>
+</html>
