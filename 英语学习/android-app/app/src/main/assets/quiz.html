@@ -90,13 +90,13 @@
     box-shadow: 0 -2px 12px rgba(0,0,0,0.04);
   }
   .tab-item {
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
     padding: 4px 0; cursor: pointer; transition: all 0.2s;
     font-family: var(--font); border: none; background: none;
     color: var(--text-sec); position: relative;
-    min-width: 56px;
+    min-width: 48px; flex: 1;
   }
-  .tab-item .tab-icon { font-size: 22px; transition: transform 0.2s; }
+  .tab-item .tab-icon { font-size: 21px; transition: transform 0.2s; }
   .tab-item .tab-label { font-size: 10px; font-weight: 600; }
   .tab-item.active { color: var(--primary); }
   .tab-item.active .tab-icon { transform: scale(1.1); }
@@ -670,6 +670,19 @@
     <button class="seg-btn" data-vmode="mixed">混合挑战</button>
   </div>
 
+  <!-- GRAMMAR SUB-MODE SELECTOR -->
+  <div class="segmented-control hidden" id="grammarModeSelector">
+    <button class="seg-btn active" data-gmode="grammar">语法</button>
+    <button class="seg-btn" data-gmode="verb">动词</button>
+    <button class="seg-btn" data-gmode="transform">变形</button>
+  </div>
+
+  <!-- READING SUB-MODE SELECTOR -->
+  <div class="segmented-control hidden" id="readingModeSelector">
+    <button class="seg-btn active" data-rmode="reading">阅读</button>
+    <button class="seg-btn" data-rmode="cloze">完形</button>
+  </div>
+
   <!-- ===== PAGES ===== -->
   <div class="pages">
 
@@ -708,8 +721,9 @@
       </div>
     </div>
 
-    <!-- GRAMMAR PAGE -->
+    <!-- GRAMMAR PAGE (语法 + 动词 + 变形 merged) -->
     <div class="page" id="grammarPage">
+      <!-- Grammar Sub-section -->
       <div class="card" id="grammarSection">
         <div id="grammarStart" class="start-screen">
           <div class="emoji">📐</div>
@@ -740,11 +754,9 @@
           <button class="restart-btn" id="grammarRestart">重新开始</button>
         </div>
       </div>
-    </div>
 
-    <!-- VERB PAGE -->
-    <div class="page" id="verbPage">
-      <div class="card" id="verbSection">
+      <!-- Verb Sub-section -->
+      <div class="card hidden" id="verbSection">
         <div id="verbStart" class="start-screen">
           <div class="emoji">🔄</div>
           <h2>不规则动词</h2>
@@ -774,10 +786,35 @@
           <button class="restart-btn" id="verbRestart">重新开始</button>
         </div>
       </div>
+
+      <!-- Transform Sub-section -->
+      <div class="card hidden" id="transformSection">
+        <div id="transformStart" class="start-screen">
+          <div class="emoji">✏️</div>
+          <h2>句子变形</h2>
+          <p>肯定↔否定↔疑问·时态转换·同义句<br>考纲核心句型训练</p>
+          <p style="font-size:12px;color:var(--text-sec);">🏆 最高分：<span id="transformBest">--</span></p>
+          <button class="start-btn" id="transformStartBtn">开始练习（22题）</button>
+        </div>
+        <div id="transformQuiz" class="hidden"></div>
+        <div id="transformResult" class="result-card hidden">
+          <div class="score-label">你的得分</div>
+          <div class="score" id="transformScoreNum">0</div>
+          <div class="stars" id="transformStars"></div>
+          <div class="time-info" id="transformTime"></div>
+          <div class="wrong-summary" id="transformWrongSummary"></div>
+          <div class="best-score" id="transformBestDisplay">🏆 最高分：--</div>
+          <div class="encourage" id="transformEncourage"></div>
+          <button class="restart-btn" id="transformNextRound" style="display:none;">▶ 再做一次</button>
+          <button class="review-btn" id="transformReviewWrong" style="display:none;">📒 复习错题</button>
+          <button class="restart-btn" id="transformRestart">重新开始</button>
+        </div>
+      </div>
     </div>
 
-    <!-- READING PAGE -->
+    <!-- READING PAGE (阅读 + 完形 merged) -->
     <div class="page" id="readingPage">
+      <!-- Reading Sub-section -->
       <div class="card" id="readingSection">
         <div id="readingStart" class="start-screen">
           <div class="emoji">📖</div>
@@ -801,6 +838,30 @@
           <button class="restart-btn" id="readingNextRound" style="display:none;">▶ 再做一次</button>
           <button class="review-btn" id="readingReviewWrong" style="display:none;">📒 复习错题</button>
           <button class="restart-btn" id="readingRestart">重新开始</button>
+        </div>
+      </div>
+
+      <!-- Cloze Sub-section -->
+      <div class="card hidden" id="clozeSection">
+        <div id="clozeStart" class="start-screen">
+          <div class="emoji">🧩</div>
+          <h2>完形填空</h2>
+          <p>读短文，选词填空<br>5篇短文 · 紧扣核心语法</p>
+          <p style="font-size:12px;color:var(--text-sec);">🏆 最高分：<span id="clozeBest">--</span></p>
+          <button class="start-btn" id="clozeStartBtn">开始练习（5篇）</button>
+        </div>
+        <div id="clozeQuiz" class="hidden"></div>
+        <div id="clozeResult" class="result-card hidden">
+          <div class="score-label">你的得分</div>
+          <div class="score" id="clozeScoreNum">0</div>
+          <div class="stars" id="clozeStars"></div>
+          <div class="time-info" id="clozeTime"></div>
+          <div class="wrong-summary" id="clozeWrongSummary"></div>
+          <div class="best-score" id="clozeBestDisplay">🏆 最高分：--</div>
+          <div class="encourage" id="clozeEncourage"></div>
+          <button class="restart-btn" id="clozeNextRound" style="display:none;">▶ 再做一次</button>
+          <button class="review-btn" id="clozeReviewWrong" style="display:none;">📒 复习错题</button>
+          <button class="restart-btn" id="clozeRestart">重新开始</button>
         </div>
       </div>
     </div>
@@ -873,57 +934,6 @@
       </div>
     </div>
 
-    <!-- CLOZE PAGE -->
-    <div class="page" id="clozePage">
-      <div class="card" id="clozeSection">
-        <div id="clozeStart" class="start-screen">
-          <div class="emoji">🧩</div>
-          <h2>完形填空</h2>
-          <p>读短文，选词填空<br>5篇短文 · 紧扣核心语法</p>
-          <p style="font-size:12px;color:var(--text-sec);">🏆 最高分：<span id="clozeBest">--</span></p>
-          <button class="start-btn" id="clozeStartBtn">开始练习（5篇）</button>
-        </div>
-        <div id="clozeQuiz" class="hidden"></div>
-        <div id="clozeResult" class="result-card hidden">
-          <div class="score-label">你的得分</div>
-          <div class="score" id="clozeScoreNum">0</div>
-          <div class="stars" id="clozeStars"></div>
-          <div class="time-info" id="clozeTime"></div>
-          <div class="wrong-summary" id="clozeWrongSummary"></div>
-          <div class="best-score" id="clozeBestDisplay">🏆 最高分：--</div>
-          <div class="encourage" id="clozeEncourage"></div>
-          <button class="restart-btn" id="clozeNextRound" style="display:none;">▶ 再做一次</button>
-          <button class="review-btn" id="clozeReviewWrong" style="display:none;">📒 复习错题</button>
-          <button class="restart-btn" id="clozeRestart">重新开始</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- TRANSFORM PAGE -->
-    <div class="page" id="transformPage">
-      <div class="card" id="transformSection">
-        <div id="transformStart" class="start-screen">
-          <div class="emoji">✏️</div>
-          <h2>句子变形</h2>
-          <p>肯定↔否定↔疑问·时态转换·同义句<br>考纲核心句型训练</p>
-          <p style="font-size:12px;color:var(--text-sec);">🏆 最高分：<span id="transformBest">--</span></p>
-          <button class="start-btn" id="transformStartBtn">开始练习（22题）</button>
-        </div>
-        <div id="transformQuiz" class="hidden"></div>
-        <div id="transformResult" class="result-card hidden">
-          <div class="score-label">你的得分</div>
-          <div class="score" id="transformScoreNum">0</div>
-          <div class="stars" id="transformStars"></div>
-          <div class="time-info" id="transformTime"></div>
-          <div class="wrong-summary" id="transformWrongSummary"></div>
-          <div class="best-score" id="transformBestDisplay">🏆 最高分：--</div>
-          <div class="encourage" id="transformEncourage"></div>
-          <button class="restart-btn" id="transformNextRound" style="display:none;">▶ 再做一次</button>
-          <button class="review-btn" id="transformReviewWrong" style="display:none;">📒 复习错题</button>
-          <button class="restart-btn" id="transformRestart">重新开始</button>
-        </div>
-      </div>
-    </div>
 
     <!-- STATS PAGE -->
     <div class="page" id="statsPage">
@@ -1012,28 +1022,16 @@
       <span class="tab-label">单词</span>
     </button>
     <button class="tab-item" data-tab="grammar">
-      <span class="tab-icon">📐</span>
+      <span class="tab-icon">🔤</span>
       <span class="tab-label">语法</span>
-    </button>
-    <button class="tab-item" data-tab="verb">
-      <span class="tab-icon">🔄</span>
-      <span class="tab-label">动词</span>
     </button>
     <button class="tab-item" data-tab="reading">
       <span class="tab-icon">📖</span>
       <span class="tab-label">阅读</span>
     </button>
-    <button class="tab-item" data-tab="cloze">
-      <span class="tab-icon">🧩</span>
-      <span class="tab-label">完形</span>
-    </button>
-    <button class="tab-item" data-tab="transform">
-      <span class="tab-icon">✏️</span>
-      <span class="tab-label">变形</span>
-    </button>
     <button class="tab-item" data-tab="wrongbook">
       <span class="tab-icon">📒</span>
-      <span class="tab-label">错题本</span>
+      <span class="tab-label">错题</span>
       <span class="badge hidden" id="wrongbookBadge">0</span>
     </button>
     <button class="tab-item" data-tab="stats">
@@ -3608,6 +3606,8 @@ function handleWrongPracticeGenericInput(input, item) {
 
 // ==================== TAB SWITCHING ====================
 let currentTab = 'vocab';
+let currentGrammarMode = 'grammar'; // grammar | verb | transform
+let currentReadingMode = 'reading'; // reading | cloze
 
 function switchTab(tab) {
   if (currentTab === tab) return;
@@ -3616,11 +3616,15 @@ function switchTab(tab) {
 
   // Bottom tab bar
   document.querySelectorAll('#tabBar .tab-item').forEach(t => t.classList.remove('active'));
-  document.querySelector(`#tabBar [data-tab="${tab}"]`).classList.add('active');
+  const tabBtn = document.querySelector(`#tabBar [data-tab="${tab}"]`);
+  if (tabBtn) tabBtn.classList.add('active');
 
   // Page transitions
-  const oldPage = document.getElementById(oldTab + 'Page');
-  const newPage = document.getElementById(tab + 'Page');
+  const pageMap = { vocab: 'vocabPage', grammar: 'grammarPage', reading: 'readingPage', wrongbook: 'wrongbookPage', stats: 'statsPage' };
+  const oldPageId = pageMap[oldTab] || (oldTab + 'Page');
+  const newPageId = pageMap[tab];
+  const oldPage = document.getElementById(oldPageId);
+  const newPage = document.getElementById(newPageId);
 
   if (oldPage) {
     oldPage.classList.remove('active');
@@ -3633,8 +3637,10 @@ function switchTab(tab) {
     }, 50);
   }
 
-  // Vocab mode selector
+  // Mode selectors visibility
   document.getElementById('vocabModeSelector').classList.toggle('hidden', tab !== 'vocab');
+  document.getElementById('grammarModeSelector').classList.toggle('hidden', tab !== 'grammar');
+  document.getElementById('readingModeSelector').classList.toggle('hidden', tab !== 'reading');
 
   if (tab === 'wrongbook') {
     renderWrongBook();
@@ -3643,22 +3649,20 @@ function switchTab(tab) {
   if (tab === 'stats') {
     renderStats();
   }
+  if (tab === 'grammar') {
+    switchGrammarMode(currentGrammarMode);
+    const gb = parseInt(localStorage.getItem(userKey('grammarBest'))) || 0;
+    document.getElementById('grammarBest').textContent = gb || '--';
+  }
   if (tab === 'reading') {
+    switchReadingMode(currentReadingMode);
     const rb = parseInt(localStorage.getItem(userKey('readingBest'))) || 0;
     document.getElementById('readingBest').textContent = rb || '--';
   }
-  if (tab === 'cloze') {
-    const cb = parseInt(localStorage.getItem(userKey('clozeBest'))) || 0;
-    document.getElementById('clozeBest').textContent = cb || '--';
-  }
-  if (tab === 'transform') {
-    const tb = parseInt(localStorage.getItem(userKey('transformBest'))) || 0;
-    document.getElementById('transformBest').textContent = tb || '--';
-  }
 
-  // Reset views
-  const allTabs = ['vocab', 'grammar', 'verb', 'reading', 'cloze', 'transform'];
-  allTabs.forEach(t => {
+  // Reset views for all sub-types
+  const allTypes = ['vocab', 'grammar', 'verb', 'reading', 'cloze', 'transform'];
+  allTypes.forEach(t => {
     const startEl = document.getElementById(t + 'Start');
     const quizEl = document.getElementById(t + 'Quiz');
     const resultEl = document.getElementById(t + 'Result');
@@ -3667,6 +3671,66 @@ function switchTab(tab) {
     if (quizEl) quizEl.classList.add('hidden');
     if (resultEl) resultEl.classList.add('hidden');
     if (passageEl) passageEl.classList.add('hidden');
+  });
+}
+
+// Switch grammar sub-mode (grammar/verb/transform)
+function switchGrammarMode(mode) {
+  currentGrammarMode = mode;
+  ['grammarSection', 'verbSection', 'transformSection'].forEach(id => {
+    document.getElementById(id).classList.add('hidden');
+  });
+  const sectionMap = { grammar: 'grammarSection', verb: 'verbSection', transform: 'transformSection' };
+  document.getElementById(sectionMap[mode]).classList.remove('hidden');
+
+  // Update best score display
+  const bestMap = { grammar: 'grammarBest', verb: 'verbBest', transform: 'transformBest' };
+  const keyMap = { grammar: 'grammarBest', verb: 'verbBest', transform: 'transformBest' };
+  const b = parseInt(localStorage.getItem(userKey(keyMap[mode]))) || 0;
+  document.getElementById(bestMap[mode]).textContent = b || '--';
+
+  // Reset sub-type views
+  const resetTypes = mode === 'grammar' ? ['grammar'] : mode === 'verb' ? ['verb'] : ['transform'];
+  resetTypes.forEach(t => {
+    const startEl = document.getElementById(t + 'Start');
+    const quizEl = document.getElementById(t + 'Quiz');
+    const resultEl = document.getElementById(t + 'Result');
+    if (startEl) startEl.classList.remove('hidden');
+    if (quizEl) quizEl.classList.add('hidden');
+    if (resultEl) resultEl.classList.add('hidden');
+  });
+
+  // Update segmented control
+  document.querySelectorAll('#grammarModeSelector .seg-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.gmode === mode);
+  });
+}
+
+// Switch reading sub-mode (reading/cloze)
+function switchReadingMode(mode) {
+  currentReadingMode = mode;
+  document.getElementById('readingSection').classList.toggle('hidden', mode !== 'reading');
+  document.getElementById('clozeSection').classList.toggle('hidden', mode !== 'cloze');
+
+  const bestKey = mode === 'reading' ? 'readingBest' : 'clozeBest';
+  const bestId = mode === 'reading' ? 'readingBest' : 'clozeBest';
+  const b = parseInt(localStorage.getItem(userKey(bestKey))) || 0;
+  document.getElementById(bestId).textContent = b || '--';
+
+  // Reset sub-type views
+  const t = mode;
+  const startEl = document.getElementById(t + 'Start');
+  const quizEl = document.getElementById(t + 'Quiz');
+  const resultEl = document.getElementById(t + 'Result');
+  const passageEl = document.getElementById(t + 'Passage');
+  if (startEl) startEl.classList.remove('hidden');
+  if (quizEl) quizEl.classList.add('hidden');
+  if (resultEl) resultEl.classList.add('hidden');
+  if (passageEl) passageEl.classList.add('hidden');
+
+  // Update segmented control
+  document.querySelectorAll('#readingModeSelector .seg-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.rmode === mode);
   });
 }
 
@@ -3686,6 +3750,20 @@ document.querySelectorAll('#vocabModeSelector .seg-btn').forEach(btn => {
     document.getElementById('vocabStart').classList.remove('hidden');
     document.getElementById('vocabQuiz').classList.add('hidden');
     document.getElementById('vocabResult').classList.add('hidden');
+  });
+});
+
+// Grammar mode selector
+document.querySelectorAll('#grammarModeSelector .seg-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    switchGrammarMode(this.dataset.gmode);
+  });
+});
+
+// Reading mode selector
+document.querySelectorAll('#readingModeSelector .seg-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    switchReadingMode(this.dataset.rmode);
   });
 });
 
