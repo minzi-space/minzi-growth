@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>译林版英语互动Quiz · 五上~六下</title>
 <style>
   :root {
@@ -59,13 +59,14 @@
   }
 
   /* ===== PAGE CONTAINER & TRANSITIONS ===== */
-  .pages { flex: 1; position: relative; overflow: hidden; }
+  .pages { flex: 1; position: relative; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; }
   .page {
     position: absolute; top: 0; left: 0; right: 0;
     min-height: 100%; padding: 12px 0;
     opacity: 0; transform: translateX(30px);
     transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
+    overflow-y: visible;
   }
   .page.active {
     opacity: 1; transform: translateX(0);
@@ -170,20 +171,25 @@
   @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
 
   /* Input */
-  .input-wrap { display:flex; gap:8px; margin:16px 0; }
+  .input-wrap {
+    display:flex; gap:8px; margin:16px 0;
+    position: relative;
+  }
   .input-wrap input {
     flex:1; padding:14px 16px; border:2px solid var(--border); border-radius:var(--radius-xs);
     font-size:20px; font-family:"SF Mono","Consolas","Courier New",monospace;
     outline:none; transition:all 0.2s; letter-spacing:1px; background:#F9F9FB;
+    min-width: 0;
   }
   .input-wrap input:focus { border-color:var(--primary); background:#fff; }
   .input-wrap input.correct-input { border-color:var(--correct); background:var(--correct-light); }
   .input-wrap input.wrong-input { border-color:var(--error); background:var(--error-light); animation:inputShake 0.4s ease; }
   @keyframes inputShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
   .submit-btn {
-    padding:14px 24px; background:var(--primary); color:#fff; border:none;
+    padding:14px 20px; background:var(--primary); color:#fff; border:none;
     border-radius:var(--radius-xs); font-size:16px; font-weight:700; cursor:pointer;
-    font-family:var(--font); min-width:72px; transition:all 0.15s;
+    font-family:var(--font); min-width:64px; transition:all 0.15s;
+    flex-shrink: 0; white-space: nowrap;
   }
   .submit-btn:active { transform:scale(0.95); background:var(--primary-dark); }
   .submit-btn:disabled { opacity:0.4; pointer-events:none; }
@@ -3888,6 +3894,17 @@ document.getElementById('grammarBest').textContent = `${getBest('grammarBest')}/
 document.getElementById('verbBest').textContent = `${getBest('verbBest')}/10`;
 updateWrongbookBadge();
 updateWrongbookStats();
+
+// Scroll input into view when virtual keyboard opens (WebView fix)
+if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+  document.addEventListener('focusin', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+      setTimeout(function() {
+        e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    }
+  });
+}
 
 </script>
 </body>
