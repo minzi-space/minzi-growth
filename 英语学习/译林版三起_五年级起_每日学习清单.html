@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>译林版（三起）五年级起 · 每日学习内容清单 | 敏敏出品</title>
+<style>
+  :root {
+    --primary: #1a6fb5;
+    --accent: #e8734a;
+    --green: #2e7d32;
+    --bg: #f8f9fb;
+    --card: #fff;
+    --text: #2c3e50;
+    --text-sec: #5a6c7d;
+    --border: #e5e9f0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06);
+    --radius: 10px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text); line-height:1.75; font-size:14.5px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width:820px; margin:0 auto; padding:16px 12px 48px; }
+
+  /* Header */
+  .header {
+    text-align:center; padding:28px 16px 20px;
+    background: linear-gradient(135deg, #1565c0, #2196F3, #42a5f5);
+    color:#fff; border-radius:var(--radius); margin-bottom:20px;
+  }
+  .header .badge { display:inline-block; background:rgba(255,255,255,.2); padding:3px 12px; border-radius:20px; font-size:12px; margin-bottom:10px; }
+  .header h1 { font-size:24px; font-weight:700; margin-bottom:4px; }
+  .header .sub { font-size:13px; opacity:.85; }
+
+  /* Legend */
+  .legend { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:16px; font-size:12.5px; }
+  .legend span { display:flex; align-items:center; gap:5px; }
+  .dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .dot-red { background:#e53935; } .dot-orange { background:#fb8c00; } .dot-blue { background:#1e88e5; } .dot-green { background:#43a047; }
+
+  /* Cards */
+  .card {
+    background:var(--card); border-radius:var(--radius); padding:18px 16px;
+    margin-bottom:14px; box-shadow:var(--shadow); border:1px solid var(--border);
+  }
+  .card h2 { font-size:17px; font-weight:700; margin-bottom:10px; }
+  .card h3 { font-size:14.5px; font-weight:600; color:var(--primary); margin:14px 0 8px; padding-left:10px; border-left:3px solid var(--primary); }
+
+  /* Tables */
+  table { width:100%; border-collapse:collapse; margin:10px 0; font-size:13px; }
+  thead th { background:#f1f5f9; padding:8px 8px; text-align:left; font-weight:600; font-size:12.5px; border-bottom:2px solid var(--border); }
+  tbody td { padding:7px 8px; border-bottom:1px solid var(--border); vertical-align:top; }
+  tbody tr:last-child td { border-bottom:none; }
+  .col-day { width:7%; text-align:center; font-weight:700; color:var(--primary); }
+  .col-words { width:28%; }
+  .col-grammar { width:25%; }
+  .col-read { width:20%; }
+  .col-task { width:20%; }
+
+  /* Word tag */
+  .w { display:inline-block; background:#f0f7ff; border:1px solid #c5d9f0; border-radius:4px; padding:1px 7px; margin:1px 3px 1px 0; font-size:12px; font-family:"SF Mono","Consolas",monospace; }
+  .w-imp { background:#fff3e0; border-color:#ffcc80; }
+
+  /* Alert */
+  .alert { padding:10px 14px; border-radius:6px; margin:10px 0; font-size:13px; line-height:1.6; }
+  .alert-info { background:#e8f4fd; border-left:3px solid var(--primary); }
+  .alert-warn { background:#fff8e1; border-left:3px solid #ff8f00; }
+  .alert-good { background:#e8f5e9; border-left:3px solid var(--green); }
+
+  /* Section divider */
+  .section-divider {
+    text-align:center; margin:24px 0 16px; position:relative;
+  }
+  .section-divider::before {
+    content:''; position:absolute; left:0; top:50%; width:100%; height:1px; background:var(--border);
+  }
+  .section-divider span {
+    position:relative; background:var(--bg); padding:0 16px; font-weight:700; font-size:15px; color:var(--primary);
+  }
+
+  /* Checklist */
+  .check-item { display:flex; align-items:flex-start; gap:8px; padding:3px 0; font-size:13px; color:var(--text-sec); }
+  .check-item input { margin-top:3px; }
+
+  /* Progress bar */
+  .prog { margin:8px 0; }
+  .prog-label { display:flex; justify-content:space-between; font-size:12px; margin-bottom:2px; color:var(--text-sec); }
+  .prog-bar { height:6px; background:#e8edf2; border-radius:3px; overflow:hidden; }
+  .prog-fill { height:100%; border-radius:3px; }
+  .pf-blue { background:linear-gradient(90deg,#1a6fb5,#4fc3f7); }
+  .pf-orange { background:linear-gradient(90deg,#e8734a,#ffab76); }
+  .pf-green { background:linear-gradient(90deg,#2e7d32,#66bb6a); }
+
+  /* Footer */
+  .footer { text-align:center; padding:16px; font-size:12px; color:var(--text-sec); opacity:.7; }
+
+  @media (max-width:480px) {
+    .container { padding:10px 6px 32px; }
+    .header { padding:20px 10px 16px; }
+    .header h1 { font-size:20px; }
+    .card { padding:14px 10px; }
+    table { font-size:11.5px; }
+    thead th, tbody td { padding:5px 4px; }
+    .w { font-size:11px; padding:1px 5px; }
+  }
+
+  @media print {
+    body { background:#fff; font-size:12px; }
+    .card { box-shadow:none; break-inside:avoid; page-break-inside:avoid; }
+    .header { background:#1565c0!important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .section-divider span { background:#fff; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="badge">译林版 · 三年级起点</div>
+    <h1>五年级起 · 每日学习内容清单</h1>
+    <div class="sub">五上 → 五下 → 六上 → 六下 | 60天可执行计划 | 每天40~50分钟</div>
+  </div>
+
+  <div class="legend">
+    <span><span class="dot dot-red"></span> 当天核心单词</span>
+    <span><span class="dot dot-orange"></span> 必会语法点</span>
+    <span><span class="dot dot-blue"></span> 课文/阅读</span>
+    <span><span class="dot dot-green"></span> 每日任务</span>
+  </div>
+
+  <!-- ==================== 总览 ==================== -->
+  <div class="card">
+    <h2>📋 使用说明</h2>
+    <p>本清单按<strong>译林版（三起）教材单元顺序</strong>编排，从五年级上册Unit 1开始，每单元2天（Day 1词汇+句型，Day 2语法+课文），共覆盖四册书32个单元，合计<strong>64天</strong>。如果暑假有60天，可以适当压缩（六下部分单元合并为1天）。</p>
+    <div class="alert alert-info">
+      <strong>每日流程（40~50分钟）：</strong><br>
+      ① 单词闪卡（10min）：看英文→读→遮住默中文→反向默英文<br>
+      ② 句型跟读（10min）：课文核心句跟读3遍→自己造句2个<br>
+      ③ 语法专项（15min）：当天语法点讲解+5道练习<br>
+      ④ 课文朗读/阅读（10min）：读当天单元Story time，能口头复述大意
+    </div>
+    <div class="alert alert-warn">
+      <strong>⚠️ 敏敏须知：</strong>四年级基础尚可意味着孩子至少有400+词汇量和基本句型概念。从五年级开始补，重点攻<strong>There be句型、第三人称单数、一般过去时</strong>这三个"分水岭"语法点——这是译林版五六年级跟三四年级最大的难度跳跃。
+    </div>
+  </div>
+
+  <!-- ==================== 五上 ==================== -->
+  <div class="section-divider"><span>📘 五年级上册（Day 1~16）</span></div>
+
+  <div class="card">
+    <h3>Unit 1 Goldilocks and the three bears | 话题：童话故事 | 语法：There be句型</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 1</td>
+          <td><span class="w w-imp">bear</span><span class="w w-imp">forest</span><span class="w w-imp">there</span><span class="w">house</span><span class="w">soup</span><span class="w">room</span><span class="w">hard</span><span class="w">soft</span><span class="w">afraid</span><span class="w">really</span><span class="w">then</span><span class="w">find</span></td>
+          <td>There is + 单数<br>There are + 复数</td>
+          <td>Story time 朗读</td>
+          <td>单词闪卡×2轮<br>There be造句5个</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 2</td>
+          <td><span class="w">her</span><span class="w">him</span><span class="w">beside</span><span class="w">between</span><span class="w">in front of</span><span class="w">just right</span><span class="w">too cold/hot</span><span class="w w-imp">hungry</span><span class="w w-imp">thirsty</span><span class="w w-imp">tired</span></td>
+          <td>There be否定/疑问<br>方位介词</td>
+          <td>Story time 复述</td>
+          <td>介词看图说话<br>There be句型转换5组</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 2 A new student | 话题：学校设施 | 语法：How many...? / 序数词</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 3</td>
+          <td><span class="w w-imp">student</span><span class="w">classroom</span><span class="w w-imp">floor</span><span class="w">computer</span><span class="w">first</span><span class="w">second</span><span class="w">third</span><span class="w">show...around</span><span class="w">library</span><span class="w">playground</span></td>
+          <td>How many...are there?<br>序数词1st/2nd/3rd</td>
+          <td>Story time 朗读</td>
+          <td>序数词1st~10th默写<br>How many问答5组</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 4</td>
+          <td><span class="w">art room</span><span class="w">music room</span><span class="w">table tennis room</span><span class="w">swing</span><span class="w">push</span><span class="w">heavy</span><span class="w">high</span><span class="w w-imp">great fun</span><span class="w">go and have a look</span></td>
+          <td>Is there...? Yes/No<br>Are there...? Yes/No</td>
+          <td>Story time 复述</td>
+          <td>用学校平面图描述<br>There be疑问句5组</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 3 Our animal friends | 话题：动物 | 语法：have/has / can</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 5</td>
+          <td><span class="w w-imp">animal</span><span class="w">leg</span><span class="w">arm</span><span class="w">body</span><span class="w">tail</span><span class="w">wing</span><span class="w">foot (feet)</span><span class="w">eye</span><span class="w">ear</span><span class="w">mouth</span><span class="w w-imp">one...the other...</span></td>
+          <td>I/We/They have...<br>He/She/It has...</td>
+          <td>Story time 朗读</td>
+          <td>描述一个动物(5句)<br>have/has填空10题</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 6</td>
+          <td><span class="w w-imp">can</span><span class="w w-imp">can't</span><span class="w">run</span><span class="w">jump</span><span class="w">swim</span><span class="w">fly</span><span class="w">talk</span><span class="w">carry</span><span class="w">give</span><span class="w">finger</span><span class="w">hard (硬的)</span></td>
+          <td>It can... / It can't...<br>Does it have...?</td>
+          <td>Story time 复述</td>
+          <td>动物谜语写3个<br>can句型转换5组</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 4 Hobbies | 话题：爱好 | 语法：like + doing / be good at</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 7</td>
+          <td><span class="w w-imp">hobby</span><span class="w">be good at</span><span class="w">play basketball</span><span class="w">play football</span><span class="w">play the piano</span><span class="w">read</span><span class="w">watch films</span><span class="w">sing</span><span class="w">dance</span><span class="w">draw</span><span class="w">skate</span><span class="w">swim</span></td>
+          <td>I like doing...<br>He/She likes doing...<br>⚠️ 三单likes + doing</td>
+          <td>Story time 朗读</td>
+          <td>爱好句型造句8个<br>注意三单likes</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 8</td>
+          <td><span class="w">both</span><span class="w">all</span><span class="w">also</span><span class="w">too</span><span class="w w-imp">a lot of</span><span class="w">idea</span><span class="w">hole</span><span class="w">wet</span><span class="w">look out</span><span class="w">go climbing</span><span class="w">go skating</span></td>
+          <td>both vs all vs also vs too<br>What does he/she like doing?</td>
+          <td>Story time 复述</td>
+          <td>both/all/also/too辨析<br>介绍家人爱好(5句)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 5 What do they do? | 话题：职业 | 语法：一般现在时（第三人称单数）</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 9</td>
+          <td><span class="w w-imp">teacher</span><span class="w w-imp">teach</span><span class="w w-imp">doctor</span><span class="w">writer</span><span class="w">write</span><span class="w">work</span><span class="w">factory</span><span class="w">worker</span><span class="w">farmer</span><span class="w">cook</span><span class="w">driver</span><span class="w">drive</span></td>
+          <td><strong>三单动词+s/es</strong><br>What does he/she do?<br>He/She is a...<br>He/She + V-s/es...</td>
+          <td>Story time 朗读</td>
+          <td>动词三单变形20个<br>职业问答5组</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 10</td>
+          <td><span class="w w-imp">nurse</span><span class="w">policeman</span><span class="w">help</span><span class="w">sick</span><span class="w">people</span><span class="w">make</span><span class="w">sweet</span><span class="w w-imp">a lot of</span><span class="w">so many</span><span class="w">at home</span><span class="w">in the sky</span></td>
+          <td>三单否定 doesn't + 原形<br>三单疑问 Does...?</td>
+          <td>Story time 复述</td>
+          <td>三单否定/疑问各5组<br>介绍父母职业(5句)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 6 My e-friend | 话题：网友/个人信息 | 语法：一般现在时疑问句</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 11</td>
+          <td><span class="w w-imp">e-friend</span><span class="w w-imp">email</span><span class="w">send</span><span class="w">live</span><span class="w">study</span><span class="w">China</span><span class="w">UK</span><span class="w">US</span><span class="w">Canada</span><span class="w">Australia</span><span class="w">speak</span><span class="w w-imp">wait a minute</span></td>
+          <td>Where does he live?<br>How old is he?<br>What subjects does he like?</td>
+          <td>Story time 朗读</td>
+          <td>特殊疑问句5组<br>国家名默写</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 12</td>
+          <td><span class="w">Chinese</span><span class="w">English</span><span class="w">Maths</span><span class="w">PE</span><span class="w">Art</span><span class="w">Science</span><span class="w">subject</span><span class="w">lesson</span><span class="w">fishing</span><span class="w">tomorrow</span><span class="w">don't worry</span></td>
+          <td>Does he/she...? Yes/No<br>What...does he...?</td>
+          <td>Story time 复述</td>
+          <td>写一封简短email<br>Does疑问句5组</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 7 At weekends | 话题：周末活动 | 语法：频率副词 + 一般现在时</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 13</td>
+          <td><span class="w w-imp">weekend</span><span class="w w-imp">always</span><span class="w w-imp">usually</span><span class="w w-imp">often</span><span class="w w-imp">sometimes</span><span class="w">visit</span><span class="w">grandparent</span><span class="w">play with</span><span class="w">chat</span><span class="w">Internet</span><span class="w">cinema</span><span class="w">picnic</span></td>
+          <td>频率副词位置<br>（实义动词前，be动词后）<br>What do you do at weekends?</td>
+          <td>Story time 朗读</td>
+          <td>频率副词造句8个<br>周末活动描述(6句)</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 14</td>
+          <td><span class="w">fly a kite</span><span class="w">have a picnic</span><span class="w">go to the cinema</span><span class="w">go climbing</span><span class="w">go swimming</span><span class="w">go fishing</span><span class="w">go boating</span><span class="w">go skating</span><span class="w">there</span><span class="w w-imp">a lot</span><span class="w w-imp">very much</span></td>
+          <td>What does he/she do...?<br>频率副词综合练习</td>
+          <td>Story time 复述</td>
+          <td>三单+频率副词造句<br>go+doing词组汇总</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 8 At Christmas | 话题：圣诞节 | 语法：序数词 / First...Next...Then...Finally...</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 15</td>
+          <td><span class="w w-imp">Christmas</span><span class="w">buy</span><span class="w">present</span><span class="w">Christmas tree</span><span class="w">Father Christmas</span><span class="w">put</span><span class="w">pretty</span><span class="w">thing</span><span class="w">card</span><span class="w w-imp">wait for</span><span class="w w-imp">wake up</span></td>
+          <td>First...Next...Then...Finally...<br>（时间顺序描述）</td>
+          <td>Story time 朗读</td>
+          <td>用顺序词描述一天<br>序数词复习(1st~31st)</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 16</td>
+          <td><span class="w">pudding</span><span class="w">turkey</span><span class="w">stocking</span><span class="w">fold</span><span class="w">message</span><span class="w">merry</span><span class="w w-imp">What's wrong with...?</span><span class="w">finally</span><span class="w">early</span><span class="w">late</span></td>
+          <td>五上语法总复习<br>There be / have-has / 三单 / 频率副词</td>
+          <td>Story time 复述</td>
+          <td>五上单元1~8单词抽测<br>五上语法综合练习</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== 五下 ==================== -->
+  <div class="section-divider"><span>📗 五年级下册（Day 17~32）</span></div>
+
+  <div class="card">
+    <h3>Unit 1 Cinderella | 话题：童话故事 | 语法：Why...? Because...</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 17</td>
+          <td><span class="w w-imp">prince</span><span class="w w-imp">fairy</span><span class="w w-imp">why</span><span class="w w-imp">because</span><span class="w">clothes</span><span class="w">put on</span><span class="w">take off</span><span class="w">try on</span><span class="w">fit</span><span class="w">mushroom</span><span class="w">pick</span><span class="w">understand</span></td>
+          <td>Why can't you...?<br>Because I don't have...<br>Why does...? Because...</td>
+          <td>Story time 朗读</td>
+          <td>Why/Because问答5组<br>put on/take off/try on辨析</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 18</td>
+          <td><span class="w w-imp">have to</span><span class="w">leave...behind</span><span class="w">come back</span><span class="w">have a good time</span><span class="w">at the party</span><span class="w">before</span><span class="w">late</span><span class="w">sad</span><span class="w">happy</span><span class="w">shoe</span></td>
+          <td>have to + 动词原形<br>Why/Because综合</td>
+          <td>Story time 复述</td>
+          <td>用Why/Because写对话<br>Cinderella故事复述</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 2 How do you come to school? | 话题：交通方式 | 语法：How...? 询问交通</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 19</td>
+          <td><span class="w w-imp">far from</span><span class="w w-imp">near</span><span class="w">bus</span><span class="w">metro</span><span class="w">taxi</span><span class="w">bike</span><span class="w">plane</span><span class="w">ship</span><span class="w">train</span><span class="w w-imp">on foot</span><span class="w">live</span><span class="w">street</span></td>
+          <td>How do you come to...?<br>I come to... by + 交通<br>I walk to... = on foot</td>
+          <td>Story time 朗读</td>
+          <td>交通方式造句8个<br>by bus / on foot 区分</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 20</td>
+          <td><span class="w">city</span><span class="w">town</span><span class="w">near</span><span class="w w-imp">far from</span><span class="w">Moon Street</span><span class="w">City Library</span><span class="w">basketball</span><span class="w">young</span><span class="w">wheel</span><span class="w">ride</span><span class="w">show</span></td>
+          <td>Where do you live?<br>I live on/in/near...<br>How does he/she come to...?</td>
+          <td>Story time 复述</td>
+          <td>住址+交通方式描述<br>三单交通方式5句</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 3 Asking the way | 话题：问路指路 | 语法：祈使句指路 / 方位表达</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 21</td>
+          <td><span class="w w-imp">ask the way</span><span class="w w-imp">get to</span><span class="w w-imp">go along</span><span class="w">turn left</span><span class="w">turn right</span><span class="w">traffic light</span><span class="w">next to</span><span class="w">on your right</span><span class="w">get on</span><span class="w">get off</span><span class="w">station</span><span class="w">walk</span></td>
+          <td>How do I get to...?<br>Go along this street.<br>Turn left/right at...</td>
+          <td>Story time 朗读</td>
+          <td>指路句型5组<br>left/right/along动作练习</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 22</td>
+          <td><span class="w">bookshop</span><span class="w">cinema</span><span class="w">hospital</span><span class="w">supermarket</span><span class="w">zoo</span><span class="w">park</span><span class="w">full</span><span class="w w-imp">see a new film</span><span class="w">stop</span><span class="w">over</span><span class="w w-imp">ask...for help</span></td>
+          <td>You can see...on your right.<br>Get on/off...at...Station.</td>
+          <td>Story time 复述</td>
+          <td>画地图指路练习<br>问路指路情景对话</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 4 Seeing the doctor | 话题：看病 | 语法：should / shouldn't</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 23</td>
+          <td><span class="w w-imp">see the doctor</span><span class="w">feel</span><span class="w w-imp">toothache</span><span class="w">headache</span><span class="w">fever</span><span class="w">cold</span><span class="w w-imp">should</span><span class="w w-imp">shouldn't</span><span class="w">medicine</span><span class="w">rest</span><span class="w">drink water</span><span class="w">brush teeth</span></td>
+          <td>What's wrong with you?<br>I have a...<br>You should/shouldn't...</td>
+          <td>Story time 朗读</td>
+          <td>should/shouldn't造句6个<br>疾病词汇默写</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 24</td>
+          <td><span class="w">dentist</span><span class="w">anything</span><span class="w">bedtime</span><span class="w">check</span><span class="w">giraffe</span><span class="w w-imp">have a rest</span><span class="w w-imp">point at</span><span class="w">neck</span><span class="w">hear</span><span class="w">take medicine</span><span class="w">temperature</span></td>
+          <td>tooth→teeth (单复数)<br>What should...do?</td>
+          <td>Story time 复述</td>
+          <td>看病情景对话<br>不规则复数复习</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 5 Helping our parents | 话题：家务 | 语法：现在进行时</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 25</td>
+          <td><span class="w w-imp">parent</span><span class="w">clean</span><span class="w">cook</span><span class="w">busy</span><span class="w w-imp">make the bed</span><span class="w w-imp">sweep the floor</span><span class="w">wash dishes</span><span class="w">clean the car</span><span class="w">watch TV</span><span class="w">sleep</span><span class="w">grow</span></td>
+          <td><strong>现在进行时</strong><br>am/is/are + V-ing<br>What are you doing?<br>I am + V-ing...</td>
+          <td>Story time 朗读</td>
+          <td>V-ing变形规则汇总<br>现在进行时造句8个</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 26</td>
+          <td><span class="w">garden</span><span class="w">kitchen</span><span class="w">bedroom</span><span class="w">living room</span><span class="w">sweet</span><span class="w">pest</span><span class="w">ladybird</span><span class="w w-imp">go away</span><span class="w">blow</span><span class="w">fruit</span><span class="w">eat fruit</span></td>
+          <td>What is he/she doing?<br>He/She is + V-ing...<br>双写+ing规则</td>
+          <td>Story time 复述</td>
+          <td>现在进行时否定/疑问<br>双写+ing专项练习</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 6 In the kitchen | 话题：厨房/食物 | 语法：There be + 不可数名词 / 现在进行时</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 27</td>
+          <td><span class="w w-imp">meat</span><span class="w">potato</span><span class="w">tomato</span><span class="w">vegetable</span><span class="w">bread</span><span class="w">juice</span><span class="w">soup</span><span class="w">rice</span><span class="w w-imp">yummy</span><span class="w">smell</span><span class="w">angry</span><span class="w">game</span></td>
+          <td>There is some... (不可数)<br>There are some... (可数复数)<br>Is/Are there any...?</td>
+          <td>Story time 朗读</td>
+          <td>可数/不可数分类<br>some/any辨析</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 28</td>
+          <td><span class="w">ready</span><span class="w">drive...away</span><span class="w">win</span><span class="w">love</span><span class="w">catch</span><span class="w">ladybird</span><span class="w w-imp">I can't wait!</span><span class="w">look for</span><span class="w">find</span><span class="w">dinner</span></td>
+          <td>现在进行时 + There be综合<br>Are you + V-ing...? Yes/No</td>
+          <td>Story time 复述</td>
+          <td>There be+现在进行时混合<br>食物主题写作(6句)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 7 Chinese festivals | 话题：中国传统节日 | 语法：月份 / 节日表达</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 29</td>
+          <td><span class="w w-imp">festival</span><span class="w">Spring Festival</span><span class="w">Dragon Boat Festival</span><span class="w">Mid-Autumn Festival</span><span class="w">Double Ninth Festival</span><span class="w">January~December</span><span class="w">call</span><span class="w w-imp">dumpling</span><span class="w">rice dumpling</span><span class="w">moon cake</span></td>
+          <td>The...Festival is in...<br>People...at this festival.<br>12个月份默写</td>
+          <td>Story time 朗读</td>
+          <td>12个月份默写<br>4个节日+月份+活动</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 30</td>
+          <td><span class="w">place</span><span class="w">mountain</span><span class="w">climb</span><span class="w">dragon boat race</span><span class="w">get together</span><span class="w w-imp">eat...at this festival</span><span class="w">look at the moon</span><span class="w">old</span><span class="w">November</span><span class="w">October</span></td>
+          <td>What do people do at...?<br>What do people eat at...?<br>节日主题写作框架</td>
+          <td>Story time 复述</td>
+          <td>写一个节日(6句)<br>五下Unit 1~7单词抽测</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 8 Birthdays | 话题：生日 | 语法：序数词日期 / 一般现在时综合</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 31</td>
+          <td><span class="w w-imp">birthday</span><span class="w">eleventh</span><span class="w">twelfth</span><span class="w">twentieth</span><span class="w">twenty-first</span><span class="w">thirty-first</span><span class="w">date</span><span class="w">hero</span><span class="w">play</span><span class="w">answer</span><span class="w">password</span><span class="w">start</span></td>
+          <td>When's your birthday?<br>It's on the...of...<br>序数词完整(1st~31st)</td>
+          <td>Story time 朗读</td>
+          <td>序数词1st~31st默写<br>生日日期表达5组</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 32</td>
+          <td><span class="w">fight</span><span class="w">number</span><span class="w">door</span><span class="w">easy</span><span class="w">as soon as</span><span class="w">game</span><span class="w w-imp">have a party</span><span class="w">buy a cake</span><span class="w">eat noodles</span><span class="w">blow out</span></td>
+          <td>五下语法总复习<br>现在进行时 / Why-Because / should / 序数词</td>
+          <td>Story time 复述</td>
+          <td>五下Unit 1~8单词抽测<br>五下语法综合练习</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== 六上 ==================== -->
+  <div class="section-divider"><span>📙 六年级上册（Day 33~48）</span></div>
+
+  <div class="card">
+    <h3>Unit 1 The king's new clothes | 话题：童话故事 | 语法：一般过去时（was/were + 规则动词ed）</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 33</td>
+          <td><span class="w w-imp">long long ago</span><span class="w w-imp">magic</span><span class="w">clever</span><span class="w">foolish</span><span class="w w-imp">laugh</span><span class="w w-imp">shout</span><span class="w w-imp">point at</span><span class="w">king</span><span class="w">each</span><span class="w">wear</span><span class="w">tell</span><span class="w">turn into</span></td>
+          <td><strong>一般过去时</strong><br>Long long ago, there was...<br>动词+ed规则<br>was/were 用法</td>
+          <td>Story time 朗读</td>
+          <td>was/were填空10题<br>规则动词ed变形20个</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 34</td>
+          <td><span class="w">child</span><span class="w">children</span><span class="w">man</span><span class="w">people</span><span class="w w-imp">try on</span><span class="w w-imp">walk through</span><span class="w">beautiful</span><span class="w">clothes</span><span class="w">street</span><span class="w">little</span><span class="w">quick</span></td>
+          <td>一般过去时否定<br>didn't + 动词原形<br>Did...? 疑问句</td>
+          <td>Story time 复述</td>
+          <td>过去时否定句5组<br>Did疑问句5组</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 2 What a day! | 话题：天气日记 | 语法：不规则动词过去式 / 天气表达</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 35</td>
+          <td><span class="w w-imp">sunny</span><span class="w w-imp">cloudy</span><span class="w w-imp">rainy</span><span class="w w-imp">windy</span><span class="w">become</span><span class="w w-imp">bring</span><span class="w">honey</span><span class="w">drink</span><span class="w">ant</span><span class="w">bee</span><span class="w">cloud</span><span class="w">rain</span></td>
+          <td>不规则动词过去式①<br>go→went, see→saw<br>fly→flew, bring→brought<br>can→could, become→became</td>
+          <td>Story time 朗读</td>
+          <td>不规则动词过去式10个<br>天气形容词+名词区分</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 36</td>
+          <td><span class="w w-imp">wet</span><span class="w">meet</span><span class="w">lose</span><span class="w">know</span><span class="w">climb up</span><span class="w">hold onto</span><span class="w">fly away</span><span class="w">all day</span><span class="w">What happened?</span><span class="w">go away</span></td>
+          <td>不规则动词过去式②<br>meet→met, lose→lost<br>find→found, take→took<br>天气日记写作</td>
+          <td>Story time 复述</td>
+          <td>写一篇天气日记(6句)<br>不规则动词20个默写</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 3 Holiday fun | 话题：假期活动 | 语法：一般过去时疑问句</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 37</td>
+          <td><span class="w w-imp">holiday</span><span class="w w-imp">National Day</span><span class="w">Bund</span><span class="w">Shanghai Museum</span><span class="w">Palace Museum</span><span class="w">Great Wall</span><span class="w">catch</span><span class="w">eat</span><span class="w">pick</span><span class="w w-imp">call</span><span class="w">bottle</span></td>
+          <td>Where did you go?<br>What did you do?<br>How was your holiday?</td>
+          <td>Story time 朗读</td>
+          <td>过去时特殊疑问句5组<br>不规则动词: catch→caught, eat→ate</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 38</td>
+          <td><span class="w">Great Wall</span><span class="w">Tian'anmen Square</span><span class="w">Summer Palace</span><span class="w">fashion show</span><span class="w w-imp">excited</span><span class="w">paper</span><span class="w">ask</span><span class="w">at first</span><span class="w">heavy rain</span><span class="w">go well</span></td>
+          <td>Did you...? Yes, I did. / No, I didn't.<br>过去时作文框架</td>
+          <td>Story time 复述</td>
+          <td>写假期短文(8句)<br>过去时综合练习</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 4 Then and now | 话题：过去与现在对比 | 语法：一般过去时 vs 一般现在时</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 39</td>
+          <td><span class="w w-imp">ago</span><span class="w">telephone</span><span class="w">mobile phone</span><span class="w">radio</span><span class="w">newspaper</span><span class="w">news</span><span class="w">e-book</span><span class="w">anywhere</span><span class="w w-imp">could / couldn't</span><span class="w">use</span><span class="w">write</span><span class="w">read</span></td>
+          <td>...years ago, I was/could...<br>Now I am/can...<br>过去vs现在对比写作</td>
+          <td>Story time 朗读</td>
+          <td>过去vs现在对比5组<br>could/couldn't造句</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 40</td>
+          <td><span class="w">yesterday</span><span class="w">then</span><span class="w">now</span><span class="w w-imp">make friends</span><span class="w">buy things</span><span class="w">do shopping</span><span class="w">watch news</span><span class="w">all over the world</span><span class="w">spell</span><span class="w">still</span></td>
+          <td>不规则动词过去式③<br>make→made, buy→bought<br>do→did, read→read</td>
+          <td>Story time 复述</td>
+          <td>Then and now短文(8句)<br>不规则动词累计30个</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 5 Signs | 话题：公共标志 | 语法：情态动词 can / can't / must / mustn't</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 41</td>
+          <td><span class="w w-imp">sign</span><span class="w">shopping centre</span><span class="w">careful</span><span class="w w-imp">mean</span><span class="w">floor</span><span class="w">litter</span><span class="w">restaurant</span><span class="w">smoke</span><span class="w">smell</span><span class="w">outing</span><span class="w">someone</span><span class="w">take...into</span></td>
+          <td><strong>What does it mean?</strong><br>It means...<br>You can/can't...<br>No + V-ing</td>
+          <td>Story time 朗读</td>
+          <td>标志英文表达10个<br>No+V-ing句型</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 42</td>
+          <td><span class="w">No smoking</span><span class="w">No eating or drinking</span><span class="w">No littering</span><span class="w">No parking</span><span class="w">Wet floor</span><span class="w">Danger!</span><span class="w w-imp">around</span><span class="w w-imp">monkey</span><span class="w">walk on</span><span class="w">underground</span></td>
+          <td>must / mustn't<br>can / can't<br>情态动词+动词原形</td>
+          <td>Story time 复述</td>
+          <td>设计标志+英文说明<br>must/mustn't造句8个</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 6 Keep our city clean | 话题：环境保护 | 语法：make + 名词 + 形容词</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 43</td>
+          <td><span class="w w-imp">keep</span><span class="w w-imp">clean</span><span class="w w-imp">dirty</span><span class="w">messy</span><span class="w">dead</span><span class="w">bin</span><span class="w">factory</span><span class="w">rubbish</span><span class="w">smoke</span><span class="w">air</span><span class="w">plant</span><span class="w">more</span></td>
+          <td>What makes...dirty?<br>...makes...dirty/messy.<br>make + n. + adj.</td>
+          <td>Story time 朗读</td>
+          <td>make+n+adj造句5个<br>环保主题词汇默写</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 44</td>
+          <td><span class="w w-imp">move...away from</span><span class="w">take the bus</span><span class="w">walk to school</span><span class="w">put...in the bin</span><span class="w">plant trees</span><span class="w">well</span><span class="w">museum</span><span class="w">throw</span><span class="w">skin</span><span class="w">ground</span><span class="w">pick...up</span></td>
+          <td>What can we do to...?<br>We can...<br>建议句型综合</td>
+          <td>Story time 复述</td>
+          <td>环保建议短文(8句)<br>六上Unit 1~6单词抽测</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 7 Protect the Earth | 话题：保护地球 | 语法：use...to... / should</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 45</td>
+          <td><span class="w w-imp">protect</span><span class="w w-imp">Earth</span><span class="w">save</span><span class="w">useful</span><span class="w">waste</span><span class="w">energy</span><span class="w">coal</span><span class="w">oil</span><span class="w">wood</span><span class="w">plastic</span><span class="w">paper</span><span class="w">glass</span></td>
+          <td>We use...to...<br>We should...<br>We should not...</td>
+          <td>Story time 朗读</td>
+          <td>use...to...造句5个<br>能源/材料词汇默写</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 46</td>
+          <td><span class="w">reuse</span><span class="w">recycle</span><span class="w w-imp">too much</span><span class="w w-imp">too many</span><span class="w">come from</span><span class="w">cut down</span><span class="w">drive so much</span><span class="w">most of</span><span class="w">poster</span><span class="w">project</span><span class="w">gate</span></td>
+          <td>too much + 不可数<br>too many + 可数复数<br>should综合运用</td>
+          <td>Story time 复述</td>
+          <td>保护地球海报英文<br>六上单词综合抽测</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 8 Chinese New Year | 话题：春节 | 语法：一般将来时（be going to）</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 47</td>
+          <td><span class="w w-imp">fireworks</span><span class="w w-imp">firecracker</span><span class="w">lion dance</span><span class="w">red packet</span><span class="w w-imp">get</span><span class="w">rich</span><span class="w">plan</span><span class="w">hooray</span><span class="w">light</span><span class="w">cook</span><span class="w">watch</span><span class="w">excited</span></td>
+          <td><strong>一般将来时</strong><br>be going to + 动词原形<br>What are you going to do?<br>I'm going to...</td>
+          <td>Story time 朗读</td>
+          <td>be going to造句8个<br>春节词汇默写</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 48</td>
+          <td><span class="w">food</span><span class="w">tangyuan</span><span class="w">dumpling</span><span class="w">flower</span><span class="w">Eve</span><span class="w w-imp">on Chinese New Year's Eve</span><span class="w">on...Day</span><span class="w">talk about</span><span class="w">next week</span><span class="w">tomorrow</span></td>
+          <td>六上语法总复习<br>过去时 / 情态动词 / be going to</td>
+          <td>Story time 复述</td>
+          <td>春节计划短文(8句)<br>六上语法综合练习</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== 六下 ==================== -->
+  <div class="section-divider"><span>📕 六年级下册（Day 49~60）</span></div>
+
+  <div class="card">
+    <h3>Unit 1 The lion and the mouse | 话题：寓言故事 | 语法：副词（-ly）</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 49</td>
+          <td><span class="w w-imp">lion</span><span class="w w-imp">mouse</span><span class="w">large</span><span class="w">strong</span><span class="w">weak</span><span class="w w-imp">quietly</span><span class="w w-imp">loudly</span><span class="w w-imp">sadly</span><span class="w w-imp">happily</span><span class="w">net</span><span class="w">bite</span><span class="w">sharp</span></td>
+          <td><strong>形容词→副词 +ly</strong><br>quiet→quietly<br>loud→loudly<br>sad→sadly<br>happy→happily (y→i+ly)</td>
+          <td>Story time 朗读</td>
+          <td>副词变形规则汇总<br>形容词vs副词填空10题</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 50</td>
+          <td><span class="w">wake...up</span><span class="w">let...go</span><span class="w">pour</span><span class="w">cheer</span><span class="w">deep</span><span class="w">reach</span><span class="w w-imp">get out</span><span class="w w-imp">from then on</span><span class="w">become friends</span><span class="w">brave</span></td>
+          <td>副词不规则变化<br>good→well<br>fast→fast (同形)<br>hard→hard (同形)</td>
+          <td>Story time 复述</td>
+          <td>副词综合练习<br>寓言复述(英文6句)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 2 Good habits | 话题：习惯 | 语法：频率副词 + 一般现在时综合</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 51</td>
+          <td><span class="w w-imp">habit</span><span class="w">never</span><span class="w">late</span><span class="w">finish</span><span class="w">tidy</span><span class="w">messy</span><span class="w">fast</span><span class="w">well</span><span class="w">badly</span><span class="w">sleepy</span><span class="w w-imp">put...in order</span><span class="w w-imp">go to bed late</span></td>
+          <td>频率副词复习+扩展<br>always/usually/often/sometimes/never<br>He never goes to bed late.</td>
+          <td>Story time 朗读</td>
+          <td>好习惯vs坏习惯清单<br>never造句5个</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 52</td>
+          <td><span class="w">before bedtime</span><span class="w">brush teeth</span><span class="w">keep...clean</span><span class="w">feel sleepy</span><span class="w">know...well</span><span class="w w-imp">last night</span><span class="w">walk fast</span><span class="w">run fast</span><span class="w">four times</span><span class="w">do well</span></td>
+          <td>well vs good<br>fast vs quick<br>badly (副词)</td>
+          <td>Story time 复述</td>
+          <td>习惯主题写作(8句)<br>副词+频率副词综合</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 3 A healthy diet | 话题：健康饮食 | 语法：a lot of / some / a few / a little</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 53</td>
+          <td><span class="w w-imp">diet</span><span class="w w-imp">healthy</span><span class="w">a little</span><span class="w">a few</span><span class="w">at a time</span><span class="w">need</span><span class="w">cola</span><span class="w">porridge</span><span class="w">steamed bun</span><span class="w">cereal</span><span class="w">sausage</span></td>
+          <td>a lot of / some / a few (+可数)<br>a lot of / some / a little (+不可数)<br>数量词分级</td>
+          <td>Story time 朗读</td>
+          <td>数量词造句6个<br>可数/不可数分类复习</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 54</td>
+          <td><span class="w">egg</span><span class="w">milk</span><span class="w">bread</span><span class="w">rice</span><span class="w">noodles</span><span class="w">meat</span><span class="w">fish</span><span class="w">fruit</span><span class="w">vegetable</span><span class="w w-imp">sweet food</span><span class="w">too much</span><span class="w">too many</span></td>
+          <td>a few vs a little<br>too much vs too many<br>数量词综合辨析</td>
+          <td>Story time 复述</td>
+          <td>饮食金字塔写作<br>数量词综合练习</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 4 Road safety | 话题：道路安全 | 语法：must / mustn't / can</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 55</td>
+          <td><span class="w w-imp">road</span><span class="w w-imp">safety</span><span class="w w-imp">cross</span><span class="w w-imp">safely</span><span class="w">pavement</span><span class="w">traffic light</span><span class="w">green man</span><span class="w">red man</span><span class="w">zebra crossing</span><span class="w">look out for</span><span class="w">left</span><span class="w">right</span></td>
+          <td>must / mustn't 复习<br>can / can't 复习<br>情态动词+动词原形</td>
+          <td>Story time 朗读</td>
+          <td>must/mustn't造句8个<br>交通规则英文描述</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 56</td>
+          <td><span class="w">rule</span><span class="w">stay</span><span class="w">light</span><span class="w">follow</span><span class="w">easily</span><span class="w">look left/right</span><span class="w">run on the road</span><span class="w">play on the road</span><span class="w w-imp">wait on the pavement</span><span class="w">helmet</span></td>
+          <td>情态动词综合复习<br>must / should / can 区别<br>祈使句安全规则</td>
+          <td>Story time 复述</td>
+          <td>道路安全规则短文<br>情态动词综合练习</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 六下 Unit 5~8 合并加速 -->
+  <div class="card">
+    <h3>Unit 5 A party | 话题：派对 | 语法：be going to 将来时复习</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（10~12个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 57</td>
+          <td><span class="w w-imp">party</span><span class="w">clown</span><span class="w">appear</span><span class="w">balloon</span><span class="w">snack</span><span class="w">drink</span><span class="w">fruit</span><span class="w">toy</span><span class="w w-imp">put on a play</span><span class="w">tell a story</span><span class="w">play the piano</span><span class="w">Children's Day</span></td>
+          <td>be going to 将来时复习<br>What are you going to bring?<br>I'm going to bring some...</td>
+          <td>Story time 朗读</td>
+          <td>be going to造句8个<br>派对计划短文(6句)</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 58</td>
+          <td><span class="w">Unit 6 An interesting country</span><br><span class="w">country</span><span class="w">learn</span><span class="w">find out</span><span class="w">magazine</span><span class="w">kangaroo</span><span class="w">koala</span><span class="w">sport-lover</span><span class="w">exciting</span><span class="w">Sydney</span><span class="w">London</span><span class="w">Oxford</span></td>
+          <td>will + 动词原形<br>I will...<br>will vs be going to 区别</td>
+          <td>两课Story time朗读</td>
+          <td>will造句8个<br>国家介绍短文(6句)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Unit 7 Summer holiday plans & Unit 8 Our dreams | 话题：暑假计划/梦想 | 语法：将来时总复习</h3>
+    <table>
+      <thead><tr><th class="col-day">天</th><th class="col-words">核心单词（15~18个）</th><th class="col-grammar">语法/句型</th><th class="col-read">课文/阅读</th><th class="col-task">每日任务</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="col-day">Day 59</td>
+          <td><span class="w w-imp">summer holiday</span><span class="w">go back to</span><span class="w">stay</span><span class="w">sound</span><span class="w">Disneyland</span><span class="w">Ocean Park</span><span class="w">Taipei</span><span class="w">photo</span><span class="w">travel</span><span class="w">different</span><span class="w">by plane/train</span></td>
+          <td>将来时总复习<br>will / be going to<br>Where will you go?<br>How long will you stay?</td>
+          <td>U7 Story time 朗读</td>
+          <td>暑假计划短文(10句)<br>将来时两种形式互转</td>
+        </tr>
+        <tr>
+          <td class="col-day">Day 60</td>
+          <td><span class="w w-imp">dream</span><span class="w">future</span><span class="w">dentist</span><span class="w">astronaut</span><span class="w">spaceship</span><span class="w">pianist</span><span class="w">scientist</span><span class="w">artist</span><span class="w">dancer</span><span class="w">football player</span><span class="w">come true</span><span class="w w-imp">care about</span></td>
+          <td><strong>六下+小升初总复习</strong><br>时态大总结：一般现在/现在进行/一般过去/一般将来<br>40个不规则动词总默写</td>
+          <td>U8 Story time 朗读</td>
+          <td>My dream短文(10句)<br>四时态综合卷1套</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== 附录 ==================== -->
+  <div class="section-divider"><span>📎 附录</span></div>
+
+  <!-- 不规则动词表 -->
+  <div class="card">
+    <h2>📋 附录一：译林版必考不规则动词表（40个）</h2>
+    <table>
+      <thead><tr><th>类型</th><th>原形</th><th>过去式</th><th>中文</th><th>原形</th><th>过去式</th><th>中文</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="5">AAA型<br>（不变）</td><td>cut</td><td>cut</td><td>切</td><td>put</td><td>put</td><td>放</td></tr>
+        <tr><td>read</td><td>read</td><td>读</td><td>let</td><td>let</td><td>让</td></tr>
+        <tr><td>hurt</td><td>hurt</td><td>受伤</td><td>hit</td><td>hit</td><td>打</td></tr>
+        <tr><td>cost</td><td>cost</td><td>花费</td><td></td><td></td><td></td></tr>
+        <tr><td colspan="6"></td></tr>
+        <tr><td rowspan="6">ABB型<br>（同形）</td><td>bring</td><td>brought</td><td>带来</td><td>buy</td><td>bought</td><td>买</td></tr>
+        <tr><td>catch</td><td>caught</td><td>抓住</td><td>teach</td><td>taught</td><td>教</td></tr>
+        <tr><td>think</td><td>thought</td><td>想</td><td>find</td><td>found</td><td>找到</td></tr>
+        <tr><td>have</td><td>had</td><td>有</td><td>make</td><td>made</td><td>制作</td></tr>
+        <tr><td>tell</td><td>told</td><td>告诉</td><td>say</td><td>said</td><td>说</td></tr>
+        <tr><td>feel</td><td>felt</td><td>感觉</td><td>keep</td><td>kept</td><td>保持</td></tr>
+        <tr><td rowspan="8">ABC型<br>（全变）</td><td>go</td><td>went</td><td>去</td><td>see</td><td>saw</td><td>看见</td></tr>
+        <tr><td>eat</td><td>ate</td><td>吃</td><td>drink</td><td>drank</td><td>喝</td></tr>
+        <tr><td>take</td><td>took</td><td>拿</td><td>give</td><td>gave</td><td>给</td></tr>
+        <tr><td>fly</td><td>flew</td><td>飞</td><td>become</td><td>became</td><td>变成</td></tr>
+        <tr><td>run</td><td>ran</td><td>跑</td><td>sing</td><td>sang</td><td>唱</td></tr>
+        <tr><td>swim</td><td>swam</td><td>游泳</td><td>write</td><td>wrote</td><td>写</td></tr>
+        <tr><td>do</td><td>did</td><td>做</td><td>come</td><td>came</td><td>来</td></tr>
+        <tr><td>know</td><td>knew</td><td>知道</td><td>draw</td><td>drew</td><td>画</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-info">
+      <strong>记忆技巧：</strong>从Day 35开始每天背5个，8天背完。AAA型不用背变化，ABB型找规律（如-ought组：bring/buy/catch/teach/think），ABC型逐个击破。
+    </div>
+  </div>
+
+  <!-- 家长指南 -->
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <h2>💛 附录二：敏敏操作指南</h2>
+    <table>
+      <thead><tr><th>你做什么</th><th>具体怎么做</th><th>不要做什么</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>打印清单</strong></td>
+          <td>把这份HTML打印出来，每天撕一页贴在书桌前。孩子自己对照执行，完成一项打钩。</td>
+          <td>不要每天口头催"你做了没有"——清单就是最好的提醒。</td>
+        </tr>
+        <tr>
+          <td><strong>15分钟"验收"</strong></td>
+          <td>每天睡前15分钟，孩子当小老师考你3个今天学的单词/句型。你故意"记不住"，让他纠正你。</td>
+          <td>不要在验收时纠错。他说错了，你轻声重复正确的就行。</td>
+        </tr>
+        <tr>
+          <td><strong>打卡激励</strong></td>
+          <td>准备一个日历，每天完成全部任务后贴一颗⭐。集满7颗换一个小奖励（不是物质奖励，比如"今晚你来选电影"）。</td>
+          <td>不要用"做完才能玩手机"做条件——学习和娱乐不要对立。</td>
+        </tr>
+        <tr>
+          <td><strong>处理崩溃</strong></td>
+          <td>如果他某天情绪爆炸不想学——抱抱他，说"今天休息，明天再来"。60天里允许有3~5天"休息日"。</td>
+          <td>不要说"你看人家XXX都学到哪了"——比较是自信心的毒药。</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-warn">
+      <strong>核心心态：</strong>这份60天计划的目标不是"学完四本书"，而是<strong>建立"我能学会英语"的信念</strong>。哪怕只完成了80%，只要孩子每天能看到自己的进步，初一开学时的心态就会完全不同——从"我英语不行"变成"我暑假补了很多"。
+    </div>
+  </div>
+
+  <div class="footer">
+    译林版（三年级起点）五年级起 · 每日学习内容清单 · 敏敏出品 · 2026.06<br>
+    可打印 | 手机浏览器友好 | 60天可执行
+  </div>
+
+</div>
+</body>
+</html>

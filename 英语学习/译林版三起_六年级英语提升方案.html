@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>译林版（三起）六年级英语提升方案 | 敏敏出品</title>
+<style>
+  :root {
+    --primary: #1a6fb5;
+    --primary-light: #e8f4fd;
+    --accent: #e8734a;
+    --accent-light: #fef6f3;
+    --green: #2e7d32;
+    --green-light: #e8f5e9;
+    --bg: #f8f9fb;
+    --card: #ffffff;
+    --text: #2c3e50;
+    --text-secondary: #5a6c7d;
+    --border: #e5e9f0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 20px 16px 48px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 36px 20px 28px;
+    background: linear-gradient(135deg, #1a6fb5 0%, #2196F3 50%, #4fc3f7 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+  }
+  .header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+  .header .subtitle {
+    font-size: 14px;
+    opacity: 0.85;
+    font-weight: 400;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  .card h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card h2 .icon {
+    font-size: 22px;
+  }
+  .card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 16px 0 8px;
+    padding-left: 10px;
+    border-left: 3px solid var(--primary);
+  }
+  .card p {
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 16px;
+    font-size: 13.5px;
+  }
+  thead th {
+    background: #f1f5f9;
+    padding: 10px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+    border-bottom: 2px solid var(--border);
+  }
+  thead th:first-child { border-radius: 8px 0 0 0; }
+  thead th:last-child { border-radius: 0 8px 0 0; }
+  tbody td {
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #fafbfc; }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11.5px;
+    font-weight: 600;
+    margin-right: 4px;
+    margin-bottom: 3px;
+  }
+  .tag-red { background: #ffebee; color: #c62828; }
+  .tag-orange { background: #fff3e0; color: #e65100; }
+  .tag-blue { background: #e3f2fd; color: #1565c0; }
+  .tag-green { background: #e8f5e9; color: #2e7d32; }
+  .tag-purple { background: #f3e5f5; color: #6a1b9a; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: var(--border);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -22px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+  .tl-item.phase2::before { background: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+  .tl-item.phase3::before { background: var(--green); box-shadow: 0 0 0 2px var(--green); }
+  .tl-item .tl-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+  .tl-item .tl-date {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+  }
+  .tl-item .tl-content {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+  }
+
+  /* Alert boxes */
+  .alert {
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    margin: 12px 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .alert-info { background: var(--primary-light); border-left: 3px solid var(--primary); }
+  .alert-warning { background: var(--accent-light); border-left: 3px solid var(--accent); }
+  .alert-success { background: var(--green-light); border-left: 3px solid var(--green); }
+
+  /* Checklists */
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+  .checklist li {
+    padding: 5px 0 5px 24px;
+    position: relative;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  .checklist li::before {
+    content: '☐';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  /* Grammar grid */
+  .grammar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 12px 0;
+  }
+  .grammar-card {
+    background: #fafbfc;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+  }
+  .grammar-card .gc-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: var(--primary);
+  }
+  .grammar-card .gc-content {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Numbered list */
+  .num-list { counter-reset: item; list-style: none; padding: 0; }
+  .num-list li {
+    counter-increment: item;
+    padding: 4px 0 4px 28px;
+    position: relative;
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+  }
+  .num-list li::before {
+    content: counter(item);
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  /* Vocab highlight */
+  .vocab-box {
+    background: #fefcf5;
+    border: 1px solid #f0e6c8;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin: 12px 0;
+  }
+  .vocab-box .vb-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: #8d6e00;
+    margin-bottom: 6px;
+  }
+  .vocab-box .vb-words {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .vocab-box .vb-word {
+    background: #fff;
+    border: 1px solid #f0e6c8;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 13px;
+    color: var(--text);
+    font-family: "SF Mono", "Consolas", monospace;
+  }
+
+  /* Progress bar */
+  .progress-section { margin: 16px 0; }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .progress-bar {
+    height: 8px;
+    background: #e8edf2;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+  .fill-blue { background: linear-gradient(90deg, #1a6fb5, #4fc3f7); }
+  .fill-orange { background: linear-gradient(90deg, #e8734a, #ffab76); }
+  .fill-green { background: linear-gradient(90deg, #2e7d32, #66bb6a); }
+
+  /* Daily card */
+  .daily-schedule {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 8px 12px;
+    margin: 12px 0;
+    font-size: 13.5px;
+  }
+  .daily-schedule .ds-time {
+    font-weight: 700;
+    color: var(--primary);
+    text-align: right;
+  }
+  .daily-schedule .ds-task {
+    color: var(--text-secondary);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .container { padding: 12px 10px 36px; }
+    .header { padding: 24px 14px 20px; }
+    .header h1 { font-size: 22px; }
+    .card { padding: 16px 14px; }
+    table { font-size: 12px; }
+    thead th, tbody td { padding: 6px 6px; }
+    .grammar-grid { grid-template-columns: 1fr; }
+    .daily-schedule { grid-template-columns: 50px 1fr; font-size: 12.5px; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .card { box-shadow: none; break-inside: avoid; }
+    .header { background: #1a6fb5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ========== HEADER ========== -->
+  <div class="header">
+    <div class="badge">译林版 · 三年级起点</div>
+    <h1>六年级毕业班英语提升方案</h1>
+    <div class="subtitle">从"基本单词不认识"到"小升初稳扎稳打"——60天可执行路线图</div>
+  </div>
+
+  <!-- ========== 一、问题诊断 ========== -->
+  <div class="card">
+    <h2><span class="icon">🔍</span> 一、问题诊断：为什么六年级了基础还这么差？</h2>
+    <p>这不是孩子"笨"或"不努力"。译林版三起教材的设计逻辑是<strong>螺旋上升</strong>——三年级的漏洞到六年级会被无限放大。常见根因：</p>
+
+    <table>
+      <thead>
+        <tr><th style="width:22%">症结</th><th>具体表现</th><th style="width:18%">严重程度</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>拼读能力缺失</strong></td>
+          <td>没系统学过音标或自然拼读，单词全靠死记字母顺序，效率极低</td>
+          <td><span class="tag tag-red">致命</span></td>
+        </tr>
+        <tr>
+          <td><strong>三/四年级词汇大面积遗忘</strong></td>
+          <td>译林版三起三上~四下约350个基础词，这些词是六年级课文的"积木"，不认识就看不懂句子</td>
+          <td><span class="tag tag-red">致命</span></td>
+        </tr>
+        <tr>
+          <td><strong>时态概念混淆</strong></td>
+          <td>一般现在时、现在进行时、一般过去时混为一谈，be动词和助动词乱用</td>
+          <td><span class="tag tag-orange">严重</span></td>
+        </tr>
+        <tr>
+          <td><strong>畏难心理固化</strong></td>
+          <td>"我英语就是不行"的标签已经贴上，面对英语自动进入防御模式</td>
+          <td><span class="tag tag-orange">严重</span></td>
+        </tr>
+        <tr>
+          <td><strong>句型储备不足</strong></td>
+          <td>只会蹦单词，不会组织完整句子，写作和口语表达空白</td>
+          <td><span class="tag tag-blue">中等</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-info">
+      <strong>💡 关键认知：</strong>六年级基础差不是一天形成的，也不能一天补上。但60天集中攻坚 + 暑假系统补漏，完全可以在初一开学时<strong>追上中等水平</strong>。前提是——不走"全面开花"的路线，而是<strong>精准打击核心漏洞</strong>。
+    </div>
+  </div>
+
+  <!-- ========== 二、译林版知识地图 ========== -->
+  <div class="card">
+    <h2><span class="icon">🗺️</span> 二、译林版（三起）知识地图：到底欠了多少账？</h2>
+    <p>先拉一张"全景图"，看清三到六年级到底学了什么、哪块欠账最严重。</p>
+
+    <h3>📚 各年级教材话题与核心语法分布</h3>
+    <table>
+      <thead>
+        <tr><th>年级</th><th>核心话题（Unit主题）</th><th>核心语法</th><th>词汇量</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>三上</strong></td>
+          <td>问候、自我介绍、颜色、食物、衣服、家庭、动物、生日</td>
+          <td>a/an、I'm...、This is...、颜色/数字、祈使句</td>
+          <td>~100</td>
+        </tr>
+        <tr>
+          <td><strong>三下</strong></td>
+          <td>学校物品、数字、时间、位置、水果、年龄、农场动物</td>
+          <td>Where's...?、What time...?、How old...?、名词复数</td>
+          <td>~100</td>
+        </tr>
+        <tr>
+          <td><strong>四上</strong></td>
+          <td>能力、爱好、数量、运动、家居、食物点餐、外貌、五官</td>
+          <td>can/can't、like/likes、How many...?、some/any、have/has</td>
+          <td>~110</td>
+        </tr>
+        <tr>
+          <td><strong>四下</strong></td>
+          <td>课程、日程、季节、天气、公园、衣服归属、疾病、电话</td>
+          <td>What day...?、What's the matter?、Whose...?、现在进行时（初步）</td>
+          <td>~110</td>
+        </tr>
+        <tr>
+          <td><strong>五上</strong></td>
+          <td>学校设施、房间、职业、爱好、朋友、网友、周末活动、圣诞节</td>
+          <td>There be句型、第三人称单数、like doing、频率副词</td>
+          <td>~120</td>
+        </tr>
+        <tr>
+          <td><strong>五下</strong></td>
+          <td>童话故事、交通方式、问路、看病、家务、烹饪、节日</td>
+          <td>Why/Because、should/shouldn't、现在进行时（深入）</td>
+          <td>~120</td>
+        </tr>
+        <tr>
+          <td><strong>六上</strong></td>
+          <td>国王新衣、天气日记、假期、过去与现在、标志、环保、春节</td>
+          <td>一般过去时（was/were+规则动词ed）、过去式时间状语</td>
+          <td>~120</td>
+        </tr>
+        <tr>
+          <td><strong>六下</strong></td>
+          <td>习惯、饮食健康、道路安全、梦想、派对、旅游、毕业</td>
+          <td>一般过去时（不规则动词）、will将来时、比较级、情态动词must/mustn't</td>
+          <td>~120</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-warning">
+      <strong>⚠️ 诊断结论：</strong>如果孩子"很多基本单词都不认识"，说明<strong>三上~四下的词汇欠账</strong>是首要问题，这部分约420个词是高频基础词，不补上就永远在"听不懂课"的循环里。同时，五上开始的<strong>There be句型和第三人称单数</strong>、六上六下的<strong>一般过去时</strong>，是六年级课堂的"当前战线"，需要同步跟上。
+    </div>
+  </div>
+
+  <!-- ========== 三、语法体系 ========== -->
+  <div class="card">
+    <h2><span class="icon">🏗️</span> 三、译林版语法体系速查：七大核心语法点</h2>
+    <p>小升初考试就考这七个语法大项，按重要性和难度排序：</p>
+
+    <div class="grammar-grid">
+      <div class="grammar-card">
+        <div class="gc-title">① 一般现在时 <span class="tag tag-red">必考</span></div>
+        <div class="gc-content">
+          表示经常性动作或状态。<br>
+          I/You/We/They + 动词原形<br>
+          He/She/It + 动词s/es<br>
+          <em>关键词：always, usually, often, sometimes, every day</em>
+        </div>
+      </div>
+      <div class="grammar-card">
+        <div class="gc-title">② 一般过去时 <span class="tag tag-red">必考</span></div>
+        <div class="gc-content">
+          表示过去发生的动作。<br>
+          was/were / 动词+ed / 不规则变化<br>
+          <em>关键词：yesterday, last week, ago, then</em><br>
+          不规则动词表必须背（约40个）
+        </div>
+      </div>
+      <div class="grammar-card">
+        <div class="gc-title">③ 现在进行时 <span class="tag tag-orange">高频</span></div>
+        <div class="gc-content">
+          表示正在进行的动作。<br>
+          am/is/are + 动词ing<br>
+          <em>关键词：now, look, listen, at the moment</em><br>
+          注意：双写+ing的规则
+        </div>
+      </div>
+      <div class="grammar-card">
+        <div class="gc-title">④ There be 句型 <span class="tag tag-orange">高频</span></div>
+        <div class="gc-content">
+          表示"某处有某物"。<br>
+          There is + 单数/不可数<br>
+          There are + 复数<br>
+          <em>就近原则：离be动词近的名词决定单复数</em>
+        </div>
+      </div>
+      <div class="grammar-card">
+        <div class="gc-title">⑤ 形容词比较级 <span class="tag tag-blue">常考</span></div>
+        <div class="gc-content">
+          A is taller than B.<br>
+          规则：+er / 双写+er / y→i+er<br>
+          多音节：more + 原级<br>
+          <em>不规则：good→better, bad→worse</em>
+        </div>
+      </div>
+      <div class="grammar-card">
+        <div class="gc-title">⑥ 一般将来时 <span class="tag tag-blue">常考</span></div>
+        <div class="gc-content">
+          表示将来的动作或计划。<br>
+          will + 动词原形<br>
+          be going to + 动词原形<br>
+          <em>关键词：tomorrow, next week, soon</em>
+        </div>
+      </div>
+      <div class="grammar-card">
+        <div class="gc-title">⑦ 情态动词 <span class="tag tag-green">基础</span></div>
+        <div class="gc-content">
+          can/can't 能力<br>
+          must/mustn't 必须/禁止<br>
+          should/shouldn't 应该<br>
+          <em>特点：后接动词原形，无人称变化</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 四、60天行动方案 ========== -->
+  <div class="card">
+    <h2><span class="icon">📅</span> 四、60天可执行行动方案（6月中旬~8月中旬）</h2>
+    <p>分三个阶段，每个阶段20天，不贪多、不冒进，重在<strong>每天坚持+看到进步</strong>。</p>
+
+    <!-- Phase 1 -->
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-title">🔤 第一阶段：打通拼读 + 补三/四年级基础词（第1~20天）</div>
+        <div class="tl-date">目标：见到单词能拼读，听到单词能拼写，恢复信心</div>
+        <div class="tl-content">
+          <ol class="num-list">
+            <li><strong>学48个国际音标</strong>：B站搜"英语兔 音标"，每天5个，10天学完。边学边在单词中验证。</li>
+            <li><strong>学自然拼读核心规则</strong>：元音组合（ee/ea/oo/ai/ay/oa）、辅音组合（sh/ch/th/wh/ph/ck/ng），用译林版三/四年级单词做拼读练习。</li>
+            <li><strong>三上~四下高频词地毯式扫盲</strong>：从三上开始，每天15个旧词，流程是"看音标拼读 → 遮住英文看中文默写 → 订正并用词造简单句"。</li>
+            <li><strong>每天1篇RAZ Level D/E分级阅读</strong>：控制在5~8句话/篇，先听后读再复述，不求完全理解，培养语感。</li>
+            <li><strong>正向反馈机制</strong>：每完成一轮（5天），让孩子自己"验收"——用学会的词给你读一篇小短文，你只鼓掌不纠错。</li>
+          </ol>
+          <div class="progress-section">
+            <div class="progress-label"><span>第一阶段进度参考</span><span>补词~300个 / 音标+拼读打通</span></div>
+            <div class="progress-bar"><div class="progress-fill fill-blue" style="width:33%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="tl-item phase2">
+        <div class="tl-title">⚡ 第二阶段：攻克核心语法 + 五年级词汇（第21~40天）</div>
+        <div class="tl-date">目标：能分清三个基本时态，能用There be/比较级造句</div>
+        <div class="tl-content">
+          <ol class="num-list">
+            <li><strong>三大时态对比专项</strong>：制作"时态三色卡"——蓝色（一般现在时）、绿色（现在进行时）、红色（一般过去时）。每天用同一个动词造三个时态的句子，比如：I play football. / I am playing football. / I played football.</li>
+            <li><strong>不规则动词表</strong>：译林版要求约40个不规则动词（go-went, see-saw, eat-ate, take-took...），每天5个，分组记忆（AAA型/ABB型/ABC型）。</li>
+            <li><strong>五上~五下词汇补漏</strong>：每天12个，重点攻克There be相关词、频率副词、交通工具、疾病类词汇。</li>
+            <li><strong>句型转换训练</strong>：陈述句→否定句→一般疑问句→特殊疑问句，每天5组。</li>
+            <li><strong>RAZ升级到Level F/G</strong>：每天1篇，开始尝试回答"5W1H"阅读理解问题。</li>
+          </ol>
+          <div class="progress-section">
+            <div class="progress-label"><span>第二阶段进度参考</span><span>三大时态过关 + 补词~240个</span></div>
+            <div class="progress-bar"><div class="progress-fill fill-orange" style="width:66%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="tl-item phase3">
+        <div class="tl-title">🚀 第三阶段：六年级同步 + 小升初综合（第41~60天）</div>
+        <div class="tl-date">目标：六年级课本能自主阅读，小升初模拟卷及格以上</div>
+        <div class="tl-content">
+          <ol class="num-list">
+            <li><strong>六上+六下词汇扫尾</strong>：每天10个，重点过去式相关动词、比较级形容词、健康/环保/节日主题词。</li>
+            <li><strong>语法综合训练</strong>：每周做1套小升初语法专项卷（译林版），错题整理到"错题本"。</li>
+            <li><strong>课文朗读+复述</strong>：从六上课文开始，每天读1篇→遮住课文口头复述→录音听回放。</li>
+            <li><strong>写作模板</strong>：准备5个高频作文模板（My friend / My day / My holiday / My dream / A party），每个模板练2遍。</li>
+            <li><strong>真题模拟</strong>：最后10天，每2天1套小升初真题卷，严格计时，重点分析错因而非分数。</li>
+          </ol>
+          <div class="progress-section">
+            <div class="progress-label"><span>第三阶段进度参考</span><span>六上六下同步 + 小升初模拟 ≥ 70分</span></div>
+            <div class="progress-bar"><div class="progress-fill fill-green" style="width:100%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 五、每日时间安排 ========== -->
+  <div class="card">
+    <h2><span class="icon">⏰</span> 五、每日时间安排建议（暑假版）</h2>
+    <p>每天<strong>总投入约60~75分钟</strong>，分三个时间段，避免疲劳战。关键是"短时高频"而非"一次猛灌"。</p>
+
+    <table>
+      <thead>
+        <tr><th>时间段</th><th>内容</th><th>时长</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>☀️ 早 8:30</td>
+          <td>单词闪卡复习（旧词）+ 学新词</td>
+          <td>20分钟</td>
+          <td>用艾宾浩斯间隔复习：当天词→第2天→第4天→第7天→第15天</td>
+        </tr>
+        <tr>
+          <td>🌤️ 上午 10:00</td>
+          <td>语法专项 / 句型训练</td>
+          <td>25分钟</td>
+          <td>一天语法一天句型交替，配合译林版课本单元</td>
+        </tr>
+        <tr>
+          <td>🌙 晚 19:30</td>
+          <td>分级阅读 + 听读跟读</td>
+          <td>15-20分钟</td>
+          <td>RAZ或译林版课文，先听音频→跟读→自己读→口头复述</td>
+        </tr>
+        <tr>
+          <td>📱 碎片时间</td>
+          <td>听力磨耳朵</td>
+          <td>随意</td>
+          <td>吃饭/洗澡/坐车时放译林版课文音频或英文儿歌</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-success">
+      <strong>✅ 家长守则（敏敏请务必记住）：</strong><br>
+      1. <strong>只看进步，不比别人。</strong>孩子从"apple都不认识"到"能读一篇RAZ D级"就是巨大胜利。<br>
+      2. <strong>不纠错，只示范。</strong>他读错了，你轻声读一遍正确的就行，不要说"你又读错了"。<br>
+      3. <strong>固定时间，不临时加码。</strong>"今天表现好，再多做20分钟"是最大的陷阱——孩子会因此抵触"表现好"。<br>
+      4. <strong>你装傻，他当老师。</strong>每天让他教你3个今天学的词，你故意"记不住"，他来纠正你。这是最有效的巩固方式。
+    </div>
+  </div>
+
+  <!-- ========== 六、核心词汇清单 ========== -->
+  <div class="card">
+    <h2><span class="icon">📝</span> 六、译林版三起核心词汇分级清单（精简版）</h2>
+
+    <h3>🔴 第一优先级：三上~四下 高频基础词（必须先拿下）</h3>
+    <div class="vocab-box">
+      <div class="vb-title">人称/问候/课堂用语</div>
+      <div class="vb-words">
+        <span class="vb-word">hello</span><span class="vb-word">goodbye</span><span class="vb-word">morning</span><span class="vb-word">afternoon</span><span class="vb-word">please</span><span class="vb-word">thank</span><span class="vb-word">sorry</span><span class="vb-word">yes</span><span class="vb-word">no</span><span class="vb-word">Mr</span><span class="vb-word">Miss</span>
+      </div>
+    </div>
+    <div class="vocab-box">
+      <div class="vb-title">颜色/数字/时间</div>
+      <div class="vb-words">
+        <span class="vb-word">red</span><span class="vb-word">blue</span><span class="vb-word">green</span><span class="vb-word">yellow</span><span class="vb-word">white</span><span class="vb-word">black</span><span class="vb-word">one~twenty</span><span class="vb-word">time</span><span class="vb-word">clock</span><span class="vb-word">morning</span><span class="vb-word">night</span>
+      </div>
+    </div>
+    <div class="vocab-box">
+      <div class="vb-title">食物/衣服/动物/身体</div>
+      <div class="vb-words">
+        <span class="vb-word">apple</span><span class="vb-word">banana</span><span class="vb-word">milk</span><span class="vb-word">bread</span><span class="vb-word">egg</span><span class="vb-word">rice</span><span class="vb-word">cake</span><span class="vb-word">water</span><span class="vb-word">shirt</span><span class="vb-word">dress</span><span class="vb-word">shoes</span><span class="vb-word">cat</span><span class="vb-word">dog</span><span class="vb-word">bird</span><span class="vb-word">pig</span><span class="vb-word">cow</span><span class="vb-word">duck</span><span class="vb-word">head</span><span class="vb-word">eye</span><span class="vb-word">mouth</span>
+      </div>
+    </div>
+    <div class="vocab-box">
+      <div class="vb-title">家庭/学校/动作</div>
+      <div class="vb-words">
+        <span class="vb-word">father</span><span class="vb-word">mother</span><span class="vb-word">brother</span><span class="vb-word">sister</span><span class="vb-word">friend</span><span class="vb-word">teacher</span><span class="vb-word">student</span><span class="vb-word">school</span><span class="vb-word">classroom</span><span class="vb-word">book</span><span class="vb-word">pen</span><span class="vb-word">run</span><span class="vb-word">swim</span><span class="vb-word">sing</span><span class="vb-word">dance</span><span class="vb-word">read</span><span class="vb-word">write</span><span class="vb-word">play</span><span class="vb-word">eat</span><span class="vb-word">drink</span><span class="vb-word">sleep</span>
+      </div>
+    </div>
+
+    <h3>🟡 第二优先级：五上~五下 核心词</h3>
+    <div class="vocab-box">
+      <div class="vb-title">There be / 频率 / 交通 / 疾病</div>
+      <div class="vb-words">
+        <span class="vb-word">between</span><span class="vb-word">beside</span><span class="vb-word">behind</span><span class="vb-word">always</span><span class="vb-word">usually</span><span class="vb-word">often</span><span class="vb-word">sometimes</span><span class="vb-word">never</span><span class="vb-word">bus</span><span class="vb-word">metro</span><span class="vb-word">taxi</span><span class="vb-word">bike</span><span class="vb-word">fever</span><span class="vb-word">headache</span><span class="vb-word">toothache</span><span class="vb-word">medicine</span><span class="vb-word">should</span><span class="vb-word">shouldn't</span>
+      </div>
+    </div>
+
+    <h3>🟢 第三优先级：六上~六下 重点词</h3>
+    <div class="vocab-box">
+      <div class="vb-title">过去式动词 / 比较级 / 主题词</div>
+      <div class="vb-words">
+        <span class="vb-word">went</span><span class="vb-word">saw</span><span class="vb-word">ate</span><span class="vb-word">took</span><span class="vb-word">flew</span><span class="vb-word">brought</span><span class="vb-word">became</span><span class="vb-word">taller</span><span class="vb-word">bigger</span><span class="vb-word">heavier</span><span class="vb-word">better</span><span class="vb-word">worse</span><span class="vb-word">habit</span><span class="vb-word">healthy</span><span class="vb-word">dream</span><span class="vb-word">party</span><span class="vb-word">travel</span><span class="vb-word">must</span><span class="vb-word">mustn't</span><span class="vb-word">safe</span>
+      </div>
+    </div>
+
+    <div class="alert alert-info">
+      <strong>📊 总量估算：</strong>译林版三起三~六年级课标核心词约 <strong>800~900个</strong>。如果目前基础词汇缺口大，第一阶段先集中攻克<strong>三上~四下的约420个高频基础词</strong>，这是最紧急的"止血"任务。
+    </div>
+  </div>
+
+  <!-- ========== 七、工具推荐 ========== -->
+  <div class="card">
+    <h2><span class="icon">🛠️</span> 七、推荐工具与资源</h2>
+
+    <table>
+      <thead>
+        <tr><th>用途</th><th>推荐工具/资源</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>音标学习</td>
+          <td>B站「英语兔」音标系列</td>
+          <td>免费，讲解清晰，适合零基础</td>
+        </tr>
+        <tr>
+          <td>单词记忆</td>
+          <td>「不背单词」App / 百词斩</td>
+          <td>选"小学译林版"词库，有发音+拼写检测</td>
+        </tr>
+        <tr>
+          <td>分级阅读</td>
+          <td>RAZ Kids（Reading A-Z）</td>
+          <td>Level D起步，有音频+Quiz，体系完整</td>
+        </tr>
+        <tr>
+          <td>听力输入</td>
+          <td>译林版课本配套音频</td>
+          <td>喜马拉雅搜"译林版小学英语"即可，碎片时间磨耳朵</td>
+        </tr>
+        <tr>
+          <td>语法练习</td>
+          <td>《53天天练》译林版 / 《小学英语语法一本通》</td>
+          <td>配合每天语法专项，量少质高</td>
+        </tr>
+        <tr>
+          <td>小升初真题</td>
+          <td>《江苏小升初英语真题卷》/ 学科网</td>
+          <td>最后阶段使用，每周1-2套</td>
+        </tr>
+        <tr>
+          <td>互动Quiz</td>
+          <td>敏敏定制HTML练习页（待开发）</td>
+          <td>包含单词闪卡、时态选择、句型转换，手机浏览器直接打开</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========== 八、敏敏专属提醒 ========== -->
+  <div class="card" style="border-left: 4px solid var(--accent);">
+    <h2><span class="icon">💛</span> 八、写给敏敏的话</h2>
+    <p>我知道你正在同时处理苏智出行的项目迭代、亲子沟通的反思，还有两个孩子的成长。这份方案看着很长，但<strong>不需要你亲自教</strong>——你只需要做三件事：</p>
+
+    <ol class="num-list">
+      <li><strong>帮他建好环境</strong>：把音标视频收藏到浏览器、把RAZ App装到手机上、把每天要学的15个词打印出来贴在书桌前。</li>
+      <li><strong>每天15分钟陪伴</strong>：不是"盯着他学"，而是他学完后你坐下来，让他给你讲今天学会了什么。你当学生，他当老师。</li>
+      <li><strong>看见进步就说出来</strong>：不是笼统的"你真棒"，而是具体的"昨天这个词你还不会拼，今天一遍就对了，你是怎么做到的？"——这种具体的肯定，对缺乏自信的孩子来说是"救命级"的。</li>
+    </ol>
+
+    <div class="alert alert-warning">
+      <strong>⚠️ 最重要的提醒：</strong>这个孩子不是"英语差"，是<strong>欠了三年的账没人帮他清</strong>。60天补三年的漏洞，本身就很难。如果他中间崩溃了、不想学了、觉得自己永远学不会了——<strong>抱抱他，告诉他"妈妈知道很难，我们休息一天，明天再来"</strong>。不要用说教推着他走，用陪伴拉着他走。这跟你正在学的王金海那套是完全一致的理念。
+    </div>
+
+    <p style="margin-top:16px; text-align:center; color: var(--text-secondary); font-size:13px;">
+      —— 敏敏 · 2026年6月 ——
+    </p>
+  </div>
+
+  <!-- ========== 下一步 ========== -->
+  <div class="card" style="text-align:center; background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fd 100%);">
+    <h2 style="justify-content:center;">📋 下一步：我可以帮你做的</h2>
+    <p style="margin-bottom:16px;">以下任选，告诉我优先级，我马上开工：</p>
+    <table style="text-align:left;">
+      <tbody>
+        <tr>
+          <td style="width:32px; text-align:center; font-size:18px;">1</td>
+          <td><strong>互动Quiz HTML</strong>：译林版三上~四下核心词汇闪卡 + 三大时态闯关练习（手机浏览器直接打开）</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; font-size:18px;">2</td>
+          <td><strong>完整词汇表</strong>：译林版三起三~六年级全部核心词汇（含音标+词性+中文），打印友好版</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; font-size:18px;">3</td>
+          <td><strong>不规则动词表</strong>：译林版必考40个不规则动词分组记忆表（含例句）</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; font-size:18px;">4</td>
+          <td><strong>语法错题模板</strong>：可打印的小升初语法专项练习纸</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; font-size:18px;">5</td>
+          <td><strong>21天打卡表</strong>：激励型打卡表HTML，每完成一天自动变色，给孩子可视化成就感</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    译林版（三年级起点）六年级英语提升方案 · 敏敏出品 · 2026.06
+  </div>
+
+</div>
+</body>
+</html>

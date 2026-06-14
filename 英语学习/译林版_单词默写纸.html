@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>译林版（三起）单词默写纸 · 五上~六下</title>
+<style>
+  :root {
+    --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    --text: #222;
+    --line: #999;
+    --light: #f9f9f9;
+    --border: #ccc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font);
+    color: var(--text);
+    background: #fff;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 16px 20px;
+  }
+
+  /* ---- Cover Page ---- */
+  .cover {
+    text-align: center;
+    padding: 60px 20px 40px;
+    page-break-after: always;
+  }
+  .cover h1 {
+    font-size: 28px;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+  .cover .sub {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 36px;
+  }
+  .cover .info-line {
+    font-size: 15px;
+    margin: 10px 0;
+  }
+  .cover .info-line span {
+    display: inline-block;
+    min-width: 180px;
+    border-bottom: 1px solid #333;
+    margin: 0 8px;
+  }
+
+  /* ---- Page header ---- */
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: #555;
+  }
+  .page-header .name-date span {
+    display: inline-block;
+    min-width: 80px;
+    border-bottom: 1px solid #999;
+    margin-left: 6px;
+  }
+
+  /* ---- Section title ---- */
+  .semester-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 28px 0 18px;
+    padding: 8px 0;
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+    letter-spacing: 1px;
+    page-break-before: always;
+    page-break-after: avoid;
+  }
+  .semester-title:first-of-type {
+    page-break-before: auto;
+  }
+
+  /* ---- Unit block ---- */
+  .unit-block {
+    margin-bottom: 24px;
+    page-break-inside: avoid;
+  }
+  .unit-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding: 4px 10px;
+    background: #f0f0f0;
+    border-left: 4px solid #1a6fb5;
+  }
+
+  /* ---- Two-column layout ---- */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .col h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+    padding-bottom: 3px;
+    border-bottom: 1px dashed #ccc;
+  }
+  .word-row {
+    display: flex;
+    align-items: baseline;
+    padding: 3px 0;
+    border-bottom: 1px dotted #e0e0e0;
+  }
+  .word-row .num {
+    width: 22px;
+    font-size: 11px;
+    color: #aaa;
+    flex-shrink: 0;
+  }
+  .word-row .word {
+    font-weight: 600;
+    margin-right: 6px;
+    flex-shrink: 0;
+    min-width: 70px;
+    font-size: 13px;
+  }
+  .word-row .word-en {
+    font-family: "SF Mono", "Consolas", "Courier New", monospace;
+    font-size: 13px;
+  }
+  .word-row .line {
+    flex: 1;
+    border-bottom: 1px solid var(--line);
+    margin-left: 4px;
+    min-width: 40px;
+  }
+
+  /* ---- Print ---- */
+  @media print {
+    body {
+      font-size: 12px;
+      line-height: 1.7;
+    }
+    .container {
+      max-width: 100%;
+      padding: 0 12px;
+    }
+    .cover {
+      padding: 40px 20px 30px;
+    }
+    .semester-title {
+      font-size: 17px;
+      margin: 20px 0 14px;
+      page-break-before: always;
+      page-break-after: avoid;
+    }
+    .semester-title:first-of-type {
+      page-break-before: auto;
+    }
+    .unit-block {
+      page-break-inside: avoid;
+      margin-bottom: 18px;
+    }
+    .unit-title {
+      font-size: 14px;
+      background: #f0f0f0 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .word-row .word { font-size: 11px; }
+    .word-row .word-en { font-size: 11px; }
+    .two-col { gap: 18px; }
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+  }
+
+  /* ---- Screen only ---- */
+  @media screen {
+    .container {
+      box-shadow: 0 0 20px rgba(0,0,0,0.08);
+      background: #fff;
+      min-height: 100vh;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ====== COVER ====== -->
+  <div class="cover">
+    <h1>📝 译林版（三起）单词默写纸</h1>
+    <div class="sub">五年级上册 ~ 六年级下册 · 全32单元</div>
+    <div class="info-line">姓名：<span></span></div>
+    <div class="info-line">班级：<span></span></div>
+    <div class="info-line">日期：<span></span></div>
+    <p style="margin-top:30px;font-size:13px;color:#999;">使用方法：先默写「看英写中」，再默写「看中写英」<br>用不同颜色的笔订正，错的词重点标记</p>
+  </div>
+
+  <!-- ====== 五年级上册 ====== -->
+  <div class="semester-title">📘 五年级上册</div>
+
+  <!-- U1 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 1 Goldilocks and the three bears</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">bear</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">forest</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">house</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">soup</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">room</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">hard</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">soft</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">afraid</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">really</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">then</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">find</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">her</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">熊</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">森林</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">房子</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">汤</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">房间</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">硬的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">软的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">害怕的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">真正地</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">然后</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">找到</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">她</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U2 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 2 A new student</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">student</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">classroom</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">floor</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">computer</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">first</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">second</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">third</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">library</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">playground</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">swing</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">heavy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">high</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">学生</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">教室</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">楼层</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">电脑</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">第一</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">第二</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">第三</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">图书馆</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">操场</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">秋千</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">重的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">高的</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U3 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 3 Our animal friends</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">animal</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">leg</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">arm</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">body</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">tail</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">wing</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">foot</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">eye</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">ear</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">mouth</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">finger</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">give</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">动物</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">腿</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">手臂</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">身体</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">尾巴</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">翅膀</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">脚</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">眼睛</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">耳朵</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">嘴</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">手指</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">给</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U4 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 4 Hobbies</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">hobby</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">both</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">all</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">also</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">idea</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">hole</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">wet</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">skate</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">draw</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">sing</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">dance</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">read</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">爱好</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">两个都</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">全部</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">也</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">主意</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">洞</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">湿的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">溜冰</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">画画</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">唱歌</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">跳舞</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">读</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U5 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 5 What do they do?</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">teacher</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">teach</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">doctor</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">writer</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">worker</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">farmer</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">driver</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">nurse</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">policeman</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">cook</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">sick</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">people</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">老师</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">教</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">医生</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">作家</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">工人</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">农民</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">司机</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">护士</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">警察</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">厨师</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">生病的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">人们</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U6 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 6 My e-friend</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">e-friend</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">email</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">send</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">live</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">study</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">China</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">UK</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">US</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">Canada</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">Australia</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">speak</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">wait</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">网友</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">电子邮件</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">发送</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">居住</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">学习</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">中国</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">英国</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">美国</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">加拿大</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">澳大利亚</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">说</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">等待</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U7 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 7 At weekends</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">weekend</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">always</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">usually</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">often</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">sometimes</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">visit</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">grandparent</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">chat</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">Internet</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">cinema</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">picnic</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">fly</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">周末</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">总是</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">通常</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">经常</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">有时</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">拜访</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">祖父母</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">聊天</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">互联网</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">电影院</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">野餐</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">飞</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U8 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 8 At Christmas</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">Christmas</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">buy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">present</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">card</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">pretty</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">thing</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">pudding</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">turkey</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">stocking</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">fold</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">message</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">merry</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">圣诞节</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">买</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">礼物</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">卡片</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">漂亮的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">东西</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">布丁</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">火鸡</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">长袜</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">折叠</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">信息</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">快乐的</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== 五年级下册 ====== -->
+  <div class="semester-title">📗 五年级下册</div>
+
+  <!-- 五下U1 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 1 Cinderella</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">prince</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">fairy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">clothes</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">mushroom</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">understand</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">because</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">before</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">leave</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">shoe</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">sad</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">happy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">fit</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">王子</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">仙女</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">衣服</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">蘑菇</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">理解</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">因为</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">在…之前</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">离开</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">鞋</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">伤心的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">开心的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">合适</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五下U2 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 2 How do you come to school?</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">far</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">near</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">bus</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">metro</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">taxi</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">bike</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">plane</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">ship</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">train</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">street</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">city</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">town</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">远的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">近的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">公交车</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">地铁</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">出租车</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">自行车</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">飞机</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">轮船</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">火车</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">街道</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">城市</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">城镇</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五下U3 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 3 Asking the way</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">ask</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">way</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">get to</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">along</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">turn</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">left</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">right</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">traffic</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">light</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">station</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">bookshop</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">hospital</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">问</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">路</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">到达</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">沿着</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">转</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">左</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">右</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">交通</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">灯</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">车站</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">书店</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">医院</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五下U4 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 4 Seeing the doctor</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">doctor</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">feel</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">toothache</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">headache</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">fever</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">cold</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">should</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">shouldn't</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">medicine</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">rest</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">brush</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">teeth</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">医生</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">感觉</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">牙疼</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">头疼</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">发烧</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">感冒</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">应该</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">不应该</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">药</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">休息</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">刷</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">牙齿</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五下U5 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 5 Helping our parents</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">parent</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">clean</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">cook</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">busy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">garden</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">kitchen</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">bedroom</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">living room</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">sweet</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">pest</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">ladybird</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">grow</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">父/母亲</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">打扫</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">烹饪</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">忙碌的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">花园</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">厨房</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">卧室</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">客厅</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">甜的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">害虫</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">瓢虫</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">生长</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五下U6 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 6 In the kitchen</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">meat</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">potato</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">tomato</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">vegetable</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">bread</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">juice</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">soup</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">rice</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">yummy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">smell</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">ready</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">win</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">肉</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">土豆</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">西红柿</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">蔬菜</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">面包</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">果汁</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">汤</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">米饭</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">美味的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">闻</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">准备好的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">赢</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五下U7 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 7 Chinese festivals</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">festival</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">Spring Festival</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">Dragon Boat Festival</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">Mid-Autumn Festival</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">Double Ninth Festival</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">dumpling</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">rice dumpling</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">moon cake</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">place</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">mountain</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">climb</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">month</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">节日</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">春节</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">端午节</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">中秋节</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">重阳节</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">饺子</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">粽子</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">月饼</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">地方</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">山</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">爬</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">月</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五下U8 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 8 Birthdays</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">birthday</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">eleventh</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">twelfth</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">twentieth</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">twenty-first</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">date</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">hero</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">number</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">password</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">start</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">fight</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">answer</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">生日</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">第十一</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">第十二</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">第二十</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">第二十一</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">日期</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">英雄</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">数字</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">密码</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">开始</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">打架</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">回答</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== 六年级上册 ====== -->
+  <div class="semester-title">📙 六年级上册</div>
+
+  <!-- 六上U1 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 1 The king's new clothes</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">long long ago</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">magic</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">clever</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">foolish</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">king</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">each</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">wear</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">tell</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">laugh</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">shout</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">point</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">child</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">很久以前</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">有魔力的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">聪明的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">愚蠢的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">国王</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">每个</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">穿</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">告诉</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">笑</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">喊</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">指</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">小孩</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六上U2 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 2 What a day!</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">sunny</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">cloudy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">rainy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">windy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">become</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">bring</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">honey</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">ant</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">bee</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">cloud</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">rain</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">wet</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">晴朗的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">多云的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">下雨的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">有风的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">变成</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">带来</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">蜂蜜</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">蚂蚁</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">蜜蜂</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">云</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">雨</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">湿的</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六上U3 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 3 Holiday fun</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">holiday</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">National Day</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">Bund</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">museum</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">palace</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">Great Wall</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">catch</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">eat</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">pick</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">call</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">bottle</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">excited</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">假期</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">国庆节</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">外滩</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">博物馆</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">宫殿</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">长城</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">抓住</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">吃</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">捡</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">打电话</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">瓶子</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">兴奋的</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六上U4 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 4 Then and now</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">ago</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">telephone</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">mobile phone</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">radio</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">newspaper</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">news</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">e-book</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">anywhere</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">could</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">use</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">write</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">read</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">以前</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">电话</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">手机</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">收音机</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">报纸</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">新闻</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">电子书</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">任何地方</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">能</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">使用</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">写</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">读</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六上U5 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 5 Signs</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">sign</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">shopping centre</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">careful</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">mean</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">floor</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">litter</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">restaurant</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">smoke</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">smell</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">outing</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">someone</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">around</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">标志</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">购物中心</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">小心的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">意思是</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">地面</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">垃圾</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">餐厅</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">吸烟</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">闻</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">郊游</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">某人</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">周围</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六上U6 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 6 Keep our city clean</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">keep</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">clean</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">dirty</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">messy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">dead</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">bin</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">factory</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">rubbish</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">air</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">smoke</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">plant</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">more</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">保持</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">干净的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">脏的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">凌乱的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">死的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">垃圾桶</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">工厂</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">垃圾</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">空气</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">烟</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">种植</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">更多</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六上U7 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 7 Protect the Earth</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">protect</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">Earth</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">save</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">useful</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">waste</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">energy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">coal</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">oil</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">wood</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">plastic</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">paper</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">glass</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">保护</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">地球</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">节约</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">有用的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">浪费</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">能源</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">煤</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">石油</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">木头</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">塑料</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">纸</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">玻璃</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六上U8 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 8 Chinese New Year</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">fireworks</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">firecracker</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">lion dance</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">red packet</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">get</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">rich</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">plan</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">hooray</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">light</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">excited</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">food</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">Eve</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">烟花</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">鞭炮</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">舞狮</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">红包</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">得到</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">富有的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">计划</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">好哇</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">点燃</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">兴奋的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">食物</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">前夕</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== 六年级下册 ====== -->
+  <div class="semester-title">📕 六年级下册</div>
+
+  <!-- 六下U1 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 1 The lion and the mouse</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">lion</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">mouse</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">large</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">strong</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">weak</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">quietly</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">loudly</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">sadly</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">happily</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">net</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">bite</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">sharp</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">狮子</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">老鼠</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">大的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">强壮的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">虚弱的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">安静地</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">大声地</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">伤心地</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">开心地</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">网</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">咬</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">锋利的</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六下U2 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 2 Good habits</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">habit</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">never</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">late</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">finish</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">tidy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">messy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">fast</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">well</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">badly</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">sleepy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">before</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">bedtime</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">习惯</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">从不</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">晚的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">完成</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">整洁的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">凌乱的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">快的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">好地</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">差地</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">困的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">在…之前</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">就寝时间</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六下U3 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 3 A healthy diet</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">diet</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">healthy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">a little</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">a few</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">need</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">cola</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">porridge</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">steamed bun</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">cereal</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">sausage</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">egg</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">milk</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">饮食</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">健康的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">一点</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">几个</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">需要</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">可乐</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">粥</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">馒头</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">麦片</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">香肠</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">鸡蛋</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">牛奶</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六下U4 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 4 Road safety</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">road</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">safety</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">cross</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">safely</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">pavement</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">zebra crossing</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">green man</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">red man</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">look out for</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">rule</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">stay</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">follow</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">道路</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">安全</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">穿过</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">安全地</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">人行道</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">斑马线</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">绿灯</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">红灯</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">注意</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">规则</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">停留</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">遵守</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六下U5 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 5 A party</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">party</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">clown</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">appear</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">balloon</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">snack</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">drink</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">fruit</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">toy</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">play</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">story</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">piano</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">Children's Day</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">派对</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">小丑</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">出现</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">气球</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">零食</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">饮料</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">水果</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">玩具</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">戏剧</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">故事</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">钢琴</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">儿童节</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六下U6 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 6 An interesting country</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">country</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">learn</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">find out</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">magazine</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">kangaroo</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">koala</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">sport-lover</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">exciting</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">Sydney</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">London</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">Oxford</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">welcome</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">国家</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">学习</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">发现</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">杂志</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">袋鼠</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">考拉</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">运动爱好者</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">令人兴奋的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">悉尼</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">伦敦</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">牛津</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">欢迎</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六下U7 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 7 Summer holiday plans</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">summer holiday</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">go back to</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">stay</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">sound</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">Disneyland</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">Ocean Park</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">Taipei</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">photo</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">travel</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">different</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">plane</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">train</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">暑假</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">回去</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">停留</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">听起来</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">迪士尼</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">海洋公园</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">台北</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">照片</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">旅行</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">不同的</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">飞机</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">火车</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六下U8 -->
+  <div class="unit-block">
+    <div class="unit-title">Unit 8 Our dreams</div>
+    <div class="two-col">
+      <div class="col">
+        <h4>📖 看英文，写中文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word word-en">dream</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word word-en">future</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word word-en">dentist</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word word-en">astronaut</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word word-en">spaceship</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word word-en">pianist</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word word-en">scientist</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word word-en">artist</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word word-en">dancer</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word word-en">football player</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word word-en">come true</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word word-en">care about</span><span class="line"></span></div>
+      </div>
+      <div class="col">
+        <h4>✏️ 看中文，写英文</h4>
+        <div class="word-row"><span class="num">1</span><span class="word">梦想</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">2</span><span class="word">未来</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">3</span><span class="word">牙医</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">4</span><span class="word">宇航员</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">5</span><span class="word">宇宙飞船</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">6</span><span class="word">钢琴家</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">7</span><span class="word">科学家</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">8</span><span class="word">艺术家</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">9</span><span class="word">舞者</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">10</span><span class="word">足球运动员</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">11</span><span class="word">实现</span><span class="line"></span></div>
+        <div class="word-row"><span class="num">12</span><span class="word">关心</span><span class="line"></span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

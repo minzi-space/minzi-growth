@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>译林版英语互动Quiz · 五上~六下</title>
+<style>
+  :root {
+    --primary: #1a6fb5; --primary-light: #e8f4fd;
+    --correct: #43a047; --correct-light: #e8f5e9;
+    --error: #e53935; --error-light: #ffebee;
+    --warn: #ef6c00; --warn-light: #fff3e0;
+    --bg: #f5f6f8; --card: #fff; --text: #2c3e50;
+    --text-sec: #6b7d8e; --border: #e5e9f0;
+    --shadow: 0 2px 8px rgba(0,0,0,0.06);
+    --radius: 14px; --radius-sm: 10px;
+    --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: var(--font); background: var(--bg); color: var(--text);
+    min-height: 100vh; -webkit-tap-highlight-color: transparent;
+    user-select: none; -webkit-user-select: none;
+  }
+  .app { max-width: 480px; margin: 0 auto; padding: 0 0 32px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1565c0, #1a6fb5, #2196F3);
+    color: #fff; padding: 16px 16px 12px; text-align: center;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(26,111,181,0.2);
+  }
+  .header h1 { font-size: 18px; font-weight: 700; margin-bottom: 10px; letter-spacing: 0.5px; }
+  .nav-tabs { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+  .nav-tab {
+    padding: 7px 12px; border-radius: 20px; border: 1.5px solid rgba(255,255,255,0.4);
+    background: transparent; color: rgba(255,255,255,0.85); font-size: 12.5px;
+    font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--font);
+    position: relative;
+  }
+  .nav-tab.active { background: #fff; color: var(--primary); border-color: #fff; }
+  .nav-tab:active { transform: scale(0.95); }
+  .nav-tab .badge {
+    position: absolute; top: -6px; right: -6px;
+    background: var(--error); color: #fff; font-size: 10px;
+    min-width: 18px; height: 18px; border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; line-height: 1;
+  }
+
+  /* Mode Selector */
+  .mode-selector { display: flex; gap: 6px; justify-content: center; margin: 12px 16px; flex-wrap: wrap; }
+  .mode-btn {
+    padding: 7px 12px; border-radius: 16px; border: 1.5px solid var(--border);
+    background: #fff; font-size: 12.5px; font-weight: 600; cursor: pointer;
+    color: var(--text-sec); transition: all 0.2s; font-family: var(--font);
+  }
+  .mode-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .mode-btn:active { transform: scale(0.95); }
+
+  /* Continuous mode toggle */
+  .continuous-bar {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin: 8px 16px; font-size: 13px; color: var(--text-sec);
+  }
+  .toggle-switch {
+    width: 44px; height: 24px; background: #ccc; border-radius: 12px;
+    position: relative; cursor: pointer; transition: background 0.3s;
+  }
+  .toggle-switch.on { background: var(--primary); }
+  .toggle-switch::after {
+    content: ''; position: absolute; top: 2px; left: 2px;
+    width: 20px; height: 20px; background: #fff; border-radius: 50%;
+    transition: transform 0.3s;
+  }
+  .toggle-switch.on::after { transform: translateX(20px); }
+
+  /* Cards */
+  .card {
+    background: var(--card); border-radius: var(--radius); padding: 18px 16px;
+    margin: 12px 12px; box-shadow: var(--shadow);
+  }
+  .card h3 { font-size: 15px; margin-bottom: 10px; color: var(--primary); }
+
+  /* Progress */
+  .progress-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .progress-bar { flex:1; height:6px; background:#e8edf2; border-radius:3px; overflow:hidden; }
+  .progress-fill { height:100%; background:linear-gradient(90deg,var(--primary),#4fc3f7); border-radius:3px; transition:width 0.3s; }
+  .progress-text { font-size:12px; color:var(--text-sec); font-weight:600; min-width:50px; text-align:right; white-space:nowrap; }
+
+  /* Word display */
+  .word-display { text-align:center; padding:22px 14px; margin:10px 0; background:#f8faff; border-radius:var(--radius-sm); border:1px dashed var(--border); }
+  .word-display .big-word { font-size:28px; font-weight:700; color:var(--primary); letter-spacing:1px; }
+  .word-display .big-zh { font-size:26px; font-weight:700; color:#333; }
+  .word-display .hint { font-size:12px; color:var(--text-sec); margin-top:4px; }
+
+  /* Options */
+  .options-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0; }
+  .option-btn {
+    padding:14px 10px; border-radius:var(--radius-sm); border:2px solid var(--border);
+    background:#fff; font-size:15px; font-weight:600; cursor:pointer; transition:all 0.15s;
+    font-family:var(--font); min-height:48px; display:flex; align-items:center;
+    justify-content:center; text-align:center; color:var(--text);
+  }
+  .option-btn:active { transform:scale(0.96); }
+  .option-btn.correct { background:var(--correct-light); border-color:var(--correct); color:var(--correct); animation:pulse 0.4s ease; }
+  .option-btn.wrong { background:var(--error-light); border-color:var(--error); color:var(--error); animation:shake 0.4s ease; }
+  .option-btn:disabled { pointer-events:none; opacity:0.9; }
+
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.04)} }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+
+  /* Input */
+  .input-wrap { display:flex; gap:8px; margin:14px 0; }
+  .input-wrap input {
+    flex:1; padding:12px 14px; border:2px solid var(--border); border-radius:var(--radius-sm);
+    font-size:18px; font-family:"SF Mono","Consolas","Courier New",monospace;
+    outline:none; transition:border-color 0.2s; letter-spacing:1px;
+  }
+  .input-wrap input:focus { border-color:var(--primary); }
+  .input-wrap input.correct-input { border-color:var(--correct); background:var(--correct-light); }
+  .input-wrap input.wrong-input { border-color:var(--error); background:var(--error-light); }
+  .submit-btn {
+    padding:12px 20px; background:var(--primary); color:#fff; border:none;
+    border-radius:var(--radius-sm); font-size:15px; font-weight:700; cursor:pointer;
+    font-family:var(--font); min-width:64px;
+  }
+  .submit-btn:active { transform:scale(0.95); opacity:0.9; }
+  .submit-btn:disabled { opacity:0.5; pointer-events:none; }
+
+  /* Feedback */
+  .feedback { text-align:center; padding:6px; font-size:13px; font-weight:600; min-height:26px; border-radius:6px; margin:6px 0; }
+  .feedback.correct-fb { color:var(--correct); }
+  .feedback.wrong-fb { color:var(--error); }
+
+  /* Explanation box */
+  .explanation-box {
+    background: #fefcf5; border: 1px solid #f0e6c8; border-radius: 8px;
+    padding: 10px 12px; margin: 8px 0; font-size: 12.5px;
+    color: #6d5e00; line-height: 1.6;
+  }
+  .explanation-box .exp-label { font-weight:700; font-size:11px; color:#8d6e00; margin-bottom:2px; text-transform:uppercase; letter-spacing:0.5px; }
+
+  /* Result */
+  .result-card { text-align:center; padding:20px 14px; }
+  .result-card .score { font-size:52px; font-weight:800; color:var(--primary); line-height:1; margin:6px 0; }
+  .result-card .score-label { font-size:14px; color:var(--text-sec); margin-bottom:2px; }
+  .result-card .encourage { font-size:15px; font-weight:600; margin:10px 0; padding:10px; border-radius:8px; }
+  .result-card .time-info { font-size:13px; color:var(--text-sec); margin-bottom:4px; }
+  .result-card .best-score { font-size:12px; color:var(--text-sec); margin-bottom:4px; background:var(--primary-light); display:inline-block; padding:4px 12px; border-radius:12px; }
+  .result-card .round-info { font-size:13px; color:var(--text-sec); margin-bottom:8px; }
+  .result-card .wrong-summary { font-size:12px; color:var(--error); margin-bottom:10px; }
+  .restart-btn {
+    padding:12px 28px; background:var(--primary); color:#fff; border:none; border-radius:24px;
+    font-size:15px; font-weight:700; cursor:pointer; font-family:var(--font);
+    box-shadow:0 2px 8px rgba(26,111,181,0.3); margin:4px;
+  }
+  .restart-btn:active { transform:scale(0.95); }
+  .review-btn {
+    padding:10px 24px; background:#fff; color:var(--warn); border:2px solid var(--warn);
+    border-radius:24px; font-size:14px; font-weight:700; cursor:pointer; font-family:var(--font); margin:4px;
+  }
+  .review-btn:active { transform:scale(0.95); background:var(--warn-light); }
+
+  /* Sentence */
+  .sentence-display { font-size:15px; line-height:1.7; padding:12px 10px; background:#fafbfc; border-radius:var(--radius-sm); margin:10px 0; text-align:center; }
+  .sentence-display .blank { display:inline-block; min-width:60px; border-bottom:2px solid var(--primary); margin:0 4px; color:var(--primary); font-weight:700; }
+
+  /* Start */
+  .start-screen { text-align:center; padding:32px 16px; }
+  .start-screen .emoji { font-size:48px; margin-bottom:10px; }
+  .start-screen h2 { font-size:19px; margin-bottom:6px; }
+  .start-screen p { font-size:13px; color:var(--text-sec); margin-bottom:14px; line-height:1.6; }
+  .start-btn {
+    padding:14px 36px; background:linear-gradient(135deg,#1565c0,#2196F3); color:#fff;
+    border:none; border-radius:28px; font-size:16px; font-weight:700; cursor:pointer;
+    font-family:var(--font); box-shadow:0 4px 14px rgba(26,111,181,0.35); transition:all 0.2s;
+  }
+  .start-btn:active { transform:scale(0.95); box-shadow:0 2px 8px rgba(26,111,181,0.2); }
+
+  /* Verb */
+  .verb-display { text-align:center; padding:18px; background:#f8faff; border-radius:var(--radius-sm); margin:10px 0; }
+  .verb-display .verb-en { font-size:30px; font-weight:700; color:var(--primary); }
+  .verb-display .verb-zh { font-size:14px; color:var(--text-sec); margin-top:4px; }
+
+  /* Wrong book list */
+  .wrong-item {
+    background: #fff; border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 12px; margin-bottom: 8px;
+  }
+  .wrong-item .wi-q { font-size:13px; color:var(--text); margin-bottom:4px; }
+  .wrong-item .wi-wrong { font-size:12px; color:var(--error); }
+  .wrong-item .wi-correct { font-size:12px; color:var(--correct); font-weight:600; }
+  .wrong-item .wi-exp { font-size:11.5px; color:#8d6e00; margin-top:4px; padding:6px 8px; background:#fefcf5; border-radius:4px; }
+  .wrong-item .wi-date { font-size:10px; color:var(--text-sec); margin-top:4px; }
+  .wrong-item .wi-actions { margin-top:6px; display:flex; gap:6px; }
+  .wrong-item .wi-actions button {
+    font-size:11px; padding:4px 10px; border-radius:12px; border:1px solid var(--border);
+    background:#fff; cursor:pointer; font-family:var(--font);
+  }
+  .wrong-item .wi-actions button:active { background:#f0f0f0; }
+
+  .empty-state { text-align:center; padding:32px 16px; color:var(--text-sec); }
+  .empty-state .emoji { font-size:40px; margin-bottom:8px; }
+  .empty-state p { font-size:14px; }
+
+  .hidden { display:none !important; }
+  .stars { font-size:26px; margin:4px 0; letter-spacing:3px; }
+
+  /* Clear btn */
+  .clear-btn {
+    display:block; margin:12px auto; padding:8px 20px; background:transparent;
+    color:var(--text-sec); border:1px solid var(--border); border-radius:16px;
+    font-size:12px; cursor:pointer; font-family:var(--font);
+  }
+  .clear-btn:active { background:#f0f0f0; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>📚 译林版英语Quiz</h1>
+    <div class="nav-tabs">
+      <button class="nav-tab active" data-tab="vocab">📝 单词闪卡</button>
+      <button class="nav-tab" data-tab="grammar">📐 语法闯关</button>
+      <button class="nav-tab" data-tab="verb">🔄 不规则动词</button>
+      <button class="nav-tab" data-tab="wrongbook" id="wrongbookTab">📒 错题本<span class="badge hidden" id="wrongbookBadge">0</span></button>
+    </div>
+  </div>
+
+  <!-- VOCAB MODE SELECTOR -->
+  <div class="mode-selector" id="vocabModeSelector">
+    <button class="mode-btn active" data-vmode="en2zh">看英选中</button>
+    <button class="mode-btn" data-vmode="zh2en">看中拼英</button>
+    <button class="mode-btn" data-vmode="mixed">混合挑战</button>
+  </div>
+
+  <!-- Continuous mode toggle -->
+  <div class="continuous-bar" id="continuousBar">
+    <span>📡 连续挑战模式</span>
+    <div class="toggle-switch" id="continuousToggle"></div>
+  </div>
+
+  <!-- ===== VOCAB SECTION ===== -->
+  <div class="card" id="vocabSection">
+    <div id="vocabStart" class="start-screen">
+      <div class="emoji">📝</div>
+      <h2>单词闪卡</h2>
+      <p>译林版五上~六下核心词汇<br>三种难度，选一个开始吧！</p>
+      <p style="font-size:12px;color:var(--text-sec);">🏆 最高分：<span id="vocabBest">--</span></p>
+      <button class="start-btn" id="vocabStartBtn">开始挑战（10题）</button>
+    </div>
+    <div id="vocabQuiz" class="hidden">
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill" id="vocabProgress" style="width:0%"></div></div>
+        <div class="progress-text" id="vocabCount">1/10</div>
+      </div>
+      <div id="vocabQuestion"></div>
+      <div class="feedback" id="vocabFeedback"></div>
+      <div id="vocabExplanation"></div>
+    </div>
+    <div id="vocabResult" class="result-card hidden">
+      <div class="score-label">你的得分</div>
+      <div class="score" id="vocabScoreNum">0</div>
+      <div class="stars" id="vocabStars"></div>
+      <div class="time-info" id="vocabTime"></div>
+      <div class="round-info" id="vocabRound"></div>
+      <div class="wrong-summary" id="vocabWrongSummary"></div>
+      <div class="best-score" id="vocabBestDisplay">🏆 最高分：--</div>
+      <div class="encourage" id="vocabEncourage"></div>
+      <button class="restart-btn" id="vocabNextRound" style="display:none;">▶ 下一轮</button>
+      <button class="review-btn" id="vocabReviewWrong" style="display:none;">📒 复习本轮错题</button>
+      <button class="restart-btn" id="vocabRestart">重新开始</button>
+    </div>
+  </div>
+
+  <!-- ===== GRAMMAR SECTION ===== -->
+  <div class="card hidden" id="grammarSection">
+    <div id="grammarStart" class="start-screen">
+      <div class="emoji">📐</div>
+      <h2>语法闯关</h2>
+      <p>一般现在时 · 现在进行时 · 一般过去时<br>选择正确的动词形式</p>
+      <p style="font-size:12px;color:var(--text-sec);">🏆 最高分：<span id="grammarBest">--</span></p>
+      <button class="start-btn" id="grammarStartBtn">开始挑战（10题）</button>
+    </div>
+    <div id="grammarQuiz" class="hidden">
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill" id="grammarProgress" style="width:0%"></div></div>
+        <div class="progress-text" id="grammarCount">1/10</div>
+      </div>
+      <div id="grammarQuestion"></div>
+      <div class="feedback" id="grammarFeedback"></div>
+      <div id="grammarExplanation"></div>
+    </div>
+    <div id="grammarResult" class="result-card hidden">
+      <div class="score-label">你的得分</div>
+      <div class="score" id="grammarScoreNum">0</div>
+      <div class="stars" id="grammarStars"></div>
+      <div class="round-info" id="grammarRound"></div>
+      <div class="wrong-summary" id="grammarWrongSummary"></div>
+      <div class="best-score" id="grammarBestDisplay">🏆 最高分：--</div>
+      <div class="encourage" id="grammarEncourage"></div>
+      <button class="restart-btn" id="grammarNextRound" style="display:none;">▶ 下一轮</button>
+      <button class="review-btn" id="grammarReviewWrong" style="display:none;">📒 复习本轮错题</button>
+      <button class="restart-btn" id="grammarRestart">重新开始</button>
+    </div>
+  </div>
+
+  <!-- ===== VERB SECTION ===== -->
+  <div class="card hidden" id="verbSection">
+    <div id="verbStart" class="start-screen">
+      <div class="emoji">🔄</div>
+      <h2>不规则动词</h2>
+      <p>译林版必考40个不规则动词<br>看原形，拼过去式</p>
+      <p style="font-size:12px;color:var(--text-sec);">🏆 最高分：<span id="verbBest">--</span></p>
+      <button class="start-btn" id="verbStartBtn">开始挑战（10题）</button>
+    </div>
+    <div id="verbQuiz" class="hidden">
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill" id="verbProgress" style="width:0%"></div></div>
+        <div class="progress-text" id="verbCount">1/10</div>
+      </div>
+      <div id="verbQuestion"></div>
+      <div class="feedback" id="verbFeedback"></div>
+      <div id="verbExplanation"></div>
+    </div>
+    <div id="verbResult" class="result-card hidden">
+      <div class="score-label">你的得分</div>
+      <div class="score" id="verbScoreNum">0</div>
+      <div class="stars" id="verbStars"></div>
+      <div class="round-info" id="verbRound"></div>
+      <div class="wrong-summary" id="verbWrongSummary"></div>
+      <div class="best-score" id="verbBestDisplay">🏆 最高分：--</div>
+      <div class="encourage" id="verbEncourage"></div>
+      <button class="restart-btn" id="verbNextRound" style="display:none;">▶ 下一轮</button>
+      <button class="review-btn" id="verbReviewWrong" style="display:none;">📒 复习本轮错题</button>
+      <button class="restart-btn" id="verbRestart">重新开始</button>
+    </div>
+  </div>
+
+  <!-- ===== WRONG BOOK SECTION ===== -->
+  <div class="card hidden" id="wrongbookSection">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <h3 style="margin:0;">📒 错题本</h3>
+      <button class="clear-btn" id="clearWrongbook">清空错题本</button>
+    </div>
+    <div id="wrongbookTabs" style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;">
+      <button class="mode-btn active" data-wtab="all">全部</button>
+      <button class="mode-btn" data-wtab="vocab">单词</button>
+      <button class="mode-btn" data-wtab="grammar">语法</button>
+      <button class="mode-btn" data-wtab="verb">动词</button>
+    </div>
+    <div id="wrongbookList"></div>
+    <div class="empty-state" id="wrongbookEmpty">
+      <div class="emoji">🎉</div>
+      <p>还没有错题，太棒了！<br>继续练习，错题会自动收集到这里。</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ==================== DATA ====================
+
+const vocabData = [
+  { en: "bear", zh: "熊", unit: "五上U1" },
+  { en: "forest", zh: "森林", unit: "五上U1" },
+  { en: "house", zh: "房子", unit: "五上U1" },
+  { en: "soup", zh: "汤", unit: "五上U1" },
+  { en: "room", zh: "房间", unit: "五上U1" },
+  { en: "hard", zh: "硬的", unit: "五上U1" },
+  { en: "soft", zh: "软的", unit: "五上U1" },
+  { en: "afraid", zh: "害怕的", unit: "五上U1" },
+  { en: "really", zh: "真正地", unit: "五上U1" },
+  { en: "student", zh: "学生", unit: "五上U2" },
+  { en: "classroom", zh: "教室", unit: "五上U2" },
+  { en: "computer", zh: "电脑", unit: "五上U2" },
+  { en: "first", zh: "第一", unit: "五上U2" },
+  { en: "second", zh: "第二", unit: "五上U2" },
+  { en: "third", zh: "第三", unit: "五上U2" },
+  { en: "animal", zh: "动物", unit: "五上U3" },
+  { en: "leg", zh: "腿", unit: "五上U3" },
+  { en: "arm", zh: "手臂", unit: "五上U3" },
+  { en: "body", zh: "身体", unit: "五上U3" },
+  { en: "tail", zh: "尾巴", unit: "五上U3" },
+  { en: "wing", zh: "翅膀", unit: "五上U3" },
+  { en: "hobby", zh: "爱好", unit: "五上U4" },
+  { en: "both", zh: "两个都", unit: "五上U4" },
+  { en: "idea", zh: "主意", unit: "五上U4" },
+  { en: "teacher", zh: "老师", unit: "五上U5" },
+  { en: "doctor", zh: "医生", unit: "五上U5" },
+  { en: "writer", zh: "作家", unit: "五上U5" },
+  { en: "worker", zh: "工人", unit: "五上U5" },
+  { en: "farmer", zh: "农民", unit: "五上U5" },
+  { en: "driver", zh: "司机", unit: "五上U5" },
+  { en: "e-friend", zh: "网友", unit: "五上U6" },
+  { en: "email", zh: "电子邮件", unit: "五上U6" },
+  { en: "China", zh: "中国", unit: "五上U6" },
+  { en: "always", zh: "总是", unit: "五上U7" },
+  { en: "usually", zh: "通常", unit: "五上U7" },
+  { en: "often", zh: "经常", unit: "五上U7" },
+  { en: "sometimes", zh: "有时", unit: "五上U7" },
+  { en: "visit", zh: "拜访", unit: "五上U7" },
+  { en: "Christmas", zh: "圣诞节", unit: "五上U8" },
+  { en: "present", zh: "礼物", unit: "五上U8" },
+  { en: "card", zh: "卡片", unit: "五上U8" },
+  { en: "pretty", zh: "漂亮的", unit: "五上U8" },
+  { en: "prince", zh: "王子", unit: "五下U1" },
+  { en: "fairy", zh: "仙女", unit: "五下U1" },
+  { en: "clothes", zh: "衣服", unit: "五下U1" },
+  { en: "mushroom", zh: "蘑菇", unit: "五下U1" },
+  { en: "understand", zh: "理解", unit: "五下U1" },
+  { en: "because", zh: "因为", unit: "五下U1" },
+  { en: "metro", zh: "地铁", unit: "五下U2" },
+  { en: "taxi", zh: "出租车", unit: "五下U2" },
+  { en: "bike", zh: "自行车", unit: "五下U2" },
+  { en: "street", zh: "街道", unit: "五下U2" },
+  { en: "city", zh: "城市", unit: "五下U2" },
+  { en: "town", zh: "城镇", unit: "五下U2" },
+  { en: "toothache", zh: "牙疼", unit: "五下U4" },
+  { en: "headache", zh: "头疼", unit: "五下U4" },
+  { en: "fever", zh: "发烧", unit: "五下U4" },
+  { en: "medicine", zh: "药", unit: "五下U4" },
+  { en: "dentist", zh: "牙医", unit: "五下U4" },
+  { en: "should", zh: "应该", unit: "五下U4" },
+  { en: "parent", zh: "父/母亲", unit: "五下U5" },
+  { en: "clean", zh: "打扫", unit: "五下U5" },
+  { en: "garden", zh: "花园", unit: "五下U5" },
+  { en: "kitchen", zh: "厨房", unit: "五下U5" },
+  { en: "meat", zh: "肉", unit: "五下U6" },
+  { en: "potato", zh: "土豆", unit: "五下U6" },
+  { en: "tomato", zh: "西红柿", unit: "五下U6" },
+  { en: "vegetable", zh: "蔬菜", unit: "五下U6" },
+  { en: "yummy", zh: "美味的", unit: "五下U6" },
+  { en: "festival", zh: "节日", unit: "五下U7" },
+  { en: "dumpling", zh: "饺子", unit: "五下U7" },
+  { en: "place", zh: "地方", unit: "五下U7" },
+  { en: "birthday", zh: "生日", unit: "五下U8" },
+  { en: "eleventh", zh: "第十一", unit: "五下U8" },
+  { en: "twelfth", zh: "第十二", unit: "五下U8" },
+  { en: "hero", zh: "英雄", unit: "五下U8" },
+  { en: "number", zh: "数字", unit: "五下U8" },
+  { en: "password", zh: "密码", unit: "五下U8" },
+  { en: "magic", zh: "有魔力的", unit: "六上U1" },
+  { en: "clever", zh: "聪明的", unit: "六上U1" },
+  { en: "foolish", zh: "愚蠢的", unit: "六上U1" },
+  { en: "king", zh: "国王", unit: "六上U1" },
+  { en: "each", zh: "每个", unit: "六上U1" },
+  { en: "quick", zh: "快的", unit: "六上U1" },
+  { en: "sunny", zh: "晴朗的", unit: "六上U2" },
+  { en: "cloudy", zh: "多云的", unit: "六上U2" },
+  { en: "rainy", zh: "下雨的", unit: "六上U2" },
+  { en: "windy", zh: "有风的", unit: "六上U2" },
+  { en: "honey", zh: "蜂蜜", unit: "六上U2" },
+  { en: "ant", zh: "蚂蚁", unit: "六上U2" },
+  { en: "holiday", zh: "假期", unit: "六上U3" },
+  { en: "excited", zh: "兴奋的", unit: "六上U3" },
+  { en: "paper", zh: "纸", unit: "六上U3" },
+  { en: "ago", zh: "以前", unit: "六上U4" },
+  { en: "telephone", zh: "电话", unit: "六上U4" },
+  { en: "newspaper", zh: "报纸", unit: "六上U4" },
+  { en: "anywhere", zh: "任何地方", unit: "六上U4" },
+  { en: "still", zh: "仍然", unit: "六上U4" },
+  { en: "sign", zh: "标志", unit: "六上U5" },
+  { en: "careful", zh: "小心的", unit: "六上U5" },
+  { en: "mean", zh: "意思是", unit: "六上U5" },
+  { en: "smoke", zh: "吸烟", unit: "六上U5" },
+  { en: "keep", zh: "保持", unit: "六上U6" },
+  { en: "dirty", zh: "脏的", unit: "六上U6" },
+  { en: "rubbish", zh: "垃圾", unit: "六上U6" },
+  { en: "factory", zh: "工厂", unit: "六上U6" },
+  { en: "protect", zh: "保护", unit: "六上U7" },
+  { en: "save", zh: "节约", unit: "六上U7" },
+  { en: "useful", zh: "有用的", unit: "六上U7" },
+  { en: "waste", zh: "浪费", unit: "六上U7" },
+  { en: "energy", zh: "能源", unit: "六上U7" },
+  { en: "plastic", zh: "塑料", unit: "六上U7" },
+  { en: "reuse", zh: "再利用", unit: "六上U7" },
+  { en: "fireworks", zh: "烟花", unit: "六上U8" },
+  { en: "rich", zh: "富有的", unit: "六上U8" },
+  { en: "plan", zh: "计划", unit: "六上U8" },
+  { en: "lion", zh: "狮子", unit: "六下U1" },
+  { en: "mouse", zh: "老鼠", unit: "六下U1" },
+  { en: "large", zh: "大的", unit: "六下U1" },
+  { en: "strong", zh: "强壮的", unit: "六下U1" },
+  { en: "weak", zh: "虚弱的", unit: "六下U1" },
+  { en: "quietly", zh: "安静地", unit: "六下U1" },
+  { en: "loudly", zh: "大声地", unit: "六下U1" },
+  { en: "net", zh: "网", unit: "六下U1" },
+  { en: "sharp", zh: "锋利的", unit: "六下U1" },
+  { en: "habit", zh: "习惯", unit: "六下U2" },
+  { en: "never", zh: "从不", unit: "六下U2" },
+  { en: "tidy", zh: "整洁的", unit: "六下U2" },
+  { en: "diet", zh: "饮食", unit: "六下U3" },
+  { en: "healthy", zh: "健康的", unit: "六下U3" },
+  { en: "porridge", zh: "粥", unit: "六下U3" },
+  { en: "safety", zh: "安全", unit: "六下U4" },
+  { en: "cross", zh: "穿过", unit: "六下U4" },
+  { en: "pavement", zh: "人行道", unit: "六下U4" },
+  { en: "rule", zh: "规则", unit: "六下U4" },
+  { en: "follow", zh: "遵守", unit: "六下U4" },
+  { en: "party", zh: "派对", unit: "六下U5" },
+  { en: "clown", zh: "小丑", unit: "六下U5" },
+  { en: "balloon", zh: "气球", unit: "六下U5" },
+  { en: "snack", zh: "零食", unit: "六下U5" },
+  { en: "country", zh: "国家", unit: "六下U6" },
+  { en: "magazine", zh: "杂志", unit: "六下U6" },
+  { en: "exciting", zh: "令人兴奋的", unit: "六下U6" },
+  { en: "dream", zh: "梦想", unit: "六下U8" },
+  { en: "future", zh: "未来", unit: "六下U8" },
+  { en: "scientist", zh: "科学家", unit: "六下U8" },
+  { en: "artist", zh: "艺术家", unit: "六下U8" },
+  { en: "astronaut", zh: "宇航员", unit: "六下U8" }
+];
+
+// Grammar questions with explanations
+const grammarData = [
+  { sentence: "He ___ to school every day.", answer: "goes", options: ["go", "goes", "went", "going"], hint: "一般现在时，主语he，动词加s/es", explanation: "📖 every day是一般现在时的标志词。主语he是第三人称单数，动词要加s/es。go→goes（以o结尾加es）。" },
+  { sentence: "They ___ football on Sundays.", answer: "play", options: ["plays", "playing", "play", "played"], hint: "一般现在时，主语they，动词用原形", explanation: "📖 on Sundays表示经常性动作，用一般现在时。主语they不是三单，动词用原形play。注意：只有he/she/it才需要动词加s。" },
+  { sentence: "She ___ her homework after dinner.", answer: "does", options: ["do", "does", "did", "doing"], hint: "一般现在时，主语she，用does", explanation: "📖 after dinner是日常习惯，用一般现在时。主语she是三单，do→does。do homework = 做作业。" },
+  { sentence: "My mother ___ in a hospital.", answer: "works", options: ["work", "works", "worked", "working"], hint: "一般现在时，三单+works", explanation: "📖 表示职业/日常工作，用一般现在时。My mother = she（三单），动词加s。work + s = works。" },
+  { sentence: "I ___ milk every morning.", answer: "drink", options: ["drink", "drinks", "drank", "drinking"], hint: "一般现在时，主语I，用原形", explanation: "📖 every morning表示习惯，一般现在时。主语I不是三单，动词用原形drink。三单规则只适用于he/she/it。" },
+  { sentence: "The sun ___ in the east.", answer: "rises", options: ["rise", "rises", "rose", "rising"], hint: "客观事实用一般现在时，三单", explanation: "📖 客观真理/自然规律永远用一般现在时。The sun = it（三单），rise + s = rises。不以o结尾，直接加s。" },
+  { sentence: "Does he ___ English well?", answer: "speak", options: ["speaks", "speak", "spoke", "speaking"], hint: "Does后接动词原形", explanation: "📖 助动词Does已经体现了三单，后面的动词必须用原形speak。口诀：Does已经加了s，动词就不用再加了！" },
+  { sentence: "She ___ not like ice cream.", answer: "does", options: ["do", "does", "did", "is"], hint: "一般现在时否定，三单用does", explanation: "📖 一般现在时否定句：主语三单→doesn't + 原形；主语非三单→don't + 原形。she是三单，所以用does not = doesn't。" },
+  { sentence: "We ___ to the park every weekend.", answer: "go", options: ["go", "goes", "went", "going"], hint: "一般现在时，主语we，用原形", explanation: "📖 every weekend表示经常性动作。主语we是复数，不是三单，动词用原形go。三单只有he/she/it/it名字。" },
+  { sentence: "Tom usually ___ TV in the evening.", answer: "watches", options: ["watch", "watches", "watched", "watching"], hint: "三单+es", explanation: "📖 usually是频率副词，用一般现在时。Tom = he（三单），watch以ch结尾→加es→watches。类似的：teach→teaches。" },
+  { sentence: "Look! The bird ___ in the sky.", answer: "is flying", options: ["flies", "is flying", "flew", "fly"], hint: "Look! 表示正在发生，用现在进行时", explanation: "📖 Look! 提示说话时正在发生的动作，必须用现在进行时：be + V-ing。The bird是单数，用is flying。" },
+  { sentence: "They ___ a song now.", answer: "are singing", options: ["sing", "are singing", "sang", "sings"], hint: "now提示现在进行时", explanation: "📖 now是现在进行时最典型的标志词。结构：be + V-ing。They是复数，用are singing。" },
+  { sentence: "I ___ my homework at the moment.", answer: "am doing", options: ["do", "does", "am doing", "did"], hint: "at the moment现在进行时", explanation: "📖 at the moment = 此刻，用现在进行时。I的be动词是am。do→doing（直接加ing）。" },
+  { sentence: "Listen! She ___ the piano.", answer: "is playing", options: ["plays", "played", "is playing", "play"], hint: "Listen! 提示正在发生", explanation: "📖 Listen! 和Look! 一样，提示正在发生的动作。现在进行时：is playing。play直接加ing。" },
+  { sentence: "We ___ lunch right now.", answer: "are having", options: ["have", "has", "had", "are having"], hint: "right now现在进行时", explanation: "📖 right now = 现在，现在进行时。have的ing形式要去e加ing→having。We are having lunch. = 我们正在吃午饭。" },
+  { sentence: "He ___ a book in his room.", answer: "is reading", options: ["reads", "is reading", "read", "reading"], hint: "表示正在进行的动作", explanation: "📖 没有明确时间词但表示正在进行，用现在进行时。read直接加ing→reading。He is reading = 他正在读。" },
+  { sentence: "The children ___ in the playground.", answer: "are running", options: ["run", "runs", "are running", "ran"], hint: "双写n+ing", explanation: "📖 现在进行时。run是重读闭音节（辅+元+辅），双写末尾字母n再加ing→running。类似：swim→swimming，sit→sitting。" },
+  { sentence: "My father ___ the car now.", answer: "is washing", options: ["wash", "washes", "is washing", "washed"], hint: "now现在进行时", explanation: "📖 now提示现在进行时。My father是单数，用is washing。wash直接加ing。" },
+  { sentence: "Be quiet! The baby ___.", answer: "is sleeping", options: ["sleeps", "is sleeping", "slept", "sleep"], hint: "Be quiet! 提示正在睡觉", explanation: "📖 Be quiet! 说明宝宝正在睡觉，现在进行时。sleep直接加ing→sleeping。The baby是单数，用is。" },
+  { sentence: "It ___ outside. Take an umbrella.", answer: "is raining", options: ["rains", "is raining", "rained", "rain"], hint: "正在下雨", explanation: "📖 说话时正在下雨，现在进行时。rain直接加ing→raining。Take an umbrella说明是此刻的情况。" },
+  { sentence: "Yesterday I ___ to the zoo.", answer: "went", options: ["go", "goes", "went", "going"], hint: "Yesterday + 过去时，go→went", explanation: "📖 Yesterday是过去时标志词。go是不规则动词，过去式是went（不是goed！）。这是最常用的不规则动词之一。" },
+  { sentence: "She ___ a film last night.", answer: "saw", options: ["sees", "saw", "seen", "seeing"], hint: "last night过去时，see→saw", explanation: "📖 last night表示过去。see是不规则动词，过去式是saw。注意区分：I see（现在）→I saw（过去）。" },
+  { sentence: "They ___ basketball yesterday.", answer: "played", options: ["play", "plays", "played", "playing"], hint: "规则动词+ed", explanation: "📖 play是规则动词，过去式直接加ed→played。规则动词ed发音有三种：/d/（played）、/t/（washed）、/ɪd/（wanted）。" },
+  { sentence: "He ___ his homework an hour ago.", answer: "finished", options: ["finish", "finishes", "finished", "finishing"], hint: "ago提示过去时", explanation: "📖 ago = 以前，是过去时标志。finish是规则动词，加ed→finished。记住：看到ago，动词一定要用过去式！" },
+  { sentence: "We ___ a big cake for Mum last Sunday.", answer: "made", options: ["make", "makes", "made", "making"], hint: "make→made不规则", explanation: "📖 last Sunday是过去时间。make是不规则动词，过去式是made（不是maked！）。make→made，发音也变了。" },
+  { sentence: "The lion ___ the mouse go.", answer: "let", options: ["lets", "let", "letted", "letting"], hint: "let过去式同形", explanation: "📖 let属于AAA型不规则动词，原形、过去式、过去分词都相同：let-let-let。类似的还有：cut-cut-cut，put-put-put，read-read-read。" },
+  { sentence: "I ___ an email to my friend yesterday.", answer: "wrote", options: ["write", "writes", "wrote", "writing"], hint: "write→wrote", explanation: "📖 yesterday + write→wrote（不规则）。注意：write的过去式不是writed！write→wrote→written（原形→过去式→过去分词）。" },
+  { sentence: "She ___ a new dress last week.", answer: "bought", options: ["buy", "buys", "bought", "buying"], hint: "buy→bought", explanation: "📖 last week过去时。buy是不规则动词，过去式是bought。记忆技巧：buy和bring的过去式都含-ought：buy→bought，bring→brought。" },
+  { sentence: "They ___ in Shanghai two years ago.", answer: "lived", options: ["live", "lives", "lived", "living"], hint: "规则动词+ed", explanation: "📖 two years ago过去时。live是规则动词，以e结尾直接加d→lived。规则：以不发音的e结尾，去e加ed即可。" },
+  { sentence: "He ___ me a story before bed.", answer: "told", options: ["tell", "tells", "told", "telling"], hint: "tell→told", explanation: "📖 before bed表示睡前（过去发生）。tell是不规则动词，过去式是told。tell→told（不是telled！）。" },
+  { sentence: "Long long ago, there ___ a king.", answer: "was", options: ["is", "was", "are", "were"], hint: "Long long ago过去时", explanation: "📖 Long long ago = 很久以前，过去时。a king是单数，用was。如果后面是复数名词（如many people），就用were。" },
+  { sentence: "She ___ breakfast at 7:00 every day.", answer: "has", options: ["has", "have", "had", "having"], hint: "every day一般现在时，三单", explanation: "📖 every day = 每天，习惯动作，一般现在时。she三单，have→has。have的第三人称单数形式是has，不是haves！" },
+  { sentence: "Look! The boys ___ in the river.", answer: "are swimming", options: ["swim", "swims", "swam", "are swimming"], hint: "Look! 现在进行时，双写m", explanation: "📖 Look! + 现在进行时。swim是重读闭音节，双写m加ing→swimming。The boys是复数，用are。易错：很多人会忘掉双写m！" },
+  { sentence: "He ___ to Beijing last summer.", answer: "flew", options: ["flies", "fly", "flew", "flying"], hint: "last summer过去时，fly→flew", explanation: "📖 last summer过去时。fly是不规则动词，过去式是flew（不是flied！）。fly→flew→flown。和flow（流动）的过去式flowed不同。" },
+  { sentence: "We ___ a test tomorrow.", answer: "will have", options: ["have", "has", "had", "will have"], hint: "tomorrow将来时", explanation: "📖 tomorrow = 明天，一般将来时。结构：will + 动词原形。We will have = 我们将有。也可以用be going to：We are going to have。" }
+];
+
+const verbData = [
+  { en: "go", past: "went", zh: "去", group: "ABC" },
+  { en: "see", past: "saw", zh: "看见", group: "ABC" },
+  { en: "eat", past: "ate", zh: "吃", group: "ABC" },
+  { en: "drink", past: "drank", zh: "喝", group: "ABC" },
+  { en: "take", past: "took", zh: "拿", group: "ABC" },
+  { en: "give", past: "gave", zh: "给", group: "ABC" },
+  { en: "fly", past: "flew", zh: "飞", group: "ABC" },
+  { en: "become", past: "became", zh: "变成", group: "ABC" },
+  { en: "run", past: "ran", zh: "跑", group: "ABC" },
+  { en: "sing", past: "sang", zh: "唱", group: "ABC" },
+  { en: "swim", past: "swam", zh: "游泳", group: "ABC" },
+  { en: "write", past: "wrote", zh: "写", group: "ABC" },
+  { en: "do", past: "did", zh: "做", group: "ABC" },
+  { en: "come", past: "came", zh: "来", group: "ABC" },
+  { en: "bring", past: "brought", zh: "带来", group: "ABB" },
+  { en: "buy", past: "bought", zh: "买", group: "ABB" },
+  { en: "catch", past: "caught", zh: "抓住", group: "ABB" },
+  { en: "teach", past: "taught", zh: "教", group: "ABB" },
+  { en: "think", past: "thought", zh: "想", group: "ABB" },
+  { en: "find", past: "found", zh: "找到", group: "ABB" },
+  { en: "have", past: "had", zh: "有", group: "ABB" },
+  { en: "make", past: "made", zh: "制作", group: "ABB" },
+  { en: "tell", past: "told", zh: "告诉", group: "ABB" },
+  { en: "say", past: "said", zh: "说", group: "ABB" },
+  { en: "feel", past: "felt", zh: "感觉", group: "ABB" },
+  { en: "keep", past: "kept", zh: "保持", group: "ABB" },
+  { en: "cut", past: "cut", zh: "切", group: "AAA" },
+  { en: "put", past: "put", zh: "放", group: "AAA" },
+  { en: "read", past: "read", zh: "读", group: "AAA" },
+  { en: "let", past: "let", zh: "让", group: "AAA" },
+  { en: "hurt", past: "hurt", zh: "受伤", group: "AAA" },
+  { en: "hit", past: "hit", zh: "打", group: "AAA" },
+  { en: "know", past: "knew", zh: "知道", group: "ABC" },
+  { en: "draw", past: "drew", zh: "画", group: "ABC" },
+  { en: "lose", past: "lost", zh: "丢失", group: "ABB" },
+  { en: "meet", past: "met", zh: "遇见", group: "ABB" },
+  { en: "get", past: "got", zh: "得到", group: "ABB" },
+  { en: "forget", past: "forgot", zh: "忘记", group: "ABB" },
+  { en: "begin", past: "began", zh: "开始", group: "ABC" },
+  { en: "sit", past: "sat", zh: "坐", group: "ABB" }
+];
+
+// ==================== UTILS ====================
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function getBest(key) { try { return parseInt(localStorage.getItem(key)) || 0; } catch(e) { return 0; } }
+function setBest(key, val) { try { localStorage.setItem(key, val); } catch(e) {} }
+
+// ==================== WRONG BOOK STORAGE ====================
+function getWrongBook() {
+  try { return JSON.parse(localStorage.getItem('wrongbook') || '[]'); } catch(e) { return []; }
+}
+function saveWrongBook(book) {
+  try { localStorage.setItem('wrongbook', JSON.stringify(book)); } catch(e) {}
+}
+function addWrongItem(item) {
+  const book = getWrongBook();
+  // Don't add duplicates for the same question
+  const dup = book.find(b => b.type === item.type && b.question === item.question && b.userAnswer === item.userAnswer);
+  if (!dup) {
+    book.unshift({ ...item, date: new Date().toLocaleString('zh-CN') });
+    if (book.length > 200) book.length = 200; // limit
+    saveWrongBook(book);
+  }
+  updateWrongbookBadge();
+}
+function removeWrongItem(index) {
+  const book = getWrongBook();
+  book.splice(index, 1);
+  saveWrongBook(book);
+  updateWrongbookBadge();
+}
+function clearWrongBook() {
+  if (confirm('确定要清空所有错题吗？这个操作不可撤销。')) {
+    saveWrongBook([]);
+    updateWrongbookBadge();
+    renderWrongBook();
+  }
+}
+function updateWrongbookBadge() {
+  const count = getWrongBook().length;
+  const badge = document.getElementById('wrongbookBadge');
+  if (count > 0) {
+    badge.textContent = count > 99 ? '99+' : count;
+    badge.classList.remove('hidden');
+  } else {
+    badge.classList.add('hidden');
+  }
+}
+
+function getEncourage(score, total) {
+  const pct = score / total;
+  if (pct === 1) return "🎉 完美！你是英语小天才！";
+  if (pct >= 0.9) return "🌟 太棒了！继续保持！";
+  if (pct >= 0.7) return "👍 很不错，再加把劲！";
+  if (pct >= 0.5) return "💪 还可以，继续练习会更好！";
+  if (pct >= 0.3) return "📖 别灰心，多练几次就好了！";
+  return "🌱 每一次错误都是成长，加油！";
+}
+
+function getStars(score, total) {
+  const pct = score / total;
+  if (pct >= 1) return "⭐⭐⭐⭐⭐";
+  if (pct >= 0.8) return "⭐⭐⭐⭐";
+  if (pct >= 0.6) return "⭐⭐⭐";
+  if (pct >= 0.4) return "⭐⭐";
+  return "⭐";
+}
+
+// Continuous mode
+let continuousMode = false;
+document.getElementById('continuousToggle').addEventListener('click', function() {
+  continuousMode = !continuousMode;
+  this.classList.toggle('on', continuousMode);
+});
+
+// ==================== VOCAB QUIZ ====================
+let vocabState = { mode: 'en2zh', questions: [], current: 0, score: 0, startTime: 0, answered: false, round: 1, roundWrong: [] };
+
+function initVocab() {
+  const mode = vocabState.mode;
+  const pool = shuffle(vocabData).slice(0, 10);
+  if (mode === 'mixed') {
+    vocabState.questions = pool.map((item, i) => ({ type: i % 2 === 0 ? 'en2zh' : 'zh2en', data: item }));
+  } else {
+    vocabState.questions = pool.map(item => ({ type: mode, data: item }));
+  }
+  vocabState.current = 0;
+  vocabState.score = 0;
+  vocabState.startTime = Date.now();
+  vocabState.answered = false;
+  vocabState.roundWrong = [];
+}
+
+function renderVocabQuestion() {
+  const q = vocabState.questions[vocabState.current];
+  const container = document.getElementById('vocabQuestion');
+  const fb = document.getElementById('vocabFeedback');
+  const exp = document.getElementById('vocabExplanation');
+  fb.textContent = '';
+  fb.className = 'feedback';
+  exp.innerHTML = '';
+  vocabState.answered = false;
+
+  if (q.type === 'en2zh') {
+    const correct = q.data.zh;
+    const others = shuffle(vocabData.filter(v => v.zh !== correct)).slice(0, 3).map(v => v.zh);
+    const options = shuffle([correct, ...others]);
+    container.innerHTML = `
+      <div class="word-display">
+        <div class="big-word">${q.data.en}</div>
+        <div class="hint">选择正确的中文意思</div>
+      </div>
+      <div class="options-grid">
+        ${options.map(opt => `<button class="option-btn" data-answer="${opt}">${opt}</button>`).join('')}
+      </div>`;
+    container.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => handleVocabChoice(btn));
+    });
+  } else {
+    container.innerHTML = `
+      <div class="word-display">
+        <div class="big-zh">${q.data.zh}</div>
+        <div class="hint">请输入对应的英文单词</div>
+      </div>
+      <div class="input-wrap">
+        <input type="text" id="vocabInput" placeholder="输入英文..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        <button class="submit-btn" id="vocabSubmit">提交</button>
+      </div>`;
+    const input = document.getElementById('vocabInput');
+    const submit = document.getElementById('vocabSubmit');
+    submit.addEventListener('click', () => handleVocabInput(input));
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleVocabInput(input); });
+    setTimeout(() => input.focus(), 100);
+  }
+
+  document.getElementById('vocabCount').textContent = `${vocabState.current + 1}/10`;
+  document.getElementById('vocabProgress').style.width = `${(vocabState.current / 10) * 100}%`;
+}
+
+function handleVocabChoice(btn) {
+  if (vocabState.answered) return;
+  vocabState.answered = true;
+  const q = vocabState.questions[vocabState.current];
+  const fb = document.getElementById('vocabFeedback');
+  const exp = document.getElementById('vocabExplanation');
+  const allBtns = btn.parentElement.querySelectorAll('.option-btn');
+  const isCorrect = btn.dataset.answer === q.data.zh;
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+    fb.textContent = '✅ 正确！';
+    fb.className = 'feedback correct-fb';
+    vocabState.score++;
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = `❌ 错了！正确答案是「${q.data.zh}」`;
+    fb.className = 'feedback wrong-fb';
+    allBtns.forEach(b => { if (b.dataset.answer === q.data.zh) b.classList.add('correct'); });
+    // Explanation
+    exp.innerHTML = `<div class="explanation-box"><div class="exp-label">💡 解析</div>${q.data.en} = ${q.data.zh}（${q.data.unit || ''}）。记住这个搭配，下次就不会错了！</div>`;
+    // Add to wrong book
+    const wrongItem = {
+      type: 'vocab',
+      question: `"${q.data.en}" 的中文意思？`,
+      userAnswer: btn.dataset.answer,
+      correctAnswer: q.data.zh,
+      explanation: `${q.data.en} = ${q.data.zh}（${q.data.unit || ''}）。记住这个单词的中文意思。`
+    };
+    addWrongItem(wrongItem);
+    vocabState.roundWrong.push(wrongItem);
+  }
+  allBtns.forEach(b => b.disabled = true);
+  setTimeout(nextVocabQuestion, 1800);
+}
+
+function handleVocabInput(input) {
+  if (vocabState.answered) return;
+  const userAnswer = input.value.trim().toLowerCase();
+  if (!userAnswer) return;
+  vocabState.answered = true;
+  const q = vocabState.questions[vocabState.current];
+  const correctAnswer = q.data.en.toLowerCase();
+  const fb = document.getElementById('vocabFeedback');
+  const exp = document.getElementById('vocabExplanation');
+  const submitBtn = document.getElementById('vocabSubmit');
+  const isCorrect = userAnswer === correctAnswer;
+
+  if (isCorrect) {
+    input.classList.add('correct-input');
+    fb.textContent = '✅ 正确！';
+    fb.className = 'feedback correct-fb';
+    vocabState.score++;
+  } else {
+    input.classList.add('wrong-input');
+    fb.textContent = `❌ 错了！正确答案是「${q.data.en}」`;
+    fb.className = 'feedback wrong-fb';
+    exp.innerHTML = `<div class="explanation-box"><div class="exp-label">💡 解析</div>「${q.data.zh}」的英文是 <strong>${q.data.en}</strong>（${q.data.unit || ''}）。注意拼写，多写几遍加深记忆！</div>`;
+    const wrongItem = {
+      type: 'vocab',
+      question: `"${q.data.zh}" 的英文拼写？`,
+      userAnswer: userAnswer,
+      correctAnswer: q.data.en,
+      explanation: `「${q.data.zh}」的英文是 ${q.data.en}（${q.data.unit || ''}）。建议手写3遍加深记忆。`
+    };
+    addWrongItem(wrongItem);
+    vocabState.roundWrong.push(wrongItem);
+  }
+  input.disabled = true;
+  if (submitBtn) submitBtn.disabled = true;
+  setTimeout(nextVocabQuestion, 2000);
+}
+
+function nextVocabQuestion() {
+  vocabState.current++;
+  if (vocabState.current >= 10) {
+    showVocabResult();
+  } else {
+    renderVocabQuestion();
+  }
+}
+
+function showVocabResult() {
+  const elapsed = Math.floor((Date.now() - vocabState.startTime) / 1000);
+  const score = vocabState.score;
+  const best = getBest('vocabBest');
+  const newBest = score > best ? score : best;
+  if (score > best) setBest('vocabBest', score);
+
+  document.getElementById('vocabQuiz').classList.add('hidden');
+  document.getElementById('vocabResult').classList.remove('hidden');
+  document.getElementById('vocabScoreNum').textContent = `${score}/10`;
+  document.getElementById('vocabStars').textContent = getStars(score, 10);
+  document.getElementById('vocabTime').textContent = `用时 ${elapsed} 秒`;
+  document.getElementById('vocabRound').textContent = `第 ${vocabState.round} 轮`;
+  document.getElementById('vocabBestDisplay').textContent = `🏆 最高分：${newBest}/10`;
+  document.getElementById('vocabEncourage').textContent = getEncourage(score, 10);
+  document.getElementById('vocabEncourage').style.background = score >= 7 ? 'var(--correct-light)' : 'var(--primary-light)';
+  document.getElementById('vocabBest').textContent = `${newBest}/10`;
+
+  const wrongCount = vocabState.roundWrong.length;
+  const nextBtn = document.getElementById('vocabNextRound');
+  const reviewBtn = document.getElementById('vocabReviewWrong');
+
+  if (wrongCount > 0) {
+    document.getElementById('vocabWrongSummary').textContent = `📌 本轮错了 ${wrongCount} 题，已加入错题本`;
+    reviewBtn.style.display = 'inline-block';
+    reviewBtn.onclick = () => { switchTab('wrongbook'); document.querySelector('[data-wtab="vocab"]').click(); };
+  } else {
+    document.getElementById('vocabWrongSummary').textContent = '';
+    reviewBtn.style.display = 'none';
+  }
+
+  if (continuousMode) {
+    nextBtn.style.display = 'inline-block';
+    nextBtn.onclick = () => {
+      vocabState.round++;
+      document.getElementById('vocabResult').classList.add('hidden');
+      document.getElementById('vocabQuiz').classList.remove('hidden');
+      initVocab();
+      renderVocabQuestion();
+    };
+  } else {
+    nextBtn.style.display = 'none';
+  }
+}
+
+function startVocab() {
+  vocabState.round = 1;
+  initVocab();
+  document.getElementById('vocabStart').classList.add('hidden');
+  document.getElementById('vocabQuiz').classList.remove('hidden');
+  document.getElementById('vocabResult').classList.add('hidden');
+  renderVocabQuestion();
+}
+
+// ==================== GRAMMAR QUIZ ====================
+let grammarState = { questions: [], current: 0, score: 0, answered: false, round: 1, roundWrong: [] };
+
+function initGrammar() {
+  grammarState.questions = shuffle(grammarData).slice(0, 10);
+  grammarState.current = 0;
+  grammarState.score = 0;
+  grammarState.answered = false;
+  grammarState.roundWrong = [];
+}
+
+function renderGrammarQuestion() {
+  const q = grammarState.questions[grammarState.current];
+  const container = document.getElementById('grammarQuestion');
+  const fb = document.getElementById('grammarFeedback');
+  const exp = document.getElementById('grammarExplanation');
+  fb.textContent = '';
+  fb.className = 'feedback';
+  exp.innerHTML = '';
+  grammarState.answered = false;
+
+  const parts = q.sentence.split('___');
+  container.innerHTML = `
+    <div class="sentence-display">
+      ${parts[0]}<span class="blank">?</span>${parts[1] || ''}
+    </div>
+    <div style="text-align:center;font-size:12px;color:var(--text-sec);margin-bottom:8px;">${q.hint}</div>
+    <div class="options-grid">
+      ${q.options.map(opt => `<button class="option-btn" data-answer="${opt}">${opt}</button>`).join('')}
+    </div>`;
+  container.querySelectorAll('.option-btn').forEach(btn => {
+    btn.addEventListener('click', () => handleGrammarChoice(btn));
+  });
+  document.getElementById('grammarCount').textContent = `${grammarState.current + 1}/10`;
+  document.getElementById('grammarProgress').style.width = `${(grammarState.current / 10) * 100}%`;
+}
+
+function handleGrammarChoice(btn) {
+  if (grammarState.answered) return;
+  grammarState.answered = true;
+  const q = grammarState.questions[grammarState.current];
+  const fb = document.getElementById('grammarFeedback');
+  const exp = document.getElementById('grammarExplanation');
+  const allBtns = btn.parentElement.querySelectorAll('.option-btn');
+  const isCorrect = btn.dataset.answer === q.answer;
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+    fb.textContent = '✅ 正确！';
+    fb.className = 'feedback correct-fb';
+    grammarState.score++;
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = `❌ 正确答案是「${q.answer}」`;
+    fb.className = 'feedback wrong-fb';
+    allBtns.forEach(b => { if (b.dataset.answer === q.answer) b.classList.add('correct'); });
+    exp.innerHTML = `<div class="explanation-box"><div class="exp-label">💡 知识点解析</div>${q.explanation}</div>`;
+    const wrongItem = {
+      type: 'grammar',
+      question: q.sentence.replace('___', '____'),
+      userAnswer: btn.dataset.answer,
+      correctAnswer: q.answer,
+      explanation: q.explanation
+    };
+    addWrongItem(wrongItem);
+    grammarState.roundWrong.push(wrongItem);
+  }
+  allBtns.forEach(b => b.disabled = true);
+  const blank = document.querySelector('#grammarQuestion .blank');
+  if (blank) blank.textContent = q.answer;
+  setTimeout(nextGrammarQuestion, 2200);
+}
+
+function nextGrammarQuestion() {
+  grammarState.current++;
+  if (grammarState.current >= 10) {
+    showGrammarResult();
+  } else {
+    renderGrammarQuestion();
+  }
+}
+
+function showGrammarResult() {
+  const score = grammarState.score;
+  const best = getBest('grammarBest');
+  const newBest = score > best ? score : best;
+  if (score > best) setBest('grammarBest', score);
+
+  document.getElementById('grammarQuiz').classList.add('hidden');
+  document.getElementById('grammarResult').classList.remove('hidden');
+  document.getElementById('grammarScoreNum').textContent = `${score}/10`;
+  document.getElementById('grammarStars').textContent = getStars(score, 10);
+  document.getElementById('grammarRound').textContent = `第 ${grammarState.round} 轮`;
+  document.getElementById('grammarBestDisplay').textContent = `🏆 最高分：${newBest}/10`;
+  document.getElementById('grammarEncourage').textContent = getEncourage(score, 10);
+  document.getElementById('grammarEncourage').style.background = score >= 7 ? 'var(--correct-light)' : 'var(--primary-light)';
+  document.getElementById('grammarBest').textContent = `${newBest}/10`;
+
+  const wrongCount = grammarState.roundWrong.length;
+  const nextBtn = document.getElementById('grammarNextRound');
+  const reviewBtn = document.getElementById('grammarReviewWrong');
+
+  if (wrongCount > 0) {
+    document.getElementById('grammarWrongSummary').textContent = `📌 本轮错了 ${wrongCount} 题，已加入错题本`;
+    reviewBtn.style.display = 'inline-block';
+    reviewBtn.onclick = () => { switchTab('wrongbook'); document.querySelector('[data-wtab="grammar"]').click(); };
+  } else {
+    document.getElementById('grammarWrongSummary').textContent = '';
+    reviewBtn.style.display = 'none';
+  }
+
+  if (continuousMode) {
+    nextBtn.style.display = 'inline-block';
+    nextBtn.onclick = () => {
+      grammarState.round++;
+      document.getElementById('grammarResult').classList.add('hidden');
+      document.getElementById('grammarQuiz').classList.remove('hidden');
+      initGrammar();
+      renderGrammarQuestion();
+    };
+  } else {
+    nextBtn.style.display = 'none';
+  }
+}
+
+function startGrammar() {
+  grammarState.round = 1;
+  initGrammar();
+  document.getElementById('grammarStart').classList.add('hidden');
+  document.getElementById('grammarQuiz').classList.remove('hidden');
+  document.getElementById('grammarResult').classList.add('hidden');
+  renderGrammarQuestion();
+}
+
+// ==================== VERB QUIZ ====================
+let verbState = { questions: [], current: 0, score: 0, answered: false, round: 1, roundWrong: [] };
+
+function initVerb() {
+  verbState.questions = shuffle(verbData).slice(0, 10);
+  verbState.current = 0;
+  verbState.score = 0;
+  verbState.answered = false;
+  verbState.roundWrong = [];
+}
+
+function renderVerbQuestion() {
+  const q = verbState.questions[verbState.current];
+  const container = document.getElementById('verbQuestion');
+  const fb = document.getElementById('verbFeedback');
+  const exp = document.getElementById('verbExplanation');
+  fb.textContent = '';
+  fb.className = 'feedback';
+  exp.innerHTML = '';
+  verbState.answered = false;
+
+  container.innerHTML = `
+    <div class="verb-display">
+      <div class="verb-en">${q.en}</div>
+      <div class="verb-zh">${q.zh}</div>
+      <div style="font-size:13px;color:var(--text-sec);margin-top:6px;">请输入过去式</div>
+    </div>
+    <div class="input-wrap">
+      <input type="text" id="verbInput" placeholder="输入过去式..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <button class="submit-btn" id="verbSubmit">提交</button>
+    </div>`;
+  const input = document.getElementById('verbInput');
+  const submit = document.getElementById('verbSubmit');
+  submit.addEventListener('click', () => handleVerbInput(input));
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleVerbInput(input); });
+  setTimeout(() => input.focus(), 100);
+  document.getElementById('verbCount').textContent = `${verbState.current + 1}/10`;
+  document.getElementById('verbProgress').style.width = `${(verbState.current / 10) * 100}%`;
+}
+
+function handleVerbInput(input) {
+  if (verbState.answered) return;
+  const userAnswer = input.value.trim().toLowerCase();
+  if (!userAnswer) return;
+  verbState.answered = true;
+  const q = verbState.questions[verbState.current];
+  const fb = document.getElementById('verbFeedback');
+  const exp = document.getElementById('verbExplanation');
+  const submitBtn = document.getElementById('verbSubmit');
+  const isCorrect = userAnswer === q.past.toLowerCase();
+
+  if (isCorrect) {
+    input.classList.add('correct-input');
+    fb.textContent = '✅ 正确！';
+    fb.className = 'feedback correct-fb';
+    verbState.score++;
+  } else {
+    input.classList.add('wrong-input');
+    fb.textContent = `❌ 错了！「${q.en}」的过去式是「${q.past}」`;
+    fb.className = 'feedback wrong-fb';
+    const groupDesc = q.group === 'AAA' ? 'AAA型（原形=过去式，不变）' : q.group === 'ABB' ? 'ABB型（过去式=过去分词）' : 'ABC型（三种形式都不同）';
+    exp.innerHTML = `<div class="explanation-box"><div class="exp-label">💡 解析</div>${q.en} → <strong>${q.past}</strong>（${q.zh}）。属于${groupDesc}。建议手写3遍：${q.en} — ${q.past}。</div>`;
+    const wrongItem = {
+      type: 'verb',
+      question: `「${q.en}」(${q.zh}) 的过去式？`,
+      userAnswer: userAnswer,
+      correctAnswer: q.past,
+      explanation: `${q.en} → ${q.past}（${q.zh}），${groupDesc}。同类词参考：${q.group === 'AAA' ? 'cut-cut, put-put, let-let' : q.group === 'ABB' ? 'buy-bought, think-thought, feel-felt' : 'go-went, see-saw, eat-ate'}。`
+    };
+    addWrongItem(wrongItem);
+    verbState.roundWrong.push(wrongItem);
+  }
+  input.disabled = true;
+  if (submitBtn) submitBtn.disabled = true;
+  setTimeout(nextVerbQuestion, 2000);
+}
+
+function nextVerbQuestion() {
+  verbState.current++;
+  if (verbState.current >= 10) {
+    showVerbResult();
+  } else {
+    renderVerbQuestion();
+  }
+}
+
+function showVerbResult() {
+  const score = verbState.score;
+  const best = getBest('verbBest');
+  const newBest = score > best ? score : best;
+  if (score > best) setBest('verbBest', score);
+
+  document.getElementById('verbQuiz').classList.add('hidden');
+  document.getElementById('verbResult').classList.remove('hidden');
+  document.getElementById('verbScoreNum').textContent = `${score}/10`;
+  document.getElementById('verbStars').textContent = getStars(score, 10);
+  document.getElementById('verbRound').textContent = `第 ${verbState.round} 轮`;
+  document.getElementById('verbBestDisplay').textContent = `🏆 最高分：${newBest}/10`;
+  document.getElementById('verbEncourage').textContent = getEncourage(score, 10);
+  document.getElementById('verbEncourage').style.background = score >= 7 ? 'var(--correct-light)' : 'var(--primary-light)';
+  document.getElementById('verbBest').textContent = `${newBest}/10`;
+
+  const wrongCount = verbState.roundWrong.length;
+  const nextBtn = document.getElementById('verbNextRound');
+  const reviewBtn = document.getElementById('verbReviewWrong');
+
+  if (wrongCount > 0) {
+    document.getElementById('verbWrongSummary').textContent = `📌 本轮错了 ${wrongCount} 题，已加入错题本`;
+    reviewBtn.style.display = 'inline-block';
+    reviewBtn.onclick = () => { switchTab('wrongbook'); document.querySelector('[data-wtab="verb"]').click(); };
+  } else {
+    document.getElementById('verbWrongSummary').textContent = '';
+    reviewBtn.style.display = 'none';
+  }
+
+  if (continuousMode) {
+    nextBtn.style.display = 'inline-block';
+    nextBtn.onclick = () => {
+      verbState.round++;
+      document.getElementById('verbResult').classList.add('hidden');
+      document.getElementById('verbQuiz').classList.remove('hidden');
+      initVerb();
+      renderVerbQuestion();
+    };
+  } else {
+    nextBtn.style.display = 'none';
+  }
+}
+
+function startVerb() {
+  verbState.round = 1;
+  initVerb();
+  document.getElementById('verbStart').classList.add('hidden');
+  document.getElementById('verbQuiz').classList.remove('hidden');
+  document.getElementById('verbResult').classList.add('hidden');
+  renderVerbQuestion();
+}
+
+// ==================== WRONG BOOK RENDERING ====================
+let wrongbookFilter = 'all';
+
+function renderWrongBook() {
+  const book = getWrongBook();
+  const list = document.getElementById('wrongbookList');
+  const empty = document.getElementById('wrongbookEmpty');
+
+  let filtered = book;
+  if (wrongbookFilter !== 'all') {
+    filtered = book.filter(item => item.type === wrongbookFilter);
+  }
+
+  if (filtered.length === 0) {
+    list.innerHTML = '';
+    empty.classList.remove('hidden');
+    return;
+  }
+
+  empty.classList.add('hidden');
+  list.innerHTML = filtered.map((item, i) => {
+    const typeLabel = item.type === 'vocab' ? '📝 单词' : item.type === 'grammar' ? '📐 语法' : '🔄 动词';
+    return `
+      <div class="wrong-item">
+        <div class="wi-q">${typeLabel} | ${item.question}</div>
+        <div class="wi-wrong">❌ 你的答案：${item.userAnswer}</div>
+        <div class="wi-correct">✅ 正确答案：${item.correctAnswer}</div>
+        <div class="wi-exp">${item.explanation || ''}</div>
+        <div class="wi-date">${item.date || ''}</div>
+        <div class="wi-actions">
+          <button onclick="removeWrongItem(${i}); renderWrongBook();">🗑 已掌握，删除</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ==================== TAB SWITCHING ====================
+let currentTab = 'vocab';
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+
+  document.getElementById('vocabSection').classList.toggle('hidden', tab !== 'vocab');
+  document.getElementById('grammarSection').classList.toggle('hidden', tab !== 'grammar');
+  document.getElementById('verbSection').classList.toggle('hidden', tab !== 'verb');
+  document.getElementById('wrongbookSection').classList.toggle('hidden', tab !== 'wrongbook');
+  document.getElementById('vocabModeSelector').classList.toggle('hidden', tab !== 'vocab');
+  document.getElementById('continuousBar').classList.toggle('hidden', tab === 'wrongbook');
+
+  if (tab === 'wrongbook') {
+    renderWrongBook();
+  }
+
+  // Reset views
+  if (tab === 'vocab') {
+    document.getElementById('vocabStart').classList.remove('hidden');
+    document.getElementById('vocabQuiz').classList.add('hidden');
+    document.getElementById('vocabResult').classList.add('hidden');
+  } else if (tab === 'grammar') {
+    document.getElementById('grammarStart').classList.remove('hidden');
+    document.getElementById('grammarQuiz').classList.add('hidden');
+    document.getElementById('grammarResult').classList.add('hidden');
+  } else if (tab === 'verb') {
+    document.getElementById('verbStart').classList.remove('hidden');
+    document.getElementById('verbQuiz').classList.add('hidden');
+    document.getElementById('verbResult').classList.add('hidden');
+  }
+}
+
+// ==================== EVENT BINDINGS ====================
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+});
+
+document.querySelectorAll('.mode-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    if (this.dataset.vmode) {
+      document.querySelectorAll('#vocabModeSelector .mode-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      vocabState.mode = this.dataset.vmode;
+      document.getElementById('vocabStart').classList.remove('hidden');
+      document.getElementById('vocabQuiz').classList.add('hidden');
+      document.getElementById('vocabResult').classList.add('hidden');
+    } else if (this.dataset.wtab) {
+      document.querySelectorAll('#wrongbookTabs .mode-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      wrongbookFilter = this.dataset.wtab;
+      renderWrongBook();
+    }
+  });
+});
+
+document.getElementById('vocabStartBtn').addEventListener('click', startVocab);
+document.getElementById('vocabRestart').addEventListener('click', () => {
+  document.getElementById('vocabResult').classList.add('hidden');
+  document.getElementById('vocabStart').classList.remove('hidden');
+});
+
+document.getElementById('grammarStartBtn').addEventListener('click', startGrammar);
+document.getElementById('grammarRestart').addEventListener('click', () => {
+  document.getElementById('grammarResult').classList.add('hidden');
+  document.getElementById('grammarStart').classList.remove('hidden');
+});
+
+document.getElementById('verbStartBtn').addEventListener('click', startVerb);
+document.getElementById('verbRestart').addEventListener('click', () => {
+  document.getElementById('verbResult').classList.add('hidden');
+  document.getElementById('verbStart').classList.remove('hidden');
+});
+
+document.getElementById('clearWrongbook').addEventListener('click', clearWrongBook);
+
+// ==================== INIT ====================
+document.getElementById('vocabBest').textContent = `${getBest('vocabBest')}/10`;
+document.getElementById('grammarBest').textContent = `${getBest('grammarBest')}/10`;
+document.getElementById('verbBest').textContent = `${getBest('verbBest')}/10`;
+updateWrongbookBadge();
+</script>
+</body>
+</html>

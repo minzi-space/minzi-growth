@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>21天英语打卡表 · 译林版</title>
+<style>
+  :root {
+    --primary: #1a6fb5;
+    --done: #43a047;
+    --done-light: #e8f5e9;
+    --undone: #e0e0e0;
+    --bg: #f5f6f8;
+    --card: #fff;
+    --text: #2c3e50;
+    --text-sec: #6b7d8e;
+    --border: #e5e9f0;
+    --shadow: 0 2px 8px rgba(0,0,0,0.06);
+    --radius: 14px;
+    --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .app { max-width: 480px; margin: 0 auto; padding: 0 0 32px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1565c0, #1a6fb5, #2196F3);
+    color: #fff;
+    padding: 24px 16px 20px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(26,111,181,0.2);
+  }
+  .header h1 { font-size: 21px; font-weight: 700; margin-bottom: 4px; }
+  .header .sub { font-size: 13px; opacity: 0.85; }
+
+  /* Card */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    margin: 12px 12px;
+    box-shadow: var(--shadow);
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 12px 0;
+  }
+  .stat-item .stat-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .stat-item .stat-label {
+    font-size: 12px;
+    color: var(--text-sec);
+    margin-top: 4px;
+  }
+  .stat-item.streak .stat-num { color: #e8734a; }
+
+  /* Calendar grid */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .day-cell {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid var(--border);
+    background: #fff;
+    position: relative;
+    font-weight: 600;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .day-cell .day-num {
+    font-size: 17px;
+    line-height: 1;
+  }
+  .day-cell .day-label {
+    font-size: 10px;
+    color: var(--text-sec);
+    margin-top: 2px;
+  }
+  .day-cell:active { transform: scale(0.92); }
+
+  .day-cell.done {
+    background: var(--done-light);
+    border-color: var(--done);
+    color: var(--done);
+  }
+  .day-cell.done .day-label { color: var(--done); }
+  .day-cell.done::after {
+    content: '✓';
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--done);
+  }
+  .day-cell.today {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(26,111,181,0.15);
+  }
+  .day-cell.today .day-label { color: var(--primary); }
+
+  /* Weekly row label */
+  .week-label {
+    font-size: 11px;
+    color: var(--text-sec);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  /* Encourage box */
+  .encourage-box {
+    text-align: center;
+    padding: 14px;
+    background: linear-gradient(135deg, #fff8e1, #fff3e0);
+    border-radius: 12px;
+    margin: 12px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #e65100;
+    transition: all 0.3s;
+  }
+  .encourage-box.milestone {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    color: var(--done);
+  }
+  .encourage-box .emoji { font-size: 24px; display: block; margin-bottom: 4px; }
+
+  /* Task list */
+  .task-list {
+    list-style: none;
+    margin: 12px 0;
+  }
+  .task-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 0;
+    font-size: 13px;
+    color: var(--text-sec);
+  }
+  .task-list li .check-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .task-list li.done-task .check-icon {
+    background: var(--done);
+    border-color: var(--done);
+    color: #fff;
+  }
+  .task-list li.done-task { color: var(--done); text-decoration: line-through; }
+
+  /* Progress bar */
+  .progress-wrap {
+    margin: 12px 0;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-sec);
+    margin-bottom: 4px;
+  }
+  .progress-bar {
+    height: 8px;
+    background: #e8edf2;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--done), #66bb6a);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+
+  /* Reset button */
+  .reset-btn {
+    display: block;
+    margin: 16px auto 0;
+    padding: 8px 20px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    font-size: 12px;
+    color: var(--text-sec);
+    cursor: pointer;
+    font-family: var(--font);
+    transition: all 0.2s;
+  }
+  .reset-btn:active { background: #f5f5f5; }
+
+  /* Footer */
+  .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--text-sec); opacity: 0.7; }
+
+  @media (max-width: 380px) {
+    .calendar-grid { gap: 5px; }
+    .day-cell .day-num { font-size: 15px; }
+    .day-cell .day-label { font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>📅 21天英语打卡表</h1>
+    <div class="sub">译林版五上~六下 · 每天进步一点点</div>
+  </div>
+
+  <!-- STATS -->
+  <div class="card">
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-num" id="doneCount">0</div>
+        <div class="stat-label">已完成</div>
+      </div>
+      <div class="stat-item streak">
+        <div class="stat-num" id="streakCount">0</div>
+        <div class="stat-label">🔥 连续</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="totalDays">21</div>
+        <div class="stat-label">总天数</div>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>完成进度</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENCOURAGE -->
+  <div class="card" id="encourageCard">
+    <div class="encourage-box" id="encourageBox">
+      <span class="emoji">👋</span>
+      点击今天的格子开始打卡吧！
+    </div>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="card">
+    <h3 style="font-size:15px;margin-bottom:12px;text-align:center;">📆 打卡日历</h3>
+    <div class="calendar-grid" id="calendarGrid"></div>
+  </div>
+
+  <!-- TODAY'S TASKS -->
+  <div class="card">
+    <h3 style="font-size:15px;margin-bottom:10px;">✅ 今日任务清单</h3>
+    <ul class="task-list" id="taskList">
+      <li><span class="check-icon" data-task="0">☐</span> 单词闪卡复习（10分钟）</li>
+      <li><span class="check-icon" data-task="1">☐</span> 句型跟读+造句（10分钟）</li>
+      <li><span class="check-icon" data-task="2">☐</span> 语法专项练习（15分钟）</li>
+      <li><span class="check-icon" data-task="3">☐</span> 课文朗读/阅读（10分钟）</li>
+    </ul>
+  </div>
+
+  <!-- RESET -->
+  <button class="reset-btn" id="resetBtn">🔄 重新开始</button>
+
+  <div class="footer">
+    敏敏出品 · 2026.06<br>
+    坚持21天，养成一个好习惯 ✨
+  </div>
+
+</div>
+
+<script>
+// ==================== STATE ====================
+const TOTAL_DAYS = 21;
+const STORAGE_KEY = 'english_checkin_21';
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return { days: {}, tasks: {} };
+}
+
+function saveState(state) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch(e) {}
+}
+
+let state = loadState();
+
+// ==================== RENDER ====================
+function getTodayIndex() {
+  // For this app, "today" is relative to when they started
+  // If they have no days done, today = 1
+  // Otherwise today = max done day + 1, capped at 21
+  const doneDays = Object.keys(state.days).map(Number).filter(d => state.days[d]);
+  if (doneDays.length === 0) return 1;
+  return Math.min(Math.max(...doneDays) + 1, TOTAL_DAYS);
+}
+
+function countStreak(days) {
+  let streak = 0;
+  for (let i = TOTAL_DAYS; i >= 1; i--) {
+    if (days[i]) streak++;
+    else break;
+  }
+  return streak;
+}
+
+function renderCalendar() {
+  const grid = document.getElementById('calendarGrid');
+  const today = getTodayIndex();
+  grid.innerHTML = '';
+
+  for (let i = 1; i <= TOTAL_DAYS; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'day-cell';
+    if (state.days[i]) cell.classList.add('done');
+    if (i === today && !state.days[i]) cell.classList.add('today');
+
+    cell.innerHTML = `
+      <span class="day-num">${i}</span>
+      <span class="day-label">天</span>
+    `;
+
+    cell.addEventListener('click', () => toggleDay(i));
+    grid.appendChild(cell);
+  }
+
+  // Update stats
+  const doneCount = Object.values(state.days).filter(Boolean).length;
+  const streak = countStreak(state.days);
+  const pct = Math.round((doneCount / TOTAL_DAYS) * 100);
+
+  document.getElementById('doneCount').textContent = doneCount;
+  document.getElementById('streakCount').textContent = streak;
+  document.getElementById('progressPct').textContent = `${pct}%`;
+  document.getElementById('progressFill').style.width = `${pct}%`;
+
+  // Encourage
+  updateEncourage(doneCount, streak);
+
+  // Today's tasks
+  renderTasks(today);
+}
+
+function updateEncourage(doneCount, streak) {
+  const box = document.getElementById('encourageBox');
+  const messages = [
+    { min: 0, emoji: '👋', text: '点击今天的格子开始打卡吧！每天4个小任务，坚持就是胜利 💪', milestone: false },
+    { min: 1, emoji: '🌱', text: '好的开始是成功的一半！第一天打卡完成，太棒了！', milestone: false },
+    { min: 2, emoji: '⭐', text: '连续2天啦！小小的坚持，大大的进步！', milestone: false },
+    { min: 3, emoji: '🔥', text: '3天连续打卡！习惯正在悄悄养成~', milestone: false },
+    { min: 5, emoji: '🌟', text: '5天啦！你已经超过了大多数人的起点！', milestone: false },
+    { min: 7, emoji: '🏆', text: '整整一周！7天连续打卡，你太厉害了！给自己鼓个掌 👏', milestone: true },
+    { min: 10, emoji: '🎯', text: '10天！已经过半了，英语正在变得越来越简单~', milestone: false },
+    { min: 14, emoji: '💎', text: '两周达成！14天的坚持，你已经不是原来的你了！', milestone: true },
+    { min: 18, emoji: '🚀', text: '18天！只剩最后3天，冲刺阶段加油！', milestone: false },
+    { min: 21, emoji: '🎉', text: '21天全部完成！！！你是英语打卡之王！这个暑假没有白过！🏆🏆🏆', milestone: true }
+  ];
+
+  let msg = messages[0];
+  for (const m of messages) {
+    if (doneCount >= m.min) msg = m;
+  }
+
+  box.innerHTML = `<span class="emoji">${msg.emoji}</span>${msg.text}`;
+  if (msg.milestone) {
+    box.className = 'encourage-box milestone';
+  } else {
+    box.className = 'encourage-box';
+  }
+}
+
+function renderTasks(today) {
+  const list = document.getElementById('taskList');
+  const taskKey = `day_${today}`;
+  const tasks = state.tasks[taskKey] || {};
+
+  list.innerHTML = '';
+  const taskNames = [
+    '单词闪卡复习（10分钟）',
+    '句型跟读+造句（10分钟）',
+    '语法专项练习（15分钟）',
+    '课文朗读/阅读（10分钟）'
+  ];
+
+  taskNames.forEach((name, idx) => {
+    const li = document.createElement('li');
+    if (tasks[idx]) li.classList.add('done-task');
+    li.innerHTML = `
+      <span class="check-icon" data-task="${idx}">${tasks[idx] ? '✓' : '☐'}</span>
+      ${name}
+    `;
+    li.querySelector('.check-icon').addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleTask(today, idx);
+    });
+    list.appendChild(li);
+  });
+}
+
+// ==================== ACTIONS ====================
+function toggleDay(day) {
+  if (state.days[day]) {
+    // Undo: only allow undo if it's the last done day
+    const doneDays = Object.keys(state.days).map(Number).filter(d => state.days[d]);
+    const maxDone = doneDays.length > 0 ? Math.max(...doneDays) : 0;
+    if (day !== maxDone) return; // Can only undo the latest
+    delete state.days[day];
+  } else {
+    // Can only mark today
+    const today = getTodayIndex();
+    if (day !== today) return;
+    state.days[day] = true;
+  }
+  saveState(state);
+  renderCalendar();
+}
+
+function toggleTask(day, taskIdx) {
+  const taskKey = `day_${day}`;
+  if (!state.tasks[taskKey]) state.tasks[taskKey] = {};
+  state.tasks[taskKey][taskIdx] = !state.tasks[taskKey][taskIdx];
+  saveState(state);
+  renderCalendar();
+}
+
+// Reset
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (confirm('确定要重新开始吗？所有打卡记录将被清除。')) {
+    state = { days: {}, tasks: {} };
+    saveState(state);
+    renderCalendar();
+  }
+});
+
+// Init
+renderCalendar();
+</script>
+</body>
+</html>
