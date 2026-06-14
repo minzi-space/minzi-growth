@@ -44,6 +44,11 @@ class MainActivity : AppCompatActivity() {
         webView.loadUrl("file:///android_asset/quiz.html")
     }
 
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) immersiveMode()
+    }
+
     private fun immersiveMode() {
         window.statusBarColor = android.graphics.Color.TRANSPARENT
         window.navigationBarColor = android.graphics.Color.TRANSPARENT
@@ -51,14 +56,6 @@ class MainActivity : AppCompatActivity() {
         val controller = window.insetsController
         controller?.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         controller?.hide(android.view.WindowInsets.Type.systemBars())
-
-        // Make content draw behind system bars
-        window.setDecorFitsSystemWindows(false)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        immersiveMode()
     }
 
     // Handle back button: if WebView can go back, go back; otherwise exit

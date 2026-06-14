@@ -128,30 +128,30 @@
 
   /* ===== CARDS ===== */
   .card {
-    background: var(--card); border-radius: var(--radius); padding: 20px 16px;
+    background: var(--card); border-radius: var(--radius); padding: 16px 14px;
     margin: 0 12px 12px; box-shadow: var(--shadow);
     transition: transform 0.2s, box-shadow 0.2s;
   }
   .card h3 { font-size: 16px; margin-bottom: 12px; color: var(--text); font-weight: 700; }
 
   /* Progress */
-  .progress-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-  .progress-bar { flex:1; height:8px; background:#E5E5EA; border-radius:4px; overflow:hidden; }
-  .progress-fill { height:100%; background:linear-gradient(90deg,#4A90D9,#6C63FF); border-radius:4px; transition:width 0.4s ease; }
-  .progress-text { font-size:13px; color:var(--text-sec); font-weight:600; min-width:50px; text-align:right; white-space:nowrap; }
+  .progress-wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .progress-bar { flex:1; height:6px; background:#E5E5EA; border-radius:3px; overflow:hidden; }
+  .progress-fill { height:100%; background:linear-gradient(90deg,#4A90D9,#6C63FF); border-radius:3px; transition:width 0.4s ease; }
+  .progress-text { font-size:12px; color:var(--text-sec); font-weight:600; min-width:40px; text-align:right; white-space:nowrap; }
 
   /* Word display */
-  .word-display { text-align:center; padding:24px 14px; margin:12px 0; background:linear-gradient(135deg,#F8FAFF,#F0F4FF); border-radius:var(--radius-sm); border:1px solid #E8ECF4; }
-  .word-display .big-word { font-size:32px; font-weight:800; color:var(--primary); letter-spacing:1px; }
-  .word-display .big-zh { font-size:28px; font-weight:700; color:#1C1C1E; }
-  .word-display .hint { font-size:12px; color:var(--text-sec); margin-top:6px; }
+  .word-display { text-align:center; padding:18px 12px; margin:8px 0; background:linear-gradient(135deg,#F8FAFF,#F0F4FF); border-radius:var(--radius-sm); border:1px solid #E8ECF4; }
+  .word-display .big-word { font-size:28px; font-weight:800; color:var(--primary); letter-spacing:1px; }
+  .word-display .big-zh { font-size:24px; font-weight:700; color:#1C1C1E; }
+  .word-display .hint { font-size:11px; color:var(--text-sec); margin-top:4px; }
 
   /* Options */
-  .options-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:16px 0; }
+  .options-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:12px 0; }
   .option-btn {
-    padding:16px 10px; border-radius:var(--radius-xs); border:2px solid var(--border);
-    background:#fff; font-size:15px; font-weight:600; cursor:pointer; transition:all 0.2s;
-    font-family:var(--font); min-height:52px; display:flex; align-items:center;
+    padding:12px 6px; border-radius:var(--radius-xs); border:2px solid var(--border);
+    background:#fff; font-size:14px; font-weight:600; cursor:pointer; transition:all 0.2s;
+    font-family:var(--font); min-height:46px; display:flex; align-items:center;
     justify-content:center; text-align:center; color:var(--text);
     position: relative; overflow: hidden;
   }
@@ -172,12 +172,12 @@
 
   /* Input */
   .input-wrap {
-    display:flex; gap:8px; margin:16px 0;
+    display:flex; gap:8px; margin:12px 0;
     position: relative;
   }
   .input-wrap input {
-    flex:1; padding:14px 16px; border:2px solid var(--border); border-radius:var(--radius-xs);
-    font-size:20px; font-family:"SF Mono","Consolas","Courier New",monospace;
+    flex:1; padding:12px 14px; border:2px solid var(--border); border-radius:var(--radius-xs);
+    font-size:18px; font-family:"SF Mono","Consolas","Courier New",monospace;
     outline:none; transition:all 0.2s; letter-spacing:1px; background:#F9F9FB;
     min-width: 0;
   }
@@ -186,9 +186,9 @@
   .input-wrap input.wrong-input { border-color:var(--error); background:var(--error-light); animation:inputShake 0.4s ease; }
   @keyframes inputShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
   .submit-btn {
-    padding:14px 20px; background:var(--primary); color:#fff; border:none;
-    border-radius:var(--radius-xs); font-size:16px; font-weight:700; cursor:pointer;
-    font-family:var(--font); min-width:64px; transition:all 0.15s;
+    padding:12px 18px; background:var(--primary); color:#fff; border:none;
+    border-radius:var(--radius-xs); font-size:15px; font-weight:700; cursor:pointer;
+    font-family:var(--font); min-width:56px; transition:all 0.15s;
     flex-shrink: 0; white-space: nowrap;
   }
   .submit-btn:active { transform:scale(0.95); background:var(--primary-dark); }
@@ -368,23 +368,23 @@
   .sentence-display .blank { display:inline-block; min-width:64px; border-bottom:2px solid var(--primary); margin:0 4px; color:var(--primary); font-weight:700; }
 
   /* Start screen */
-  .start-screen { text-align:center; padding:36px 16px 24px; }
-  .start-screen .emoji { font-size:56px; margin-bottom:12px; animation:float 3s ease-in-out infinite; }
-  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-  .start-screen h2 { font-size:21px; font-weight:800; margin-bottom:8px; }
-  .start-screen p { font-size:14px; color:var(--text-sec); margin-bottom:18px; line-height:1.7; }
+  .start-screen { text-align:center; padding:24px 16px 18px; }
+  .start-screen .emoji { font-size:44px; margin-bottom:8px; animation:float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  .start-screen h2 { font-size:19px; font-weight:800; margin-bottom:6px; }
+  .start-screen p { font-size:13px; color:var(--text-sec); margin-bottom:14px; line-height:1.6; }
   .start-btn {
-    padding:16px 44px; background:linear-gradient(135deg,#4A90D9,#6C63FF); color:#fff;
-    border:none; border-radius:28px; font-size:17px; font-weight:700; cursor:pointer;
+    padding:14px 36px; background:linear-gradient(135deg,#4A90D9,#6C63FF); color:#fff;
+    border:none; border-radius:28px; font-size:16px; font-weight:700; cursor:pointer;
     font-family:var(--font); box-shadow:0 6px 20px rgba(74,144,217,0.4); transition:all 0.2s;
     position: relative; overflow: hidden;
   }
   .start-btn:active { transform:scale(0.95); box-shadow:0 3px 10px rgba(74,144,217,0.25); }
 
   /* Verb */
-  .verb-display { text-align:center; padding:22px; background:linear-gradient(135deg,#F8FAFF,#F0F4FF); border-radius:var(--radius-sm); margin:12px 0; border:1px solid #E8ECF4; }
-  .verb-display .verb-en { font-size:34px; font-weight:800; color:var(--primary); }
-  .verb-display .verb-zh { font-size:15px; color:var(--text-sec); margin-top:6px; }
+  .verb-display { text-align:center; padding:16px; background:linear-gradient(135deg,#F8FAFF,#F0F4FF); border-radius:var(--radius-sm); margin:10px 0; border:1px solid #E8ECF4; }
+  .verb-display .verb-en { font-size:28px; font-weight:800; color:var(--primary); }
+  .verb-display .verb-zh { font-size:14px; color:var(--text-sec); margin-top:4px; }
 
   /* Wrong book list */
   .wrong-item {
@@ -2513,7 +2513,6 @@ function renderVerbQuestion() {
     <div class="verb-display">
       <div class="verb-en">${q.en}</div>
       <div class="verb-zh">${q.zh}</div>
-      <div style="font-size:13px;color:var(--text-sec);margin-top:6px;">请输入过去式</div>
     </div>
     <div class="input-wrap">
       <input type="text" id="verbInput" placeholder="输入过去式..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
