@@ -2,288 +2,925 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="成长空间">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#F7F4EE">
+<link rel="manifest" href="manifest.json">
 <title>敏子的成长空间</title>
 <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
   :root {
-    --bg: #f9f7f4;
-    --card: #fff;
-    --text: #3a3a3a;
-    --text-light: #999;
-    --accent: #e17055;
-    --accent2: #fdcb6e;
-    --green: #66bb6a;
-    --blue: #42a5f5;
-    --red: #e53935;
-    --orange: #ff9800;
-    --radius: 18px;
-    --shadow: 0 2px 16px rgba(0,0,0,0.06);
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Serif SC", serif;
-    background: var(--bg); color: var(--text); line-height: 1.7;
-    max-width: 500px; margin: 0 auto; min-height: 100vh;
+    --bg: #F7F4EE;
+    --card: #FFFFFF;
+    --primary: #6B8F71;
+    --primary-light: #E8F0E9;
+    --accent: #E8956A;
+    --accent-light: #FFF3ED;
+    --text: #2D3436;
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
+    --border: #F0EDE6;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    --radius-sm: 12px;
+    --radius: 16px;
+    --radius-lg: 20px;
+    --nav-height: 64px;
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
   }
 
-  /* 头部 */
+  html, body {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
   .header {
-    background: linear-gradient(165deg, #1e272e 0%, #2d3436 50%, #353b48 100%);
-    padding: 44px 24px 32px; text-align: center;
+    padding: 20px 20px 0;
+    flex-shrink: 0;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6B8F71, #8FB996);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .greeting { flex: 1; margin-left: 12px; }
+  .greeting .hi { font-size: 13px; color: var(--text-secondary); }
+  .greeting .name { font-size: 18px; font-weight: 700; color: var(--text); margin-top: 2px; }
+
+  .date-badge {
+    font-size: 12px; color: var(--text-secondary);
+    background: var(--card); padding: 6px 12px;
+    border-radius: 20px; box-shadow: var(--shadow-sm);
+    white-space: nowrap;
+  }
+
+  .header-quote {
+    margin-top: 16px;
+    background: linear-gradient(135deg, #6B8F7120, #E8956A15);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 13px; color: var(--primary);
+    text-align: center; line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* ── Main Content Area ── */
+  .main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 16px var(--nav-height);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .page { display: none; }
+  .page.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Section Title ── */
+  .section-title {
+    font-size: 15px; font-weight: 700; color: var(--text);
+    margin: 20px 0 12px; padding-left: 4px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-title .icon { font-size: 20px; }
+
+  /* ── Module Cards ── */
+  .module-cards {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+
+  .module-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 18px;
+    box-shadow: var(--shadow-sm);
+    display: flex; align-items: center;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
     position: relative; overflow: hidden;
   }
-  .header::before {
-    content: ""; position: absolute; top: -60%; left: -30%;
-    width: 160%; height: 160%;
-    background: radial-gradient(ellipse at 30% 25%, rgba(253,203,110,0.08) 0%, transparent 55%),
-                radial-gradient(ellipse at 75% 70%, rgba(225,112,85,0.06) 0%, transparent 55%);
-  }
-  .header::after {
-    content: ""; position: absolute; bottom: -1px; left: 0; right: 0;
-    height: 28px; background: var(--bg); border-radius: 28px 28px 0 0;
-  }
-  .avatar-wrap {
-    position: relative; z-index: 1;
-    width: 80px; height: 80px; margin: 0 auto 14px;
-    background: linear-gradient(135deg, var(--accent2), var(--accent));
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 2.2em; box-shadow: 0 6px 24px rgba(253,203,110,0.25);
-  }
-  .header h1 { font-size: 1.6em; font-weight: 700; color: #fff; position: relative; z-index: 1; letter-spacing: 2px; }
-  .header .subtitle { font-size: 0.85em; color: rgba(255,255,255,0.5); position: relative; z-index: 1; margin-top: 4px; }
-
-  /* 统计栏 */
-  .stats-bar {
-    display: flex; gap: 12px; padding: 0 20px;
-    margin: -16px 0 8px; position: relative; z-index: 2;
-  }
-  .stat-box {
-    flex: 1; background: var(--card); border-radius: 14px;
-    padding: 14px 10px; text-align: center;
-    box-shadow: var(--shadow);
-  }
-  .stat-box .num { font-size: 1.5em; font-weight: 800; color: var(--accent); }
-  .stat-box .label { font-size: 0.7em; color: var(--text-light); margin-top: 2px; }
-
-  /* 主内容 */
-  .main { padding: 0 16px 80px; }
-
-  /* 标签筛选 */
-  .filter-bar {
-    display: flex; gap: 8px; flex-wrap: wrap;
-    margin: 12px 0 16px;
-  }
-  .filter-chip {
-    font-size: 0.78em; padding: 6px 16px; border-radius: 20px;
-    border: 1.5px solid #e0dcd5; background: var(--card);
-    color: var(--text-light); cursor: pointer;
-    transition: all 0.25s; font-family: inherit; letter-spacing: 0.5px;
-  }
-  .filter-chip.active, .filter-chip:hover {
-    border-color: var(--accent); color: var(--accent);
-    background: #fff5f2;
+  .module-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
 
-  /* 时间线 */
-  .timeline { position: relative; padding-left: 28px; }
-  .timeline::before {
-    content: ""; position: absolute; left: 10px; top: 8px; bottom: 8px;
-    width: 2px; background: linear-gradient(to bottom, var(--accent2), #e0dcd5);
+  .module-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .module-icon.notes { background: #E8F0E9; }
+  .module-icon.parenting { background: #FFF3ED; }
+  .module-icon.checkin { background: #EDF0F8; }
+
+  .module-info { flex: 1; margin-left: 14px; }
+  .module-info .title { font-size: 16px; font-weight: 600; color: var(--text); }
+  .module-info .desc { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
+
+  .module-arrow { color: var(--text-muted); font-size: 18px; flex-shrink: 0; }
+
+  /* ── Quick Check-in ── */
+  .quick-checkin {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
   }
 
-  /* 内容卡片 */
-  .post {
-    position: relative; margin-bottom: 18px;
-    background: var(--card); border-radius: var(--radius);
-    padding: 22px 20px; box-shadow: var(--shadow);
-    text-decoration: none; color: inherit; display: block;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .post:active { transform: scale(0.985); box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
-
-  /* 时间线圆点 */
-  .post::before {
-    content: ""; position: absolute;
-    left: -22px; top: 26px;
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--card); border: 2.5px solid var(--accent2);
-    z-index: 1;
-  }
-  .post:first-child::before { border-color: var(--accent); }
-
-  /* 日期 */
-  .post .date {
-    font-size: 0.7em; color: var(--text-light);
-    letter-spacing: 0.5px; margin-bottom: 6px;
-  }
-  /* 分类标签 */
-  .post .category {
-    display: inline-block; font-size: 0.68em; letter-spacing: 1px;
-    padding: 3px 10px; border-radius: 10px; margin-bottom: 8px;
-    font-weight: 600;
-  }
-  .cat-reading { background: #e8f5e9; color: #388e3c; }
-  .cat-parenting { background: #fff3e0; color: #e65100; }
-  .cat-story { background: #fce4ec; color: #c62828; }
-
-  .post h3 { font-size: 1.08em; font-weight: 700; margin-bottom: 4px; color: #2d3436; }
-  .post .excerpt { font-size: 0.82em; color: var(--text-light); line-height: 1.5; }
-  .post .read-more {
-    font-size: 0.78em; color: var(--accent); font-weight: 600;
-    margin-top: 8px; display: inline-block;
-  }
-  .post .icon { font-size: 1.6em; float: right; margin-top: -8px; opacity: 0.7; }
-
-  /* 互动引导 */
-  .cta-banner {
-    background: linear-gradient(135deg, #fef9ef, #fdf3e0);
-    border: 1.5px dashed #e9c46a;
-    border-radius: var(--radius); padding: 20px; margin-top: 24px;
+  .checkin-item {
+    background: var(--card);
+    border-radius: var(--radius-sm);
+    padding: 14px 10px;
     text-align: center;
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
   }
-  .cta-banner h4 { font-size: 0.95em; color: #6b4c1e; margin-bottom: 4px; }
-  .cta-banner p { font-size: 0.78em; color: #8b7355; line-height: 1.6; }
-  .cta-banner .wechat-tag {
-    display: inline-block; margin-top: 8px; padding: 4px 14px;
-    background: #fff; border-radius: 14px; font-size: 0.78em;
-    color: #6b4c1e; font-weight: 600; border: 1px solid #e9c46a;
+  .checkin-item:active { transform: scale(0.96); }
+
+  .checkin-item .emoji { font-size: 28px; display: block; margin-bottom: 6px; }
+  .checkin-item .label { font-size: 12px; color: var(--text-secondary); }
+  .checkin-item.done { background: #E8F0E9; }
+  .checkin-item.done .label { color: var(--primary); font-weight: 600; }
+
+  /* ── Progress Ring ── */
+  .progress-row {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--card); border-radius: var(--radius);
+    padding: 16px 18px; box-shadow: var(--shadow-sm);
+    margin-top: 12px;
+  }
+  .progress-ring {
+    flex-shrink: 0;
+  }
+  .progress-info { flex: 1; }
+  .progress-info .pct { font-size: 22px; font-weight: 700; color: var(--primary); }
+  .progress-info .status { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+  /* ── Notes List ── */
+  .notes-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .note-card {
+    background: var(--card); border-radius: var(--radius);
+    padding: 16px; box-shadow: var(--shadow-sm);
+    display: flex; gap: 14px; align-items: flex-start;
+    cursor: pointer; transition: transform 0.15s ease;
+  }
+  .note-card:active { transform: scale(0.98); }
+
+  .note-emoji {
+    width: 40px; height: 40px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+    background: #E8F0E9;
+  }
+  .note-content { flex: 1; min-width: 0; }
+  .note-content .ntitle { font-size: 15px; font-weight: 600; }
+  .note-content .npreview {
+    font-size: 12px; color: var(--text-secondary);
+    margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .note-date { font-size: 11px; color: var(--text-muted); flex-shrink: 0; padding-top: 2px; }
+
+  /* ── Parenting Cards ── */
+  .parenting-grid {
+    display: flex; flex-direction: column; gap: 12px;
   }
 
-  /* 底部 */
-  .footer {
-    text-align: center; padding: 28px 20px 32px;
-    color: #ccc; font-size: 0.75em; line-height: 2;
+  .parenting-card {
+    background: var(--card); border-radius: var(--radius);
+    padding: 18px; box-shadow: var(--shadow-sm);
+    cursor: pointer; transition: transform 0.15s ease;
+    display: flex; align-items: center; gap: 14px;
   }
-  .footer a { color: var(--accent); text-decoration: none; }
+  .parenting-card:active { transform: scale(0.98); }
 
-  @media (max-width: 400px) {
-    .header { padding: 36px 18px 26px; }
-    .stats-bar { padding: 0 12px; }
-    .main { padding: 0 12px 60px; }
-    .post { padding: 18px 16px; }
+  .parenting-icon {
+    width: 46px; height: 46px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; flex-shrink: 0;
+    background: #FFF3ED;
+  }
+  .parenting-info { flex: 1; }
+  .parenting-info .ptitle { font-size: 15px; font-weight: 600; }
+  .parenting-info .pdesc { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
+  .parenting-tag {
+    font-size: 10px; color: var(--accent); background: var(--accent-light);
+    padding: 3px 8px; border-radius: 10px; flex-shrink: 0;
+  }
+
+  /* ── Full Check-in ── */
+  .checkin-full {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .checkin-row {
+    background: var(--card); border-radius: var(--radius-sm);
+    padding: 14px 16px; box-shadow: var(--shadow-sm);
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; transition: all 0.15s ease;
+    user-select: none;
+  }
+  .checkin-row:active { transform: scale(0.98); }
+  .checkin-row .circle {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 2px solid var(--border); flex-shrink: 0;
+    transition: all 0.3s ease;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .checkin-row.done .circle {
+    background: var(--primary); border-color: var(--primary);
+    color: #fff;
+  }
+  .checkin-row .cinfo { flex: 1; }
+  .checkin-row .cinfo .clabel { font-size: 15px; font-weight: 500; }
+  .checkin-row .cinfo .cdesc { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .checkin-row .cdate { font-size: 11px; color: var(--text-muted); }
+
+  /* ── Weekday Strip ── */
+  .weekday-strip {
+    display: flex; gap: 6px; margin-bottom: 14px;
+    justify-content: center;
+  }
+  .weekday-dot {
+    width: 32px; height: 32px; border-radius: 10px;
+    background: var(--card); box-shadow: var(--shadow-sm);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--text-muted);
+    transition: all 0.2s ease;
+  }
+  .weekday-dot.today { background: var(--primary-light); color: var(--primary); font-weight: 700; }
+  .weekday-dot.checked { background: #E8F0E9; color: var(--primary); }
+
+  /* ── Empty State ── */
+  .empty-state {
+    text-align: center; padding: 40px 20px; color: var(--text-muted);
+  }
+  .empty-state .emoji { font-size: 48px; display: block; margin-bottom: 12px; }
+  .empty-state .msg { font-size: 14px; }
+  .empty-state .hint { font-size: 12px; margin-top: 6px; }
+
+  /* ── Bottom Nav ── */
+  .nav {
+    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 480px;
+    background: var(--card); border-top: 1px solid var(--border);
+    display: flex; justify-content: space-around;
+    padding: 8px 0 calc(8px + var(--safe-bottom));
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.04);
+    z-index: 100;
+  }
+
+  .nav-item {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    cursor: pointer; padding: 4px 16px; border-radius: 12px;
+    transition: all 0.15s ease; -webkit-tap-highlight-color: transparent;
+    border: none; background: none; color: inherit; font: inherit;
+    outline: none;
+  }
+  .nav-item .nav-icon { font-size: 22px; line-height: 1; }
+  .nav-item .nav-label {
+    font-size: 10px; color: var(--text-muted);
+    transition: color 0.15s ease;
+  }
+  .nav-item.active .nav-label { color: var(--primary); font-weight: 600; }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed; top: 60px; left: 50%; transform: translateX(-50%);
+    background: #2D3436; color: #fff; font-size: 13px;
+    padding: 10px 20px; border-radius: 20px;
+    pointer-events: none; opacity: 0; transition: opacity 0.3s ease;
+    z-index: 200; white-space: nowrap;
+  }
+  .toast.show { opacity: 0.9; }
+
+  /* ── Modal ── */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.35);
+    z-index: 150; display: none; align-items: flex-end;
+    justify-content: center;
+  }
+  .modal-overlay.show { display: flex; }
+
+  .modal-sheet {
+    background: var(--card); border-radius: 20px 20px 0 0;
+    padding: 20px 20px calc(20px + var(--safe-bottom));
+    width: 100%; max-width: 480px;
+    animation: slideUp 0.3s ease;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  .modal-sheet h3 { font-size: 17px; margin-bottom: 16px; text-align: center; }
+  .modal-input {
+    width: 100%; border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm); padding: 12px 14px;
+    font-size: 15px; font-family: inherit; outline: none;
+    margin-bottom: 10px; background: var(--bg);
+  }
+  .modal-input:focus { border-color: var(--primary); }
+  .modal-input.title-input { font-size: 17px; font-weight: 600; }
+  .modal-textarea {
+    width: 100%; border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm); padding: 12px 14px;
+    font-size: 15px; font-family: inherit; outline: none;
+    margin-bottom: 14px; resize: vertical; min-height: 100px;
+    background: var(--bg);
+  }
+  .modal-textarea:focus { border-color: var(--primary); }
+
+  .btn-primary {
+    width: 100%; background: var(--primary); color: #fff;
+    border: none; border-radius: var(--radius-sm); padding: 13px;
+    font-size: 15px; font-weight: 600; cursor: pointer;
+    transition: opacity 0.15s ease;
+    font-family: inherit;
+  }
+  .btn-primary:active { opacity: 0.85; }
+
+  /* ── Responsive ── */
+  @media (min-width: 420px) {
+    body { max-width: 480px; }
   }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="avatar-wrap">🌱</div>
-  <h1>敏子的成长空间</h1>
-  <p class="subtitle">用阅读点亮生活 · 用记录见证成长</p>
-</div>
+<!-- Header -->
+<header class="header">
+  <div class="header-top">
+    <div class="avatar">🌱</div>
+    <div class="greeting">
+      <div class="hi" id="greetingHi">晚上好</div>
+      <div class="name">敏子</div>
+    </div>
+    <div class="date-badge" id="dateBadge"></div>
+  </div>
+  <div class="header-quote" id="dailyQuote"></div>
+</header>
 
-  <div class="stats-bar">
-  <div class="stat-box"><div class="num">7</div><div class="label">篇内容</div></div>
-  <div class="stat-box"><div class="num">3</div><div class="label">个分类</div></div>
-  <div class="stat-box"><div class="num">∞</div><div class="label">持续更新</div></div>
-</div>
+<!-- Main -->
+<main class="main">
 
-<div class="main">
+  <!-- 首页 -->
+  <div class="page active" id="page-home">
+    <div class="section-title"><span class="icon">📚</span> 我的模块</div>
+    <div class="module-cards">
+      <div class="module-card" onclick="switchTab('notes')">
+        <div class="module-icon notes">📝</div>
+        <div class="module-info">
+          <div class="title">学习笔记</div>
+          <div class="desc">认知觉醒 · 产品思考 · 阅读摘录</div>
+        </div>
+        <div class="module-arrow">›</div>
+      </div>
+      <div class="module-card" onclick="switchTab('parenting')">
+        <div class="module-icon parenting">💛</div>
+        <div class="module-info">
+          <div class="title">育儿指南</div>
+          <div class="desc">青春期沟通 · 情绪引导 · 亲子话题</div>
+        </div>
+        <div class="module-arrow">›</div>
+      </div>
+      <div class="module-card" onclick="switchTab('checkin')">
+        <div class="module-icon checkin">✅</div>
+        <div class="module-info">
+          <div class="title">日常打卡</div>
+          <div class="desc">阅读 · 运动 · 情绪日记 · 亲子互动</div>
+        </div>
+        <div class="module-arrow">›</div>
+      </div>
+    </div>
 
-  <!-- 筛选 -->
-  <div class="filter-bar">
-    <button class="filter-chip active" data-filter="all">全部</button>
-    <button class="filter-chip" data-filter="reading">📖 读书笔记</button>
-    <button class="filter-chip" data-filter="parenting">👨‍👩‍👧 育儿成长</button>
-    <button class="filter-chip" data-filter="story">🎭 绘本共读</button>
+    <div class="section-title"><span class="icon">⚡</span> 今日打卡</div>
+    <div class="quick-checkin" id="quickCheckin"></div>
+
+    <div class="progress-row" id="progressRow"></div>
+
+    <div class="section-title"><span class="icon">📖</span> 最近笔记</div>
+    <div class="notes-list" id="recentNotes" style="margin-bottom:20px;"></div>
   </div>
 
-  <!-- 时间线 -->
-  <div class="timeline">
-
-    <a class="post" data-cat="reading" href="认知觉醒_学习笔记.html">
-      <div class="icon">🧠</div>
-      <div class="date">2026年6月12日</div>
-      <span class="category cat-reading">读书笔记</span>
-      <h3>《认知觉醒》学习笔记</h3>
-      <p class="excerpt">周岭 著 · 10个核心概念全景拆解：三重脑、焦虑根源、元认知、专注力、学习力、行动力……开启自我改变的原动力。</p>
-      <span class="read-more">阅读全文 →</span>
-    </a>
-
-    <a class="post" data-cat="parenting" href="家庭的觉醒_学习笔记.html">
-      <div class="icon">🏠</div>
-      <div class="date">2026年6月12日</div>
-      <span class="category cat-parenting">读书笔记</span>
-      <h3>《家庭的觉醒》学习笔记</h3>
-      <p class="excerpt">沙法丽·萨巴瑞 著 · 8个核心概念深度解读：觉醒式教养、恐惧触发器、情绪反应模式、从控制到联结……做觉醒的父母，养出真实的孩子。</p>
-      <span class="read-more">阅读全文 →</span>
-    </a>
-
-    <a class="post" data-cat="parenting" href="青春期30讲_第5-6讲.html">
-      <div class="icon">🌿</div>
-      <div class="date">2026年6月12日</div>
-      <span class="category cat-parenting">家长课件</span>
-      <h3>青春期30讲 · 第5-6讲</h3>
-      <p class="excerpt">王金海 主讲 · "叛逆是独立的开始" + "发脾气是本能，控制脾气是本领" · 给青春期父母的实用教养指南。</p>
-      <span class="read-more">阅读全文 →</span>
-    </a>
-
-    <a class="post" data-cat="parenting" href="敏敏亲子沟通指南_哥哥篇_简洁版.html">
-      <div class="icon">👦</div>
-      <div class="date">2026年6月13日</div>
-      <span class="category cat-parenting">亲子沟通</span>
-      <h3>亲子沟通指南 · 哥哥篇（13岁）</h3>
-      <p class="excerpt">14天沟通计划 · 含王金海实践班应急小抄 · 句式对照：从"你怎么又这样"到"这次哪里卡住了" · 语音朗读版。</p>
-      <span class="read-more">阅读全文 →</span>
-    </a>
-
-    <a class="post" data-cat="parenting" href="敏敏亲子沟通指南_妹妹篇_简洁版.html">
-      <div class="icon">👧</div>
-      <div class="date">2026年6月13日</div>
-      <span class="category cat-parenting">亲子沟通</span>
-      <h3>亲子沟通指南 · 妹妹篇（6岁）</h3>
-      <p class="excerpt">14天亲密沟通计划 · 专为敏感细腻女孩设计 · 情绪小怪兽、勇气储蓄罐、优点放大镜 · 语音朗读版。</p>
-      <span class="read-more">阅读全文 →</span>
-    </a>
-
-    <a class="post" data-cat="parenting" href="日常主动链接孩子的话_敏敏专属.html">
-      <div class="icon">💬</div>
-      <div class="date">2026年6月13日</div>
-      <span class="category cat-parenting">亲子沟通</span>
-      <h3>日常主动链接孩子的话术手册</h3>
-      <p class="excerpt">10个场景 · 放学见面、吃饭时、玩游戏、睡前、情绪不好、吵架修复……随手就能说，不用等话题。含句式红绿对照。</p>
-      <span class="read-more">阅读全文 →</span>
-    </a>
-
-    <a class="post" data-cat="story" href="七仙女下凡_领读课件.html">
-      <div class="icon">🧚</div>
-      <div class="date">2026年6月12日</div>
-      <span class="category cat-story">戏曲绘本</span>
-      <h3>《七仙女下凡》领读指南</h3>
-      <p class="excerpt">中国中福会出版社 · 黄梅戏融合《天仙配》· 领读人：敏敏 · 适合6岁+亲子共读的交互式幻灯片。</p>
-      <span class="read-more">阅读全文 →</span>
-    </a>
-
+  <!-- 学习笔记页 -->
+  <div class="page" id="page-notes">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 12px;">
+      <div class="section-title" style="margin:0;">📝 学习笔记</div>
+      <button onclick="openNoteModal()" style="background:var(--primary);color:#fff;border:none;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;">+ 新建</button>
+    </div>
+    <div class="notes-list" id="allNotes"></div>
+    <div class="empty-state" id="notesEmpty">
+      <span class="emoji">📝</span>
+      <div class="msg">还没有笔记</div>
+      <div class="hint">点击右上角「+ 新建」开始记录</div>
+    </div>
   </div>
 
-  <!-- 互动引导 -->
-  <div class="cta-banner">
-    <h4>💬 想和敏敏交流？</h4>
-    <p>欢迎在公众号后台留言，或添加微信一起探讨<br>阅读、育儿、成长的话题～</p>
-    <span class="wechat-tag">📱 公众号：敏子的成长空间</span>
+  <!-- 育儿指南页 -->
+  <div class="page" id="page-parenting">
+    <div class="section-title">💛 育儿指南</div>
+    <div class="parenting-grid">
+      <div class="parenting-card" onclick="showMessage('哥哥沟通话题清单 — 增强自信、减少说教')">
+        <div class="parenting-icon">👦</div>
+        <div class="parenting-info">
+          <div class="ptitle">哥哥篇 · 自信沟通</div>
+          <div class="pdesc">每日话题清单，帮他重建信心</div>
+        </div>
+        <div class="parenting-tag">重点</div>
+      </div>
+      <div class="parenting-card" onclick="showMessage('妹妹情绪引导指南 — 敏感孩子如何接纳情绪')">
+        <div class="parenting-icon">👧</div>
+        <div class="parenting-info">
+          <div class="ptitle">妹妹篇 · 情绪引导</div>
+          <div class="pdesc">敏感孩子的温柔沟通策略</div>
+        </div>
+        <div class="parenting-tag">重点</div>
+      </div>
+      <div class="parenting-card" onclick="showMessage('从说教到倾听：亲子沟通核心方法')">
+        <div class="parenting-icon">💬</div>
+        <div class="parenting-info">
+          <div class="ptitle">沟通方法 · 反说教指南</div>
+          <div class="pdesc">实践班学到的沟通技巧</div>
+        </div>
+      </div>
+      <div class="parenting-card" onclick="showMessage('王金海智慧父母课程要点整理')">
+        <div class="parenting-icon">🏫</div>
+        <div class="parenting-info">
+          <div class="ptitle">王金海 · 课程笔记</div>
+          <div class="pdesc">智慧父母实践班精华</div>
+        </div>
+      </div>
+    </div>
   </div>
 
-</div>
+  <!-- 打卡清单页 -->
+  <div class="page" id="page-checkin">
+    <div class="section-title">✅ 今日打卡</div>
+    <div class="weekday-strip" id="weekdayStrip"></div>
+    <div class="checkin-full" id="checkinFull"></div>
+    <div class="section-title" style="margin-top:20px;">📊 打卡统计</div>
+    <div class="progress-row" id="checkinProgressRow"></div>
+  </div>
 
-<div class="footer">
-  <p>🌱 敏子的成长空间</p>
-  <p>每一篇笔记都是一颗种子，正在慢慢生根发芽</p>
-  <p style="margin-top:6px; font-size:0.9em;">本站由 <a href="https://github.com/minzi-space/minzi-growth">GitHub Pages</a> 驱动</p>
+</main>
+
+<!-- 底部导航 -->
+<nav class="nav">
+  <button class="nav-item active" onclick="switchTab('home')" data-tab="home">
+    <span class="nav-icon">🏠</span>
+    <span class="nav-label">首页</span>
+  </button>
+  <button class="nav-item" onclick="switchTab('notes')" data-tab="notes">
+    <span class="nav-icon">📝</span>
+    <span class="nav-label">笔记</span>
+  </button>
+  <button class="nav-item" onclick="switchTab('parenting')" data-tab="parenting">
+    <span class="nav-icon">💛</span>
+    <span class="nav-label">育儿</span>
+  </button>
+  <button class="nav-item" onclick="switchTab('checkin')" data-tab="checkin">
+    <span class="nav-icon">✅</span>
+    <span class="nav-label">打卡</span>
+  </button>
+</nav>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- 新建笔记弹窗 -->
+<div class="modal-overlay" id="noteModal">
+  <div class="modal-sheet">
+    <h3>新建笔记</h3>
+    <input class="modal-input title-input" id="noteTitleInput" placeholder="标题">
+    <textarea class="modal-textarea" id="noteContentInput" placeholder="写点什么..."></textarea>
+    <div style="display:flex;gap:10px;">
+      <button class="btn-primary" style="flex:2;" onclick="saveNote()">保存</button>
+      <button onclick="closeNoteModal()" style="flex:1;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:13px;font-size:15px;cursor:pointer;font-family:inherit;color:var(--text-secondary);">取消</button>
+    </div>
+  </div>
 </div>
 
 <script>
-// 分类筛选
-document.querySelectorAll('.filter-chip').forEach(chip => {
-  chip.addEventListener('click', () => {
-    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-    chip.classList.add('active');
-    const filter = chip.dataset.filter;
-    document.querySelectorAll('.post').forEach(post => {
-      post.style.display = (filter === 'all' || post.dataset.cat === filter) ? '' : 'none';
-    });
+// ─── 数据层 ───
+const STORAGE_NOTES = 'growth_notes';
+const STORAGE_CHECKIN = 'growth_checkin';
+
+function getToday() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function loadNotes() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_NOTES) || '[]'); }
+  catch(e) { return []; }
+}
+function saveNotes(notes) {
+  localStorage.setItem(STORAGE_NOTES, JSON.stringify(notes));
+}
+
+function loadCheckin() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_CHECKIN) || '{}'); }
+  catch(e) { return {}; }
+}
+function saveCheckin(data) {
+  localStorage.setItem(STORAGE_CHECKIN, JSON.stringify(data));
+}
+
+// ─── 打卡项定义 ───
+const CHECKIN_ITEMS = [
+  { id: 'reading', emoji: '📖', label: '阅读30分钟', desc: '每天至少阅读半小时' },
+  { id: 'exercise', emoji: '🏃', label: '运动', desc: '散步/拉伸/瑜伽都算' },
+  { id: 'mood', emoji: '🧠', label: '情绪日记', desc: '记录今天的心情和反思' },
+  { id: 'parent_kid', emoji: '💛', label: '亲子互动', desc: '与孩子的有质量对话' },
+  { id: 'learning', emoji: '🎯', label: '学习成长', desc: '课程/播客/阅读笔记' },
+  { id: 'early_sleep', emoji: '🌙', label: '早睡', desc: '23点前放下手机' },
+];
+
+// ─── 名言库 ───
+const quotes = [
+  '成长不是一蹴而就，是日复一日的坚持 🌱',
+  '教育不是灌输，而是点燃火焰 ✨',
+  '先接纳情绪，再解决问题 💛',
+  '真正的成长，是认知的觉醒 🧠',
+  '每天进步1%，一年后你会是现在的37倍 📈',
+  '最好的教育，是父母成为更好的自己 🌟',
+  '行动是治愈焦虑的良药 ⚡',
+  '温柔而坚定，是最好的陪伴力量 🤗',
+];
+
+// ─── 种子数据 ───
+function seedData() {
+  const notes = loadNotes();
+  if (notes.length === 0) {
+    const seeds = [
+      { title: '认知觉醒 · 元认知', content: '元认知是最高级别的认知，它能对自身的思考过程进行认知和理解。反思能力是人类独有的，也是成长的关键。每天花10分钟反思今天做了什么、有什么收获、哪里可以改进。', date: '2026-06-10T08:00:00Z' },
+      { title: '亲子沟通 · 先接纳再引导', content: '当孩子有情绪时，不要急着说教或解决问题。先接纳他的感受——「妈妈看到你不开心，愿意跟我说说吗？」接纳情绪不等于认同行为，但只有情绪被看见，理智才能上线。', date: '2026-06-12T20:30:00Z' },
+      { title: '产品思考 · 用户路径优化', content: '好的产品设计应该让用户感觉不到设计的存在。减少每一步的认知负担，用渐进式引导替代一次性教学。关键指标不是功能数量，而是任务完成率。', date: '2026-06-14T14:00:00Z' },
+    ];
+    saveNotes(seeds);
+  }
+}
+
+// ─── 初始化 ───
+function init() {
+  seedData();
+  // 日期与问候
+  const now = new Date();
+  const hours = now.getHours();
+  let hi = '晚上好';
+  if (hours < 6) hi = '夜深了';
+  else if (hours < 9) hi = '早上好';
+  else if (hours < 12) hi = '上午好';
+  else if (hours < 14) hi = '中午好';
+  else if (hours < 18) hi = '下午好';
+  document.getElementById('greetingHi').textContent = hi;
+  
+  const days = ['日','一','二','三','四','五','六'];
+  const m = now.getMonth()+1, d = now.getDate(), day = days[now.getDay()];
+  document.getElementById('dateBadge').textContent = `${m}月${d}日 周${day}`;
+
+  // 随机名言
+  const idx = now.getDate() % quotes.length;
+  document.getElementById('dailyQuote').textContent = quotes[idx];
+
+  // 渲染各模块
+  renderWeekdayStrip();
+  renderQuickCheckin();
+  renderCheckinFull();
+  renderNotes();
+  renderProgress();
+  renderCheckinProgress();
+}
+
+// ─── 周进度条 ───
+function renderWeekdayStrip() {
+  const today = new Date();
+  const todayIdx = today.getDay(); // 0=日
+  const days = ['日','一','二','三','四','五','六'];
+  const checkinData = loadCheckin();
+  const todayKey = getToday();
+  
+  let html = '';
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - todayIdx + i);
+    const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    let cls = '';
+    if (i === todayIdx) cls = 'today';
+    else if (checkinData[key] && Object.values(checkinData[key]).some(Boolean)) cls = 'checked';
+    html += `<div class="weekday-dot ${cls}">${days[i]}</div>`;
+  }
+  document.getElementById('weekdayStrip').innerHTML = html;
+}
+
+// ─── 快速打卡 ───
+function renderQuickCheckin() {
+  const todayKey = getToday();
+  const checkinData = loadCheckin();
+  const todayData = checkinData[todayKey] || {};
+  
+  let html = '';
+  CHECKIN_ITEMS.slice(0, 3).forEach(item => {
+    const done = !!todayData[item.id];
+    html += `<div class="checkin-item ${done ? 'done' : ''}" onclick="toggleCheckin('${item.id}')">
+      <span class="emoji">${item.emoji}</span>
+      <span class="label">${done ? '✓ ' + item.label : item.label}</span>
+    </div>`;
   });
+  document.getElementById('quickCheckin').innerHTML = html;
+  
+  // 进度条
+  const total = CHECKIN_ITEMS.length;
+  const doneCount = Object.values(todayData).filter(Boolean).length;
+  const pct = total > 0 ? Math.round(doneCount / total * 100) : 0;
+  
+  document.getElementById('progressRow').innerHTML = `
+    <svg class="progress-ring" width="52" height="52">
+      <circle cx="26" cy="26" r="22" fill="none" stroke="#F0EDE6" stroke-width="5"/>
+      <circle cx="26" cy="26" r="22" fill="none" stroke="#6B8F71" stroke-width="5"
+        stroke-dasharray="${pct / 100 * 138}" stroke-dashoffset="0"
+        stroke-linecap="round" transform="rotate(-90 26 26)"/>
+    </svg>
+    <div class="progress-info">
+      <div class="pct">${pct}%</div>
+      <div class="status">今日完成 ${doneCount}/${total} 项</div>
+    </div>
+  `;
+}
+
+// ─── 完整打卡列表 ───
+function renderCheckinFull() {
+  const todayKey = getToday();
+  const checkinData = loadCheckin();
+  const todayData = checkinData[todayKey] || {};
+
+  let html = '';
+  CHECKIN_ITEMS.forEach(item => {
+    const done = !!todayData[item.id];
+    html += `<div class="checkin-row ${done ? 'done' : ''}" onclick="toggleCheckin('${item.id}')">
+      <div class="circle">${done ? '✓' : ''}</div>
+      <div class="cinfo">
+        <div class="clabel">${item.emoji} ${item.label}</div>
+        <div class="cdesc">${item.desc}</div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('checkinFull').innerHTML = html;
+}
+
+function renderCheckinProgress() {
+  const todayKey = getToday();
+  const checkinData = loadCheckin();
+  const todayData = checkinData[todayKey] || {};
+  const total = CHECKIN_ITEMS.length;
+  const doneCount = Object.values(todayData).filter(Boolean).length;
+  const pct = total > 0 ? Math.round(doneCount / total * 100) : 0;
+  
+  document.getElementById('checkinProgressRow').innerHTML = `
+    <svg class="progress-ring" width="52" height="52">
+      <circle cx="26" cy="26" r="22" fill="none" stroke="#F0EDE6" stroke-width="5"/>
+      <circle cx="26" cy="26" r="22" fill="none" stroke="#6B8F71" stroke-width="5"
+        stroke-dasharray="${pct / 100 * 138}" stroke-dashoffset="0"
+        stroke-linecap="round" transform="rotate(-90 26 26)"/>
+    </svg>
+    <div class="progress-info">
+      <div class="pct">${pct}%</div>
+      <div class="status">今日完成 ${doneCount}/${total} 项</div>
+    </div>
+  `;
+}
+
+// ─── 切换打卡 ───
+function toggleCheckin(itemId) {
+  const todayKey = getToday();
+  const checkinData = loadCheckin();
+  if (!checkinData[todayKey]) checkinData[todayKey] = {};
+  
+  checkinData[todayKey][itemId] = !checkinData[todayKey][itemId];
+  saveCheckin(checkinData);
+  
+  renderQuickCheckin();
+  renderCheckinFull();
+  renderProgress();
+  renderCheckinProgress();
+  renderWeekdayStrip();
+  
+  const item = CHECKIN_ITEMS.find(i => i.id === itemId);
+  const done = checkinData[todayKey][itemId];
+  showToast(done ? `✓ 完成 ${item.label}` : `已取消 ${item.label}`);
+}
+
+// ─── 笔记相关 ───
+function renderNotes() {
+  const notes = loadNotes();
+  const containerRecent = document.getElementById('recentNotes');
+  const containerAll = document.getElementById('allNotes');
+  const emptyEl = document.getElementById('notesEmpty');
+
+  if (notes.length === 0) {
+    containerRecent.innerHTML = '';
+    containerAll.innerHTML = '';
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+
+  // 近期笔记（取最近3条）
+  const recent = notes.slice(-3).reverse();
+  let recentHtml = '';
+  recent.forEach(n => {
+    const date = n.date ? n.date.slice(5) : '';
+    recentHtml += `<div class="note-card" onclick="switchTab('notes')">
+      <div class="note-emoji">📄</div>
+      <div class="note-content">
+        <div class="ntitle">${escHtml(n.title || '无标题')}</div>
+        <div class="npreview">${escHtml(n.content || '')}</div>
+      </div>
+      <div class="note-date">${date}</div>
+    </div>`;
+  });
+  containerRecent.innerHTML = recentHtml || '<div class="empty-state"><span class="msg">还没有笔记</span></div>';
+
+  // 全部笔记
+  const all = notes.slice().reverse();
+  let allHtml = '';
+  all.forEach(n => {
+    const date = n.date || '';
+    allHtml += `<div class="note-card">
+      <div class="note-emoji">📄</div>
+      <div class="note-content">
+        <div class="ntitle">${escHtml(n.title || '无标题')}</div>
+        <div class="npreview">${escHtml(n.content || '')}</div>
+      </div>
+      <div class="note-date">${date.slice(0, 10)}</div>
+    </div>`;
+  });
+  containerAll.innerHTML = allHtml;
+}
+
+function openNoteModal() {
+  document.getElementById('noteModal').classList.add('show');
+  document.getElementById('noteTitleInput').focus();
+}
+
+function closeNoteModal() {
+  document.getElementById('noteModal').classList.remove('show');
+  document.getElementById('noteTitleInput').value = '';
+  document.getElementById('noteContentInput').value = '';
+}
+
+function saveNote() {
+  const title = document.getElementById('noteTitleInput').value.trim();
+  const content = document.getElementById('noteContentInput').value.trim();
+  if (!title && !content) {
+    showToast('请至少填写标题或内容');
+    return;
+  }
+  
+  const notes = loadNotes();
+  notes.push({
+    title: title || '无标题',
+    content: content,
+    date: new Date().toISOString(),
+  });
+  saveNotes(notes);
+  closeNoteModal();
+  renderNotes();
+  showToast('笔记已保存 ✓');
+}
+
+function escHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// ─── 进度区 ───
+function renderProgress() {
+  // 已在 renderQuickCheckin 中渲染
+}
+
+// ─── Tab 切换 ───
+function switchTab(tabName) {
+  // 隐藏所有页面
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  // 显示目标页面
+  const page = document.getElementById('page-' + tabName);
+  if (page) page.classList.add('active');
+
+  // 更新导航
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const navItem = document.querySelector(`.nav-item[data-tab="${tabName}"]`);
+  if (navItem) navItem.classList.add('active');
+
+  // 刷新（打卡数据可能变化）
+  if (tabName === 'checkin') {
+    renderWeekdayStrip();
+    renderCheckinFull();
+    renderCheckinProgress();
+  }
+  if (tabName === 'notes') renderNotes();
+  if (tabName === 'home') {
+    renderQuickCheckin();
+    renderNotes();
+  }
+
+  document.querySelector('.main').scrollTop = 0;
+}
+
+// ─── Toast ───
+let toastTimer;
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+}
+
+function showMessage(msg) {
+  showToast(msg);
+}
+
+// ─── 弹窗点击遮罩关闭 ───
+document.getElementById('noteModal').addEventListener('click', function(e) {
+  if (e.target === this) closeNoteModal();
+});
+
+// ─── 启动 ───
+init();
+
+// ─── Android 返回键处理 ───
+let navHistory = ['home'];
+window.addEventListener('popstate', function(e) {
+  if (e.state && e.state.tab) {
+    switchTab(e.state.tab);
+  }
+});
+function pushNav(tab) {
+  if (navHistory[navHistory.length - 1] !== tab) {
+    navHistory.push(tab);
+  }
+  history.pushState({ tab: tab }, '', '#' + tab);
+}
+
+// 重写 switchTab 以支持历史记录
+const _originalSwitchTab = switchTab;
+switchTab = function(tabName) {
+  _originalSwitchTab(tabName);
+  pushNav(tabName);
+};
+
+// 监听模态弹窗 - 返回键关闭弹窗
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' || e.key === 'Backspace') {
+    const modal = document.getElementById('noteModal');
+    if (modal.classList.contains('show')) {
+      e.preventDefault();
+      closeNoteModal();
+    }
+  }
 });
 </script>
-
 </body>
 </html>
