@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<noscript>
+  <div style="position:fixed;top:0;left:0;width:100%;background:#D6336C;color:white;padding:12px 16px;text-align:center;z-index:99999;font-size:14px;line-height:1.6;">
+    ⚠️ <b>请用浏览器打开此文件</b><br>
+    手机 WPS 不支持互动功能，请使用 <b>Chrome / Safari / Edge</b> 浏览器打开此 HTML 文件，以获得完整翻页体验。
+  </div>
+</noscript>
+<title>《七仙女下凡》绘本领读课件</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #E84A8A;
+  --primary-dark: #D6336C;
+  --gold: #D4A843;
+  --jade: #2E8B57;
+  --sky: #4A90D9;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Noto Sans SC', sans-serif; background: #1a1a2e; }
+
+.slide-container { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+.slide { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease; }
+.slide.active { display: flex; opacity: 1; z-index: 1; }
+
+/* ========== 首页（左右结构，内容居中） ========== */
+.slide.title-page {
+  background: linear-gradient(135deg, #1a0a0a 0%, #2C1810 40%, #D6336C 100%);
+  flex-direction: row; align-items: center; justify-content: center; gap: 80px;
+  padding: 40px 80px; position: relative; overflow: hidden;
+}
+.slide.title-page::before {
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(212,168,67,0.08) 0%, transparent 50%),
+             radial-gradient(circle at 70% 50%, rgba(196,30,36,0.05) 0%, transparent 50%);
+  animation: bgFloat 20s ease-in-out infinite;
+}
+@keyframes bgFloat { 0%,100%{ transform: translate(0,0) rotate(0deg); } 50%{ transform: translate(-20px,-20px) rotate(1deg); } }
+
+.title-left { flex: 0 0 auto; z-index: 2; display: flex; align-items: center; justify-content: center; }
+.title-cover-wrapper {
+  width: 480px; height: 480px; max-width: 40vw; max-height: 65vh;
+  display: flex; align-items: center; justify-content: center;
+  border: 4px solid var(--gold); border-radius: 16px;
+  box-shadow: 0 0 50px rgba(212,168,67,0.5), 0 8px 32px rgba(0,0,0,0.5);
+  overflow: hidden; background: rgba(0,0,0,0.15);
+}
+.title-cover-img {
+  max-width: 100%; max-height: 100%; width: auto; height: auto;
+  transform: rotate(-90deg); transform-origin: center center;
+  transition: transform 0.6s ease;
+}
+.title-cover-img:hover { transform: rotate(-90deg) scale(1.05); }
+
+.title-right {
+  flex: 0 0 auto; z-index: 2; display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center; gap: 22px;
+}
+.title-right h1 {
+  font-family: 'Noto Serif SC', serif; font-size: 4.2rem; font-weight: 700;
+  color: #FFD700; text-shadow: 0 0 30px rgba(255,215,0,0.6), 2px 2px 8px rgba(0,0,0,0.8);
+  letter-spacing: 0.15em; line-height: 1.2;
+}
+.title-right .subtitle {
+  font-size: 1.6rem; color: var(--gold); opacity: 0.95;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.8); letter-spacing: 0.1em;
+}
+.title-right .book-info { display: flex; flex-direction: column; gap: 10px; }
+.title-right .book-info span {
+  font-size: 1.1rem; color: rgba(255,255,255,0.85); padding: 7px 18px;
+  background: rgba(255,255,255,0.08); border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.title-right .leader-info {
+  margin-top: 18px; font-size: 1.3rem; color: #FFD700;
+  font-weight: 700; letter-spacing: 0.12em;
+  padding: 10px 28px;
+  background: linear-gradient(135deg, rgba(255,215,0,0.18), rgba(255,165,0,0.13));
+  border: 1px solid rgba(255,215,0,0.35);
+  border-radius: 25px;
+  text-shadow: 0 1px 8px rgba(255,215,0,0.4);
+  animation: fadeIn 0.8s ease-out both;
+  animation-delay: 0.5s;
+}
+
+/* ========== 开场页 ========== */
+.slide.intro-page {
+  background: linear-gradient(135deg, #0a0a2e 0%, #1a1a3e 50%, #2a1a3e 100%);
+  flex-direction: column; align-items: center; justify-content: center;
+  padding: 30px; position: relative; overflow: hidden;
+}
+.intro-bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background-size: cover; background-position: center; filter: brightness(0.45); z-index: 0;
+}
+.intro-card {
+  position: relative; z-index: 2; max-width: 750px; width: 95%;
+  background: rgba(255,255,255,0.12); backdrop-filter: blur(12px);
+  border-radius: 20px; padding: 36px 44px; text-align: center;
+  border: 1px solid rgba(255,255,255,0.2); animation: slideUp 0.8s ease-out;
+}
+@keyframes slideUp { from{ transform: translateY(40px); opacity: 0; } to{ transform: translateY(0); opacity: 1; } }
+.intro-card h2 { font-family: 'Noto Serif SC', serif; font-size: 2.2rem; color: #FFD700; margin-bottom: 20px; }
+.intro-card p { font-size: 1.35rem; color: rgba(255,255,255,0.92); line-height: 2; text-align: left; }
+.intro-card .highlight { color: #FFD700; font-weight: 700; }
+
+/* ========== 故事页 ========== */
+.slide.story-page {
+  flex-direction: column; align-items: center; justify-content: center;
+  padding: 0; position: relative; overflow: hidden;
+}
+.story-bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background-size: cover; background-position: center; filter: brightness(0.68); z-index: 0;
+}
+.view-original-btn {
+  position: absolute; top: 18px; right: 18px; z-index: 10;
+  background: rgba(212,168,67,0.9); color: #1a0a0a; border: none;
+  padding: 10px 22px; border-radius: 25px; font-size: 1.05rem; font-weight: 700;
+  cursor: pointer; transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(212,168,67,0.4);
+  display: flex; align-items: center; gap: 8px;
+}
+.view-original-btn:hover { background: #FFD700; transform: scale(1.06); }
+.view-original-btn::before { content: '📖'; font-size: 1.2rem; }
+
+/* 模态框 */
+.modal-overlay {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.92); z-index: 1000;
+  align-items: center; justify-content: center; animation: fadeIn 0.3s ease;
+}
+.modal-overlay.show { display: flex; }
+@keyframes fadeIn { from{ opacity: 0; } to{ opacity: 1; } }
+.modal-overlay img {
+  max-width: 92%; max-height: 92%; object-fit: contain;
+  border-radius: 8px; box-shadow: 0 0 60px rgba(255,255,255,0.15);
+  animation: zoomIn 0.3s ease;
+  transition: transform 0.3s ease;
+}
+@keyframes zoomIn { from{ transform: scale(0.85); opacity: 0; } to{ transform: scale(1); opacity: 1; } }
+.modal-close {
+  position: fixed; top: 24px; right: 30px; z-index: 1001;
+  background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.5);
+  color: white; font-size: 2rem; width: 50px; height: 50px;
+  border-radius: 50%; cursor: pointer; transition: all 0.3s ease;
+  display: flex; align-items: center; justify-content: center;
+}
+.modal-close:hover { background: rgba(255,255,255,0.3); transform: scale(1.1); }
+.modal-nav {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.3);
+  color: #fff; font-size: 2.8rem; width: 54px; height: 54px;
+  border-radius: 50%; cursor: pointer; z-index: 1002;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s ease; user-select: none;
+}
+.modal-nav:hover { background: rgba(255,255,255,0.28); transform: translateY(-50%) scale(1.12); }
+.modal-prev { left: 24px; }
+.modal-next { right: 24px; }
+.modal-page-info {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,0.55); color: rgba(255,255,255,0.75);
+  padding: 6px 22px; border-radius: 20px; font-size: 1rem;
+  z-index: 1002; pointer-events: none; letter-spacing: 0.05em;
+}
+
+/* 故事页标题 */
+.story-title-bar {
+  position: absolute; top: 0; left: 0; width: 100%; z-index: 5;
+  text-align: center; padding: 22px 40px 16px 40px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
+}
+.story-title-bar h2 {
+  font-family: 'Noto Serif SC', serif; font-size: 2rem; color: #FFD700;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.8); letter-spacing: 0.08em;
+}
+.story-title-bar .chapter-label {
+  font-size: 1rem; color: var(--gold); opacity: 0.85; margin-top: 4px;
+}
+
+.story-overlay {
+  position: relative; z-index: 2; width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  padding: 24px 40px 80px 40px;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+}
+.story-guide-cards { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 880px; }
+.guide-card {
+  padding: 16px 28px; border-radius: 14px; backdrop-filter: blur(10px);
+  animation: slideUp2 0.6s ease-out both;
+}
+.guide-card:nth-child(1) { animation-delay: 0.1s; }
+.guide-card:nth-child(2) { animation-delay: 0.25s; }
+.guide-card:nth-child(3) { animation-delay: 0.4s; }
+@keyframes slideUp2 { from{ transform: translateY(25px); opacity: 0; } to{ transform: translateY(0); opacity: 1; } }
+.guide-card.read { background: rgba(212,168,67,0.25); border-left: 5px solid var(--gold); }
+.guide-card.think { background: rgba(74,144,217,0.25); border-left: 5px solid var(--sky); }
+.guide-card.know { background: rgba(46,139,87,0.25); border-left: 5px solid var(--jade); }
+.guide-card.tip { background: rgba(196,30,36,0.25); border-left: 5px solid var(--primary); }
+.guide-card.interact { background: rgba(138,43,226,0.25); border-left: 5px solid #8A2BE2; }
+.guide-card h3 { font-size: 1.15rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.guide-card.read h3 { color: var(--gold); }
+.guide-card.think h3 { color: var(--sky); }
+.guide-card.know h3 { color: var(--jade); }
+.guide-card.tip h3 { color: var(--primary); }
+.guide-card.interact h3 { color: #BE8AED; }
+.guide-card p { font-size: 1.25rem; color: rgba(255,255,255,0.95); line-height: 1.7; }
+.guide-card.read .highlight {
+  color: #FFD700;
+  font-weight: 700;
+  background: rgba(255,215,0,0.18);
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(255,215,0,0.2);
+}
+
+.story-page-num {
+  position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,0.55); color: rgba(255,255,255,0.7);
+  padding: 5px 18px; border-radius: 20px; font-size: 0.95rem; z-index: 5;
+}
+
+/* ========== 黄梅戏科普页（4合一） ========== */
+.slide.know-page {
+  background: linear-gradient(135deg, #1a0a0a 0%, #2C1810 100%);
+  flex-direction: row; align-items: center; justify-content: center;
+  padding: 24px 40px; gap: 20px;
+  overflow-y: auto; flex-wrap: wrap;
+}
+
+.know-card {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px; padding: 24px 28px; max-width: 480px; width: 100%; flex: 1 1 400px;
+  animation: fadeInUp 0.6s ease-out both;
+}
+@keyframes fadeInUp { from{ transform: translateY(30px); opacity: 0; } to{ transform: translateY(0); opacity: 1; } }
+.know-card h2 { font-family: 'Noto Serif SC', serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 10px; }
+.know-card p { font-size: 1.05rem; color: rgba(255,255,255,0.88); line-height: 1.9; }
+.know-card .icon { font-size: 2rem; margin-bottom: 8px; }
+.know-page .know-card:nth-child(1) { animation-delay: 0.05s; }
+.know-page .know-card:nth-child(2) { animation-delay: 0.15s; }
+.know-page .know-card:nth-child(3) { animation-delay: 0.25s; }
+.know-page .know-card:nth-child(4) { animation-delay: 0.35s; }
+
+/* ========== 讨论页 ========== */
+.slide.discuss-page {
+  background: linear-gradient(135deg, #0a1a2e 0%, #1a2a4e 100%);
+  flex-direction: column; align-items: center;
+  padding: 32px 40px 80px 40px; gap: 16px;
+  overflow-y: auto;
+}
+.slide.discuss-page::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(30,144,255,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.discuss-card {
+  background: rgba(255,255,255,0.13);
+  border-radius: 16px; padding: 18px 24px 18px 62px;
+  max-width: 780px; width: 100%;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.08);
+  animation: fadeInUp 0.5s ease-out both;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.discuss-card:hover {
+  transform: translateX(6px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+.discuss-card::before {
+  content: attr(data-num);
+  position: absolute;
+  left: 16px; top: 50%; transform: translateY(-50%);
+  width: 34px; height: 34px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1rem; color: #fff;
+  background: linear-gradient(135deg, var(--sky), #1E90FF);
+  flex-shrink: 0;
+}
+.discuss-card:nth-child(1) { background: rgba(30,144,255,0.13); border-left: 5px solid var(--sky); }
+.discuss-card:nth-child(2) { background: rgba(255,140,0,0.13);  border-left: 5px solid #FF8C00; }
+.discuss-card:nth-child(3) { background: rgba(147,112,219,0.13); border-left: 5px solid #9370DB; }
+.discuss-card:nth-child(4) { background: rgba(255,215,0,0.16); border-left: 5px solid #FFD700; }
+.discuss-card:nth-child(1) { animation-delay: 0.1s; }
+.discuss-card:nth-child(2) { animation-delay: 0.2s; }
+.discuss-card:nth-child(3) { animation-delay: 0.3s; }
+.discuss-card:nth-child(4) {   animation-delay: 0.4s; }
+.discuss-card[data-num="1"] { background: rgba(30,144,255,0.20); border-left: 5px solid var(--sky); animation-delay: 0.1s; }
+.discuss-card[data-num="2"] { background: rgba(255,140,0,0.20); border-left: 5px solid #FF8C00; animation-delay: 0.2s; }
+.discuss-card[data-num="3"] { background: rgba(147,112,219,0.20); border-left: 5px solid #9370DB; animation-delay: 0.3s; }
+.discuss-card[data-num="4"] { background: rgba(255,215,0,0.25); border-left: 5px solid #FFD700; animation-delay: 0.4s; }
+.discuss-card[data-num="1"]::before { background: linear-gradient(135deg, var(--sky), #1E90FF); }
+.discuss-card[data-num="2"]::before { background: linear-gradient(135deg, #FF8C00, #FF6347); }
+.discuss-card[data-num="3"]::before { background: linear-gradient(135deg, #9370DB, #6A5ACD); }
+.discuss-card[data-num="4"]::before { background: linear-gradient(135deg, #FFD700, #FFA500); }
+.discuss-card[data-num="1"] h3 { color: var(--sky); }
+.discuss-card[data-num="2"] h3 { color: #FFB347; }
+.discuss-card[data-num="3"] h3 { color: #C39BD3; }
+.discuss-card[data-num="4"] h3 { color: #FFD700; }
+.discuss-card p { font-size: 1.1rem; color: rgba(255,255,255,0.88); line-height: 1.75; }
+
+/* ========== 活动页 ========== */
+.slide.activity-page {
+  background: linear-gradient(135deg, #1a2a1a 0%, #2a3a2a 100%);
+  flex-direction: column; align-items: center; justify-content: center;
+  padding: 40px; gap: 22px;
+}
+.activity-card {
+  background: rgba(255,255,255,0.07); border-left: 5px solid var(--jade);
+  border-radius: 14px; padding: 20px 30px; max-width: 800px; width: 100%;
+  animation: fadeInUp 0.5s ease-out both;
+}
+.activity-card:nth-child(1) { animation-delay: 0.1s; }
+.activity-card:nth-child(2) { animation-delay: 0.2s; }
+.activity-card:nth-child(3) { animation-delay: 0.3s; }
+.activity-card h3 { font-size: 1.2rem; color: var(--jade); margin-bottom: 8px; }
+.activity-card p { font-size: 1.1rem; color: rgba(255,255,255,0.85); line-height: 1.8; }
+
+/* ========== 结束页 ========== */
+.slide.end-page {
+  background: linear-gradient(135deg, #1a0a0a 0%, #2C1810 50%, #4a1a3a 100%);
+  flex-direction: column; align-items: center; justify-content: center;
+  padding: 40px; gap: 24px; text-align: center;
+}
+.end-page h2 { font-family: 'Noto Serif SC', serif; font-size: 2.8rem; color: #FFD700; }
+.end-page p { font-size: 1.35rem; color: rgba(255,255,255,0.88); max-width: 700px; line-height: 2; }
+
+/* ========== 破冰游戏页 ========== */
+.game-page {
+  background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #1a0a2e 100%);
+  display: flex; flex-direction: column;
+  padding: 24px 32px 80px 32px;
+  gap: 12px;
+}
+.game-title-bar {
+  text-align: center; padding: 12px 0;
+}
+.game-title-bar h2 {
+  font-size: 2.2rem; color: #FFD700;
+  text-shadow: 0 0 20px rgba(255,215,0,0.4);
+  margin-bottom: 6px;
+}
+.game-subtitle {
+  font-size: 1rem; color: rgba(255,255,255,0.6);
+  letter-spacing: 0.1em;
+}
+.game-content {
+  flex: 1; display: flex; flex-direction: column;
+  gap: 10px; overflow-y: auto;
+  padding-right: 6px;
+}
+.game-intro-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 12px 16px;
+  backdrop-filter: blur(8px);
+}
+.game-intro-card p {
+  font-size: 1.1rem; color: rgba(255,255,255,0.92);
+  line-height: 1.6; text-align: center;
+}
+.color-cards {
+  display: flex; flex-wrap: wrap;
+  justify-content: center; gap: 8px;
+  margin-top: 8px;
+}
+.color-card {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 700; color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  border: 2px solid rgba(255,255,255,0.3);
+}
+.game-step {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 10px 14px;
+  animation: fadeSlideUp 0.6s ease both;
+}
+.game-step-num {
+  width: 28px; height: 28px; min-width: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FFD700, #FF8C00);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; font-weight: 700; color: #1a0a2e;
+  margin-top: 2px;
+}
+.game-step-text { flex: 1; }
+.game-step-text h4 {
+  font-size: 1.1rem; color: #FFD700;
+  margin-bottom: 4px;
+}
+.game-step-text p {
+  font-size: 1rem; color: rgba(255,255,255,0.85);
+  line-height: 1.5;
+}
+.game-actions {
+  display: flex; justify-content: center;
+  padding: 8px 0;
+}
+.game-action-btn {
+  background: linear-gradient(135deg, #FFD700, #FF8C00);
+  color: #1a0a2e; font-size: 1.2rem; font-weight: 700;
+  padding: 12px 36px; border: none; border-radius: 30px;
+  cursor: pointer; letter-spacing: 0.08em;
+  box-shadow: 0 4px 20px rgba(255,215,0,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.game-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(255,215,0,0.5);
+}
+
+/* ========== 音乐播放器 ========== */
+.music-player {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50px;
+  padding: 12px 28px;
+  margin: 8px 0;
+}
+.music-btn {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, #FF69B4, #FF8C00);
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; color: white;
+  box-shadow: 0 4px 16px rgba(255,105,180,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.music-btn:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(255,105,180,0.6); }
+.music-btn.playing { background: linear-gradient(135deg, #FF4444, #FF6B6B); }
+.music-info { color: rgba(255,255,255,0.8); font-size: 1rem; }
+.music-info .song-name { color: #FFD700; font-weight: 600; }
+
+/* ========== 底部导航 ========== */
+.nav-bar {
+  position: fixed; bottom: 0; left: 0; width: 100%; height: 56px;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  z-index: 100; border-top: 1px solid rgba(255,255,255,0.08); padding: 0 20px;
+}
+.nav-dots { display: flex; gap: 7px; }
+.nav-dot {
+  width: 11px; height: 11px; border-radius: 50%; border: none;
+  background: rgba(255,255,255,0.25); cursor: pointer; transition: all 0.3s ease;
+}
+.nav-dot.active { background: var(--gold); transform: scale(1.3); box-shadow: 0 0 10px rgba(212,168,67,0.6); }
+.nav-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  color: white; padding: 8px 16px; border-radius: 20px; cursor: pointer;
+  font-size: 0.95rem; transition: all 0.3s ease;
+}
+.nav-btn:hover { background: rgba(255,255,255,0.2); }
+.nav-prev { left: 20px; }
+.nav-next { right: 20px; }
+
+/* ========== 视频页 ========== */
+.slide.video-page {
+  background: linear-gradient(135deg, #1a0a1a 0%, #2C1050 100%);
+  flex-direction: column; align-items: center; justify-content: center;
+  padding: 24px 40px 80px 40px; gap: 16px;
+}
+.slide.video-page .story-title-bar {
+  position: relative; background: none; padding: 0; margin-bottom: 8px;
+}
+.slide.video-page .story-title-bar h2 {
+  color: #FF69B4; font-size: 2rem;
+}
+.slide.video-page video {
+  max-width: 90%; max-height: 65vh;
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(255,105,180,0.25);
+}
+.slide.video-page .video-tip {
+  color: rgba(255,255,255,0.6); font-size: 0.95rem;
+  text-align: center; padding-bottom: 70px;
+}
+
+/* ========== 响应式 ========== */
+@media (max-width: 900px) {
+  .slide.title-page { flex-direction: column; padding: 30px 20px; gap: 24px; }
+  .title-cover-wrapper { width: 260px; height: 260px; max-width: 70vw; max-height: 35vh; }
+  .title-right { align-items: center; }
+  .title-right h1 { font-size: 2.6rem; }
+  .title-right .subtitle { font-size: 1.2rem; }
+  .title-right .book-info span { font-size: 0.9rem; }
+  .story-title-bar h2 { font-size: 1.5rem; }
+  .intro-card { padding: 24px 20px; }
+  .intro-card h2 { font-size: 1.6rem; }
+  .intro-card p { font-size: 1.1rem; }
+  .story-overlay { padding: 16px 16px 70px 16px; }
+  .guide-card { padding: 12px 16px; }
+  .guide-card p { font-size: 1.05rem; }
+  .know-card, .activity-card { padding: 20px; }
+  .discuss-card { padding: 14px 16px 14px 50px; }
+  .discuss-card::before { width: 28px; height: 28px; font-size: 0.85rem; left: 12px; }
+  .know-page { padding: 16px 16px; gap: 10px; }
+  .know-card h2 { font-size: 1.2rem; }
+  .know-card p { font-size: 0.95rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="slide-container" id="slideContainer">
+
+<!-- 第1页：首页 -->
+<div class="slide title-page active" id="slide-1">
+  <div class="title-left">
+    <div class="title-cover-wrapper">
+      <img src="原图/微信图片_20260609232229_160_7.jpg" alt="绘本封面" class="title-cover-img" onerror="this.style.display='none'">
+    </div>
+  </div>
+  <div class="title-right">
+    <h1>七仙女下凡</h1>
+    <div class="subtitle">中国戏曲有意思 · 黄梅戏绘本领读</div>
+    <div class="book-info">
+      <span>📚 中国中福会出版社 · 2024年9月</span>
+      <span>✍️ 作者：刘倩　🎨 绘画：朱燕鸣</span>
+      <span>🎭 总主编：尚长荣</span>
+    </div>
+    <div class="leader-info">领读人：yoyo & 敏敏</div>
+  </div>
+</div>
+
+<!-- 第2页：破冰游戏 -->
+<div class="slide game-page" id="slide-2">
+  <div style="position:absolute;top:16px;right:16px;z-index:10;">
+    <button id="musicToggleBtn" onclick="toggleGameMusic()" title="播放/停止背景音乐" style="width:40px;height:40px;border-radius:50%;border:none;background:linear-gradient(135deg,#FF69B4,#FF8C00);color:white;font-size:1rem;cursor:pointer;box-shadow:0 4px 16px rgba(255,105,180,0.4);display:flex;align-items:center;justify-content:center;">▶️</button>
+  </div>
+
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:40px 20px;">
+    <div style="text-align:center;max-width:600px;">
+      <h2 style="font-size:1.8rem;color:#FFD700;margin-bottom:16px;text-shadow:0 0 15px rgba(255,215,0,0.4);">🌈 彩虹仙女来报到</h2>
+      <p style="font-size:1.2rem;color:rgba(255,255,255,0.9);line-height:1.8;">
+        小朋友们围坐成一圈，颜色卡从第一位开始传递。音乐响起时快快传，音乐停止时拿到卡的小朋友站起来，大声说："我是<span style="color:#FFD700;font-weight:700;">粉（红）色仙女</span>，我最稳重！"然后传给下一位。看看谁能记住七位仙女的魔法颜色！
+      </p>
+    </div>
+
+    <div style="display:flex;gap:16px;align-items:center;margin-top:8px;">
+      <button onclick="showFairyColors()" style="background:linear-gradient(135deg,#FF69B4,#DA70D6);color:white;font-size:1.15rem;font-weight:700;padding:12px 32px;border:none;border-radius:30px;cursor:pointer;box-shadow:0 4px 16px rgba(255,105,180,0.35);flex:1;max-width:180px;">🔮 揭晓颜色</button>
+      <button onclick="nextSlide()" style="background:linear-gradient(135deg,#FFD700,#FF8C00);color:#1a0a2e;font-size:1.15rem;font-weight:700;padding:12px 32px;border:none;border-radius:30px;cursor:pointer;box-shadow:0 4px 20px rgba(255,215,0,0.35);flex:1;max-width:180px;">🎬 开始故事</button>
+    </div>
+  </div>
+  <div class="story-page-num">第 2 页</div>
+</div>
+
+<!-- 第3页：开场 -->
+<div class="slide intro-page" id="slide-3">
+  <div class="intro-bg" style="background-image:url('原图/微信图片_20260609232231_162_7.jpg')"></div>
+  <div class="story-title-bar"><h2>🌈 彩虹桥的传说</h2><div class="chapter-label">开场 · 夕夕的梦</div></div>
+  <button class="view-original-btn" onclick="showOriginal('原图/微信图片_20260609232231_162_7.jpg', -90)">看绘本</button>
+  <div class="intro-card">
+      <p>
+        雨过天晴，夕夕家的葡萄架上挂起了一道<span class="highlight">七色彩虹</span>。<br><br>
+        小伙伴们七嘴八舌：<span class="highlight">"彩虹的另一端是不是通向天宫呢？"</span><br>
+        <span class="highlight">"仙女们是不是正看着我们呢？"</span><br><br>
+        这天夜里，夕夕做了个梦……梦里，<span class="highlight">七位仙女</span>就住在<span class="highlight">彩虹的另一端</span>。
+      </p>
+  </div>
+  <div class="story-page-num">第 3 页</div>
+</div>
+
+<!-- 第4页：第一幕 -->
+<div class="slide story-page" id="slide-4">
+  <div class="story-bg" style="background-image:url('原图/微信图片_20260609232232_163_7.jpg')"></div>
+  <div class="story-title-bar"><h2>第一幕 · 天宫里的七位仙女</h2><div class="chapter-label">七位仙女住在织锦宫，管理着不同的颜色</div></div>
+  <button class="view-original-btn" onclick="showOriginal('原图/微信图片_20260609232232_163_7.jpg')">看绘本</button>
+  <div class="story-overlay">
+    <div class="story-guide-cards">
+      <div class="guide-card read">
+        <h3>📖 旁白朗读</h3>
+        <p>天宫里有一座雄伟的<span class="highlight">织锦宫</span>，住着<span class="highlight">七位仙女</span>。她们拥有高超的纺织技术，还<span class="highlight">管理着不同的颜色</span>。<span class="highlight">大姐</span><span class="highlight">法力最高强</span>，玉帝担心仙女们扰乱人间秩序，从不允许她们离开天宫。</p>
+      </div>
+      <div class="guide-card think">
+        <h3>❓ 想一想</h3>
+        <p>如果你有七位仙女朋友，她们分别管理粉（红）、橙、黄、绿、青、蓝、紫，你最喜欢去哪位姐姐那儿做客？</p>
+      </div>
+      <div class="guide-card know">
+        <h3>📚 小知识</h3>
+        <p>黄梅戏《天仙配》里，七位仙女各有特色——大姐稳重、七妹最勇敢！猜猜看，为什么七妹敢偷偷下凡？</p>
+      </div>
+    </div>
+  </div>
+  <div class="story-page-num">第 4 页</div>
+</div>
+
+<!-- 第5页：第二幕 -->
+<div class="slide story-page" id="slide-5">
+  <div class="story-bg" style="background-image:url('原图/微信图片_20260610000136_203_7.jpg')"></div>
+  <div class="story-title-bar"><h2>第二幕 · 偷看人间</h2><div class="chapter-label">仙女们看到了正在哭泣的董永</div></div>
+  <button class="view-original-btn" onclick="showOriginal('原图/微信图片_20260610000136_203_7.jpg')">看绘本</button>
+  <div class="story-overlay">
+    <div class="story-guide-cards">
+      <div class="guide-card read">
+        <h3>📖 旁白朗读</h3>
+        <p>这天，七位仙女在宫中感到烦闷，七妹提出到<span class="highlight">银河畔</span>散散心。大姐挥动拂尘，扫开一片乌云——田野、街市、迎亲队伍，都清清楚楚出现在眼前。"<span class="highlight">人间</span>真是美好呀！"突然，七妹指着下方："可是，这个人怎么在<span class="highlight">哭</span>呢？"</p>
+        <p style="margin-top:12px;">大姐告诉七妹："这是<span class="highlight">董永</span>，他家中贫苦却非常<span class="highlight">孝顺</span>，父亲生病去世了没钱埋葬，于是他把自己卖给<span class="highlight">傅员外</span>，用<span class="highlight">卖身</span>的钱埋葬父亲。这不，他在坟前告别父亲后就要去做工了。"</p>
+      </div>
+      <div class="guide-card think">
+        <h3>❓ 聊一聊</h3>
+        <p>董永为什么在坟前哭泣？如果你在场，你会怎样安慰他？</p>
+      </div>
+      <div class="guide-card tip">
+        <h3>🎙️ 领读提示</h3>
+        <p>读到"这个人怎么在哭呢"时，声音放轻，带着好奇和同情——让小朋友感受到七妹的善良。</p>
+      </div>
+    </div>
+  </div>
+  <div class="story-page-num">第 5 页</div>
+</div>
+
+<!-- 第6页：第三幕 -->
+<div class="slide story-page" id="slide-6">
+  <div class="story-bg" style="background-image:url('原图/微信图片_20260609232236_168_7.jpg')"></div>
+  <div class="story-title-bar"><h2>第三幕 · 七妹下凡</h2><div class="chapter-label">大姐送难香，七妹挥宝扇变彩虹天梯</div></div>
+  <button class="view-original-btn" onclick="showOriginal('原图/微信图片_20260609232236_168_7.jpg')">看绘本</button>
+  <div class="story-overlay">
+    <div class="story-guide-cards">
+      <div class="guide-card read">
+        <h3>📖 旁白朗读</h3>
+        <p>七妹告诉大姐："董永勤劳又孝顺，好人不应该被欺负，我要去帮助他！"大姐送给七妹一支"<span class="highlight">难香</span>"——遇到困难时<span class="highlight">点燃</span>它，姐姐们就会来帮忙。七妹挥舞宝扇，一架<span class="highlight">彩虹天梯</span>出现了……</p>
+      </div>
+      <div class="guide-card interact">
+        <h3>🌳 小互动</h3>
+        <p>请小朋友们模仿七妹挥舞宝扇的动作——"呼～"彩虹天梯出现啦！大家一起喊："七妹，加油！"</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="story-page-num">第 6 页</div>
+</div>
+
+<!-- 第7页：第四幕 -->
+<div class="slide story-page" id="slide-7">
+  <div class="story-bg" style="background-image:url('原图/微信图片_20260610000716_204_7.jpg')"></div>
+  <div class="story-title-bar"><h2>第四幕 · 土地公公来帮忙</h2><div class="chapter-label">七妹假装无家可归，董永答应带她一起</div></div>
+  <button class="view-original-btn" onclick="showOriginal('原图/微信图片_20260610000716_204_7.jpg')">看绘本</button>
+  <div class="story-overlay">
+    <div class="story-guide-cards">
+      <div class="guide-card read">
+        <h3>📖 旁白朗读</h3>
+        <p>七妹下凡后，和董永在赶路途中相遇了。<span class="highlight">土地公公</span>化身一位老爷爷，等在他们经过的路上。七妹假装<span class="highlight">无家可归</span>，土地公公请董永帮帮这位可怜的姑娘——<span class="highlight">善良</span>的董永<span class="highlight">答应</span>带七妹一起走。</p>
+      </div>
+      <div class="guide-card think">
+        <h3>❓ 想一想</h3>
+        <p>董永自己都要去傅员外家做工了，为什么还愿意带上七妹呢？如果是你，你会怎么做？</p>
+      </div>
+      <div class="guide-card tip">
+        <h3>🎙️ 领读提示</h3>
+        <p>这一幕有很多温情时刻——读的时候，让小朋友们感受"帮助别人"的快乐。</p>
+      </div>
+    </div>
+  </div>
+  <div class="story-page-num">第 7 页</div>
+</div>
+
+<!-- 第8页：第五幕 -->
+<div class="slide story-page" id="slide-8">
+  <div class="story-bg" style="background-image:url('原图/微信图片_20260609232238_170_7.jpg')"></div>
+  <div class="story-title-bar"><h2>第五幕 · 傅员外刁难</h2><div class="chapter-label">一夜织出十匹锦绢，否则三年变十年！</div></div>
+  <button class="view-original-btn" onclick="showOriginal('原图/微信图片_20260609232238_170_7.jpg')">看绘本</button>
+  <div class="story-overlay">
+    <div class="story-guide-cards">
+      <div class="guide-card read">
+        <h3>📖 旁白朗读</h3>
+        <p>到了傅家，<span class="highlight">傅员外</span>故意刁难——"要让七妹一夜织出<span class="highlight">十匹上好的锦绢</span>！如果织得出，董永的工期从<span class="highlight">三年改一百天</span>；如果织不出，三年变十年！"这不是欺负人嘛！七妹悄悄拿出了大姐送的<span class="highlight">难香</span>……</p>
+      </div>
+      <div class="guide-card interact">
+        <h3>🌳 小互动</h3>
+        <p>小朋友们，一起来帮七妹数一数——"一匹、两匹、三匹……十匹！"我们也要像七妹一样，遇到困难不害怕！</p>
+      </div>
+      <div class="guide-card think">
+        <h3>❓ 聊一聊</h3>
+        <p>傅员外这样做对不对？如果你遇到不公平的事情，会怎么办呢？</p>
+      </div>
+    </div>
+  </div>
+  <div class="story-page-num">第 8 页</div>
+</div>
+
+<!-- 第9页：第六幕 -->
+<div class="slide story-page" id="slide-9">
+  <div class="story-bg" style="background-image:url('原图/微信图片_20260609232239_171_7.jpg')"></div>
+  <div class="story-title-bar"><h2>第六幕 · 难香求救</h2><div class="chapter-label">六位姐姐踏着彩云来到人间，带来了天梭！</div></div>
+  <button class="view-original-btn" onclick="showOriginal('原图/微信图片_20260609232239_171_7.jpg')">看绘本</button>
+  <div class="story-overlay">
+    <div class="story-guide-cards">
+      <div class="guide-card read">
+        <h3>📖 旁白朗读</h3>
+        <p>夜深了，七妹点燃难香，青烟丝丝缕缕飘到了天宫。天上的<span class="highlight">六位姐姐</span>闻到了香味，知道七妹遇到了困难，急忙<span class="highlight">踏着彩云</span>来到了人间。姐姐们带来了宝物——<span class="highlight">天梭</span>！只要把它安装在织布机上，梭子就会<span class="highlight">像流星一样穿来穿去</span>，自动织出锦绢……</p>
+      </div>
+      <div class="guide-card tip">
+        <h3>🎙️ 领读提示</h3>
+        <p>读到"天梭像流星一样穿梭"时，请小朋友们伸出双手——左手向右，右手向左，像<span class="highlight">梭子一样来回穿！</span>唰唰唰，锦绢织出来啦！</p>
+      </div>
+    </div>
+  </div>
+  <div class="story-page-num">第 9 页</div>
+</div>
+
+<!-- 第10页：第七幕 -->
+<div class="slide story-page" id="slide-10">
+  <div class="story-bg" style="background-image:url('原图/微信图片_20260610001420_206_7.jpg')"></div>
+  <div class="story-title-bar"><h2>第七幕 · 织成锦绢，幸福在一起</h2><div class="chapter-label">傅员外撕掉卖身契，董永和七妹恢复了自由</div></div>
+  <button class="view-original-btn" onclick="showOriginal('原图/微信图片_20260610001420_206_7.jpg')">看绘本</button>
+  <div class="story-overlay">
+    <div class="story-guide-cards">
+      <div class="guide-card read">
+        <h3>📖 旁白朗读</h3>
+        <p><span class="highlight">十匹锦绢</span>织成了！傅员外当面<span class="highlight">撕掉了董永的卖身契</span>。一百天过去了，董永和七妹恢复了<span class="highlight">自由</span>。他们一起走出傅家大门，小鸟在枝头唱歌。董永说："七妹你看，那边的山和水好像也在笑呢！"七妹回答："那是因为你在对它们笑啊！"</p>
+      </div>
+      <div class="guide-card think">
+        <h3>❓ 想一想</h3>
+        <p>故事到这里，你觉得董永和七妹为什么能过上幸福的生活？勤劳、善良、互助——这些品质，你最喜欢哪一个？</p>
+      </div>
+    </div>
+  </div>
+  <div class="story-page-num">第 10 页</div>
+</div>
+
+<!-- 第11页：黄梅戏小科普（4合一） -->
+<div class="slide know-page" id="slide-11">
+  <div class="know-card">
+    <div class="icon">🎭</div>
+    <h2>黄梅戏 · 三小戏</h2>
+    <p>黄梅戏的角色分<strong>生、旦、丑</strong>三种。董永是"生"，七仙女是"旦"，土地公公是"丑"——他们的表演质朴又活泼！</p>
+  </div>
+  <div class="know-card">
+    <div class="icon">🎪</div>
+    <h2>黄梅戏 · 神奇舞台</h2>
+    <p>戏曲舞台上，演员走几步就能代表走了<strong>一千里</strong>；几声鼓响，夜晚就变成了白天——是不是像魔法一样？</p>
+  </div>
+</div>
+
+<!-- 第12页：黄梅戏视频欣赏 -->
+<div class="slide video-page" id="slide-12">
+  <div class="story-title-bar"><h2>🎬 黄梅戏欣赏</h2></div>
+  <div style="flex:1;display:flex;align-items:center;justify-content:center;width:100%;">
+    <video controls style="max-width:90%;max-height:65vh;border-radius:12px;box-shadow:0 0 40px rgba(255,105,180,0.25);">
+      <source src="原图/黄梅戏欣赏.mp4" type="video/mp4">
+      您的浏览器不支持视频播放，请使用 Chrome 或 Edge 浏览器。
+    </video>
+  </div>
+  <p class="video-tip">欣赏黄梅戏《天仙配》精彩片段，感受中国传统戏曲的魅力！🎭</p>
+  <div class="story-page-num">第 12 页</div>
+</div>
+
+<!-- 第13页：读后讨论 -->
+<div class="slide discuss-page" id="slide-13">
+  <div class="story-title-bar" style="position:relative;background:none;padding:0;margin-bottom:8px;"><h2 style="color:#FFD700;font-size:2rem;">💬 读后讨论</h2></div>
+  <div class="discuss-card" data-num="1" style="background: rgba(30,144,255,0.30); border-left: 5px solid var(--sky);">
+    <h3>讨论1：你最喜欢谁？</h3>
+    <p>故事里有董永、七妹、大姐、土地公公、傅员外……你最喜欢哪个角色？为什么？</p>
+  </div>
+  <div class="discuss-card" data-num="2" style="background: rgba(255,140,0,0.30); border-left: 5px solid #FF8C00;">
+    <h3>讨论2：最难的一幕？</h3>
+    <p>七妹和董永遇到了很多困难——傅员外刁难、要一夜织十匹锦绢……你觉得最难的是哪一次？他们是怎么解决的？</p>
+  </div>
+  <div class="discuss-card" data-num="3" style="background: rgba(147,112,219,0.30); border-left: 5px solid #9370DB;">
+    <h3>讨论3：如果是你……</h3>
+    <p>如果你有一支"难香"，遇到困难时可以请人来帮忙，你会在什么时候点燃它？你会请谁来帮你？</p>
+  </div>
+  <div class="discuss-card" data-num="4" style="background: rgba(255,215,0,0.45); border-left: 5px solid #FFD700;">
+    <h3>讨论4：黄梅戏好看吗？</h3>
+    <p>今天我们一起读了黄梅戏《七仙女下凡》的绘本，你最喜欢哪个部分？想不想有一天去看看真正的黄梅戏演出呢？</p>
+  </div>
+  <div class="story-page-num">第 13 页</div>
+</div>
+
+<!-- 第14页：延伸活动 -->
+<div class="slide activity-page" id="slide-14">
+  <div class="story-title-bar" style="position:relative;background:none;padding:0;margin-bottom:8px;"><h2 style="color:#7DCE82;font-size:2rem;">🎨 延伸活动</h2></div>
+  <div class="activity-card">
+    <h3>活动1：画一画七位仙女</h3>
+    <p>请你画一画天宫里的七位仙女，每位仙女管理一种颜色——粉色（红色）、橙色、黄色、绿色、青色、蓝色、紫色。你画的七仙女长什么样？她们在天宫里做什么呢？</p>
+  </div>
+  <div class="activity-card">
+    <h3>活动2：模仿黄梅戏动作</h3>
+    <p>黄梅戏里有很多好看的动作——挥拂尘、织布、挥宝扇……请小朋友们站起来，跟着老师一起模仿七妹挥舞宝扇的动作，看看谁学得最像！</p>
+  </div>
+  <div class="activity-card">
+    <h3>活动3：写一写"难香"纸条</h3>
+    <p>七妹的"难香"可以帮助她。请你在一张小纸条上写下一件你觉得困难的事情，然后折起来——我们一起想办法解决它！</p>
+  </div>
+  <div class="story-page-num">第 14 页</div>
+</div>
+
+<!-- 第15页：结束页 -->
+<div class="slide end-page" id="slide-15">
+  <h2>🎉 故事讲完啦！</h2>
+  <p>
+    七仙女下凡帮助董永，是因为她善良、勇敢、不怕困难。<br>
+    希望小朋友们也能像七妹一样——<br>
+    <strong style="color:#FFD700;">勤劳、善良、勇敢、互助</strong>，<br>
+    做一个让别人感到温暖的人！😊
+  </p>
+  <p style="font-size:1.1rem;color:rgba(255,255,255,0.6);margin-top:12px;">
+    今天的故事来自黄梅戏《天仙配》，下次我们再一起读好玩的绘本吧～ 📚
+  </p>
+</div>
+
+</div><!-- /.slide-container -->
+
+<!-- 模态框 -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal(event)">
+  <button class="modal-close" onclick="closeModal(event)">✕</button>
+  <button class="modal-nav modal-prev" onclick="prevImage(event)">‹</button>
+  <img id="modalImage" src="" alt="绘本原图" onclick="event.stopPropagation()">
+  <button class="modal-nav modal-next" onclick="nextImage(event)">›</button>
+  <div class="modal-page-info" id="modalPageInfo"></div>
+</div>
+
+<!-- 颜色秘密模态框 -->
+<div class="modal-overlay" id="fairyColorsModal" onclick="if(event.target===this)closeFairyColors()">
+  <button class="modal-close" onclick="closeFairyColors()">✕</button>
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(135deg,#1a0a2e,#2C1810);border:2px solid var(--gold);border-radius:20px;padding:40px 48px;max-width:92vw;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.7);width:680px;" onclick="event.stopPropagation()">
+    <h2 style="font-size:1.6rem;color:#FFD700;text-align:center;margin-bottom:24px;text-shadow:0 0 15px rgba(255,215,0,0.4);">🌈 七位仙女的魔法颜色</h2>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;border-radius:12px;background:rgba(255,0,0,0.15);border-left:4px solid #FF0000;">
+        <span style="font-size:1.8rem;">🔴</span>
+        <div><strong style="color:#FF6B6B;font-size:1.1rem;">红 · 大姐</strong><span style="color:rgba(255,255,255,0.85);margin-left:8px;">稳重懂事，像大姐姐一样照顾大家</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;border-radius:12px;background:rgba(255,165,0,0.15);border-left:4px solid #FFA500;">
+        <span style="font-size:1.8rem;">🟠</span>
+        <div><strong style="color:#FFB347;font-size:1.1rem;">橙 · 二姐</strong><span style="color:rgba(255,255,255,0.85);margin-left:8px;">温柔体贴，善解人意</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;border-radius:12px;background:rgba(255,215,0,0.15);border-left:4px solid #FFD700;">
+        <span style="font-size:1.8rem;">🟡</span>
+        <div><strong style="color:#FFE66D;font-size:1.1rem;">黄 · 三姐</strong><span style="color:rgba(255,255,255,0.85);margin-left:8px;">活泼开朗，喜欢说笑</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;border-radius:12px;background:rgba(0,128,0,0.15);border-left:4px solid #00C851;">
+        <span style="font-size:1.8rem;">🟢</span>
+        <div><strong style="color:#77DD77;font-size:1.1rem;">绿 · 四姐</strong><span style="color:rgba(255,255,255,0.85);margin-left:8px;">聪明机灵，点子多</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;border-radius:12px;background:rgba(0,255,255,0.15);border-left:4px solid #00FFFF;">
+        <span style="font-size:1.8rem;">🔵</span>
+        <div><strong style="color:#7DF9FF;font-size:1.1rem;">青 · 五姐</strong><span style="color:rgba(255,255,255,0.85);margin-left:8px;">勤快能干，做事麻利</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;border-radius:12px;background:rgba(0,0,255,0.15);border-left:4px solid #4169E1;">
+        <span style="font-size:1.8rem;">🔵</span>
+        <div><strong style="color:#6495ED;font-size:1.1rem;">蓝 · 六姐</strong><span style="color:rgba(255,255,255,0.85);margin-left:8px;">心思细腻，会关心人</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;border-radius:12px;background:rgba(128,0,128,0.15);border-left:4px solid #DA70D6;">
+        <span style="font-size:1.8rem;">💜</span>
+        <div><strong style="color:#DDA0DD;font-size:1.1rem;">紫 · 七妹（小七）</strong><span style="color:rgba(255,255,255,0.85);margin-left:8px;">勇敢善良，绘本主角！敢于下凡追求幸福</span></div>
+      </div>
+    </div>
+    <p style="text-align:center;color:rgba(255,215,0,0.8);margin-top:20px;font-size:0.95rem;">✨ 拿到颜色卡的小朋友，就拥有了这位仙女的魔法哦！</p>
+  </div>
+</div>
+
+<!-- 底部导航 -->
+<div class="nav-bar">
+  <button class="nav-btn nav-prev" onclick="prevSlide()">← 上一页</button>
+  <div class="nav-dots" id="navDots"></div>
+  <button class="nav-btn nav-next" onclick="nextSlide()">下一页 →</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+
+const navDots = document.getElementById('navDots');
+for (let i = 0; i < total; i++) {
+  const dot = document.createElement('button');
+  dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+  dot.onclick = () => goToSlide(i);
+  navDots.appendChild(dot);
+}
+
+function goToSlide(n) {
+  slides[current].classList.remove('active');
+  document.querySelectorAll('.nav-dot')[current].classList.remove('active');
+  current = (n + total) % total;
+  slides[current].classList.add('active');
+  document.querySelectorAll('.nav-dot')[current].classList.add('active');
+  // 离开游戏页时自动停止音乐
+  if (current !== 1 && isMusicPlaying) stopGameMusic();
+}
+function nextSlide() { goToSlide(current + 1); }
+function prevSlide() { goToSlide(current - 1); }
+
+// ========== 游戏音乐播放器（使用七色光.mp4）==========
+let gameAudio = null;
+let isMusicPlaying = false;
+
+function toggleGameMusic() {
+  const btn = document.getElementById('musicToggleBtn');
+  if (!isMusicPlaying) {
+    try {
+      if (!gameAudio) {
+        gameAudio = new Audio('七色光.mp4');
+        gameAudio.loop = true;
+        gameAudio.volume = 0.7;
+      }
+      gameAudio.play().then(() => {
+        isMusicPlaying = true;
+        btn.textContent = '⏸️';
+        btn.classList.add('playing');
+      }).catch(e => {
+        alert('点击播放失败，请尝试直接点击页面后再按播放按钮');
+      });
+    } catch(e) {
+      alert('您的浏览器不支持音频播放，请使用 Chrome 或 Safari');
+    }
+  } else {
+    if (gameAudio) { gameAudio.pause(); }
+    isMusicPlaying = false;
+    btn.textContent = '▶️';
+    btn.classList.remove('playing');
+  }
+}
+
+// 翻页时自动停止游戏音乐
+function stopGameMusic() {
+  if (isMusicPlaying && gameAudio) {
+    gameAudio.pause();
+    isMusicPlaying = false;
+    const btn = document.getElementById('musicToggleBtn');
+    if (btn) { btn.textContent = '▶️'; btn.classList.remove('playing'); }
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'Backspace') prevSlide();
+});
+
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) diff > 0 ? nextSlide() : prevSlide();
+});
+
+// 绘本原图列表（按阅读顺序排列）
+var originalImages = [
+  {src: '原图/微信图片_20260609232229_160_7.jpg', rotation: -90},
+  {src: '原图/微信图片_20260609232231_162_7.jpg', rotation: -90},
+  {src: '原图/微信图片_20260609232232_163_7.jpg', rotation: 0},
+  {src: '原图/微信图片_20260610000136_203_7.jpg', rotation: 0},
+  {src: '原图/微信图片_20260609232236_168_7.jpg', rotation: 0},
+  {src: '原图/微信图片_20260610000716_204_7.jpg', rotation: 0},
+  {src: '原图/微信图片_20260609232238_170_7.jpg', rotation: 0},
+  {src: '原图/微信图片_20260609232239_171_7.jpg', rotation: 0},
+  {src: '原图/微信图片_20260610001420_206_7.jpg', rotation: 0},
+];
+var currentModalIndex = 0;
+
+function showOriginal(imgSrc, rotation) {
+  var idx = originalImages.findIndex(function(item) { return item.src === imgSrc; });
+  if (idx === -1) idx = 0;
+  currentModalIndex = idx;
+  var img = document.getElementById('modalImage');
+  img.src = originalImages[currentModalIndex].src;
+  var rot = originalImages[currentModalIndex].rotation;
+  img.style.transform = (rot ? 'rotate(' + rot + 'deg)' : 'none');
+  updateModalPageInfo();
+  document.getElementById('modalOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function updateModalPageInfo() {
+  var info = document.getElementById('modalPageInfo');
+  info.textContent = (currentModalIndex + 1) + ' / ' + originalImages.length;
+}
+function prevImage(event) {
+  if (event) event.stopPropagation();
+  currentModalIndex = (currentModalIndex - 1 + originalImages.length) % originalImages.length;
+  var img = document.getElementById('modalImage');
+  img.src = originalImages[currentModalIndex].src;
+  var rot = originalImages[currentModalIndex].rotation;
+  img.style.transform = (rot ? 'rotate(' + rot + 'deg)' : 'none');
+  updateModalPageInfo();
+}
+function nextImage(event) {
+  if (event) event.stopPropagation();
+  currentModalIndex = (currentModalIndex + 1) % originalImages.length;
+  var img = document.getElementById('modalImage');
+  img.src = originalImages[currentModalIndex].src;
+  var rot = originalImages[currentModalIndex].rotation;
+  img.style.transform = (rot ? 'rotate(' + rot + 'deg)' : 'none');
+  updateModalPageInfo();
+}
+function closeModal(event) {
+  if (event.target === document.getElementById('modalOverlay') || event.target.className === 'modal-close' || event.target.textContent === '✕') {
+    document.getElementById('modalOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+}
+function showFairyColors() {
+  document.getElementById('fairyColorsModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeFairyColors() {
+  document.getElementById('fairyColorsModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+// ESC关闭 / 左右键翻页
+document.addEventListener('keydown', function(e) {
+  var modal = document.getElementById('modalOverlay');
+  var fairyModal = document.getElementById('fairyColorsModal');
+  if (fairyModal.classList.contains('show')) {
+    if (e.key === 'Escape') { fairyModal.classList.remove('show'); document.body.style.overflow = ''; }
+    return;
+  }
+  if (!modal.classList.contains('show')) return;
+  if (e.key === 'Escape') { modal.classList.remove('show'); document.body.style.overflow = ''; }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prevImage(); }
+  if (e.key === 'ArrowRight') { e.preventDefault(); nextImage(); }
+});
+</script>
+
+</body>
+</html>
