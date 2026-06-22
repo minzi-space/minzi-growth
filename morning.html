@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#FFF8F0">
+<title>早起的奇迹 · 敏子晨间计划</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #FFF8F0;
+    --card: #FFFFFF;
+    --morning: #F4A261;
+    --morning-light: #FFF3E8;
+    --green: #6B8F71;
+    --green-light: #E8F0E9;
+    --blue: #5B8DB8;
+    --blue-light: #EAF2FB;
+    --purple: #9B72CF;
+    --purple-light: #F3EEFE;
+    --text: #2D3436;
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
+    --border: #F0EDE6;
+    --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  html, body {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+  }
+
+  body {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    padding-bottom: calc(20px + var(--safe-bottom));
+  }
+
+  /* ── Header ── */
+  .header {
+    padding: 20px 20px 0;
+    background: linear-gradient(160deg, #FFF3E0, #FFF8F0);
+    border-bottom: 1px solid #FDEBD0;
+  }
+
+  .back-btn {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--morning); font-size: 14px; font-weight: 500;
+    cursor: pointer; margin-bottom: 16px;
+    background: none; border: none; padding: 0; font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 8px 0 24px;
+  }
+  .hero-icon { font-size: 56px; display: block; margin-bottom: 12px; line-height: 1; }
+  .hero-title { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
+  .hero-sub { font-size: 13px; color: var(--text-secondary); margin-top: 6px; line-height: 1.6; }
+
+  /* ── Section ── */
+  .section { padding: 0 16px; margin-top: 20px; }
+  .section-title {
+    font-size: 14px; font-weight: 700; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 12px; padding-left: 2px;
+  }
+
+  /* ── Timeline ── */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+
+  .timeline-item {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding-bottom: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .timeline-left {
+    display: flex; flex-direction: column; align-items: center;
+    flex-shrink: 0; width: 56px;
+  }
+
+  .time-label {
+    font-size: 12px; font-weight: 700; color: var(--text-secondary);
+    white-space: nowrap; line-height: 1;
+    margin-top: 20px;
+    margin-bottom: 4px;
+  }
+
+  .timeline-dot {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid var(--border);
+    background: var(--card);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; flex-shrink: 0;
+    transition: all 0.3s ease;
+    z-index: 1;
+  }
+  .timeline-item.done .timeline-dot {
+    background: var(--green); border-color: var(--green);
+    color: #fff; font-size: 10px;
+  }
+
+  .timeline-line {
+    width: 2px; flex: 1; min-height: 20px;
+    background: var(--border);
+    margin: 0 auto;
+  }
+
+  .timeline-card {
+    flex: 1;
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 10px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+  }
+  .timeline-item:active .timeline-card { transform: scale(0.98); }
+  .timeline-item.done .timeline-card {
+    background: var(--green-light);
+    border-left-color: var(--green);
+  }
+
+  .card-top {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 6px;
+  }
+  .card-emoji { font-size: 22px; flex-shrink: 0; }
+  .card-title { font-size: 15px; font-weight: 700; color: var(--text); }
+  .card-duration {
+    margin-left: auto;
+    font-size: 11px; color: var(--text-muted);
+    background: #F5F3EE; padding: 3px 8px; border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+  .card-tips {
+    margin-top: 8px;
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .tip-tag {
+    font-size: 11px; padding: 3px 10px; border-radius: 10px;
+    background: #F5F3EE; color: var(--text-secondary);
+  }
+
+  /* ── Progress Bar ── */
+  .progress-wrap {
+    background: var(--card); border-radius: var(--radius);
+    padding: 16px 18px; box-shadow: var(--shadow-sm);
+    margin: 0 16px;
+  }
+  .progress-top {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .progress-top .plabel { font-size: 14px; font-weight: 600; }
+  .progress-top .pcount { font-size: 13px; color: var(--text-secondary); }
+  .progress-bar-bg {
+    height: 8px; background: var(--border); border-radius: 4px; overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%; background: linear-gradient(90deg, var(--morning), var(--green));
+    border-radius: 4px; transition: width 0.5s ease;
+  }
+
+  /* ── Quote ── */
+  .quote-card {
+    background: linear-gradient(135deg, var(--morning-light), #fff8f8);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin: 0 16px;
+    text-align: center;
+    border: 1px solid #FDEBD0;
+  }
+  .quote-text {
+    font-size: 15px; line-height: 1.7; color: var(--text);
+    font-style: italic;
+  }
+  .quote-author { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+
+  /* ── Reset ── */
+  .reset-btn {
+    display: block; width: calc(100% - 32px); margin: 16px auto 0;
+    background: none; border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm); padding: 12px;
+    font-size: 14px; color: var(--text-secondary);
+    cursor: pointer; font-family: inherit; text-align: center;
+    transition: all 0.15s ease;
+  }
+  .reset-btn:active { background: var(--border); }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed; top: 60px; left: 50%; transform: translateX(-50%);
+    background: #2D3436; color: #fff; font-size: 13px;
+    padding: 10px 20px; border-radius: 20px;
+    pointer-events: none; opacity: 0; transition: opacity 0.3s ease;
+    z-index: 200; white-space: nowrap;
+  }
+  .toast.show { opacity: 0.9; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <button class="back-btn" onclick="window.history.back()">
+    ← 返回成长空间
+  </button>
+  <div class="hero">
+    <span class="hero-icon">🌅</span>
+    <div class="hero-title">早起的奇迹</div>
+    <div class="hero-sub">敏子专属晨间计划 · 6:30 起床<br>给自己 90 分钟，先喂饱自己</div>
+  </div>
+</div>
+
+<!-- 今日进度 -->
+<div style="margin-top:16px;">
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="plabel">☀️ 今日晨间</span>
+      <span class="pcount" id="pcount">0 / 5 完成</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+    </div>
+  </div>
+</div>
+
+<!-- S.A.V.E.R.S 定制时间线 -->
+<div class="section">
+  <div class="section-title">晨间 S.A.V.E.R.S 计划</div>
+  <div class="timeline" id="timeline">
+
+    <!-- 1. Silence 冥想 -->
+    <div class="timeline-item" id="item-silence" onclick="toggleItem('silence')">
+      <div class="timeline-left">
+        <div class="time-label">6:30</div>
+        <div class="timeline-dot" id="dot-silence"></div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-card">
+        <div class="card-top">
+          <span class="card-emoji">🧘</span>
+          <span class="card-title">静心冥想</span>
+          <span class="card-duration">10分钟</span>
+        </div>
+        <div class="card-desc">起床后先不看手机，坐在窗边做10分钟正念呼吸。感受当下，觉察身体，让大脑从睡眠模式平稳切换到清醒状态。</div>
+        <div class="card-tips">
+          <span class="tip-tag">S · Silence</span>
+          <span class="tip-tag">4-7-8呼吸法</span>
+          <span class="tip-tag">感恩3件事</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Affirmations 宣言 -->
+    <div class="timeline-item" id="item-affirmation" onclick="toggleItem('affirmation')">
+      <div class="timeline-left">
+        <div class="time-label">6:40</div>
+        <div class="timeline-dot" id="dot-affirmation"></div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-card">
+        <div class="card-top">
+          <span class="card-emoji">💬</span>
+          <span class="card-title">正向宣言</span>
+          <span class="card-duration">5分钟</span>
+        </div>
+        <div class="card-desc">大声或默念今天的宣言。不用华丽，真实就好。比如：「我是个有耐心的妈妈」「我今天会先听再说」「我有能力做好我的工作」。</div>
+        <div class="card-tips">
+          <span class="tip-tag">A · Affirmations</span>
+          <span class="tip-tag">写在便利贴上</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Exercise 运动 -->
+    <div class="timeline-item" id="item-exercise" onclick="toggleItem('exercise')">
+      <div class="timeline-left">
+        <div class="time-label">6:45</div>
+        <div class="timeline-dot" id="dot-exercise"></div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-card">
+        <div class="card-top">
+          <span class="card-emoji">🏃</span>
+          <span class="card-title">晨间运动</span>
+          <span class="card-duration">20分钟</span>
+        </div>
+        <div class="card-desc">不用大汗淋漓，让身体动起来就行。室内拉伸、瑜伽、跳绳、快走都算。让身体告诉大脑：今天开始了！</div>
+        <div class="card-tips">
+          <span class="tip-tag">E · Exercise</span>
+          <span class="tip-tag">瑜伽/拉伸</span>
+          <span class="tip-tag">跳绳5分钟</span>
+          <span class="tip-tag">室内快走</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Reading 阅读 -->
+    <div class="timeline-item" id="item-reading" onclick="toggleItem('reading')">
+      <div class="timeline-left">
+        <div class="time-label">7:05</div>
+        <div class="timeline-dot" id="dot-reading"></div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-card">
+        <div class="card-top">
+          <span class="card-emoji">📖</span>
+          <span class="card-title">专注阅读</span>
+          <span class="card-duration">20分钟</span>
+        </div>
+        <div class="card-desc">读让你成长的书，不是刷新闻。《认知觉醒》《青春期30讲》都是好选择。只需20分钟，但必须是专注不被打扰的20分钟。</div>
+        <div class="card-tips">
+          <span class="tip-tag">R · Reading</span>
+          <span class="tip-tag">认知觉醒</span>
+          <span class="tip-tag">青春期30讲</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Scribing 书写 -->
+    <div class="timeline-item" id="item-scribing" onclick="toggleItem('scribing')">
+      <div class="timeline-left">
+        <div class="time-label">7:25</div>
+        <div class="timeline-dot" id="dot-scribing"></div>
+        <div class="timeline-line"></div>
+      </div>
+      <div class="timeline-card">
+        <div class="card-top">
+          <span class="card-emoji">✍️</span>
+          <span class="card-title">晨间书写</span>
+          <span class="card-duration">10分钟</span>
+        </div>
+        <div class="card-desc">写下3件期待的事，或昨天一个印象深刻的瞬间，或今天最重要的一件事。不需要完整文章，片段感悟就好，重要的是动笔这个动作。</div>
+        <div class="card-tips">
+          <span class="tip-tag">S · Scribing</span>
+          <span class="tip-tag">3件期待</span>
+          <span class="tip-tag">今日关键词</span>
+          <span class="tip-tag">情绪觉察</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 结束时间 -->
+<div class="section" style="margin-top:0;">
+  <div style="display:flex;align-items:center;gap:14px;">
+    <div style="display:flex;flex-direction:column;align-items:center;width:56px;">
+      <div class="time-label" style="margin-top:0;">7:35</div>
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--morning);display:flex;align-items:center;justify-content:center;font-size:14px;">☀️</div>
+    </div>
+    <div style="background:#FFF3E8;border-radius:var(--radius);padding:14px 16px;flex:1;border-left:3px solid var(--morning);">
+      <div style="font-size:15px;font-weight:700;">晨间完成！开始美好的一天 🌟</div>
+      <div style="font-size:13px;color:var(--text-secondary);margin-top:4px;">剩余时间可以准备孩子上学、吃早餐、复盘今日计划</div>
+    </div>
+  </div>
+</div>
+
+<!-- 名言 -->
+<div class="section">
+  <div class="quote-card" id="quoteCard">
+    <div class="quote-text" id="quoteText">"赢得早晨，赢得整天。"</div>
+    <div class="quote-author">— Hal Elrod《早起的奇迹》</div>
+  </div>
+</div>
+
+<!-- 重置按钮 -->
+<button class="reset-btn" onclick="resetToday()">🔄 重置今日打卡</button>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STORAGE_KEY = 'morning_routine_v1';
+const ITEMS = ['silence', 'affirmation', 'exercise', 'reading', 'scribing'];
+const LABELS = {
+  silence: '静心冥想',
+  affirmation: '正向宣言',
+  exercise: '晨间运动',
+  reading: '专注阅读',
+  scribing: '晨间书写'
+};
+const ENCOURAGEMENTS = [
+  '太棒了！✨ 每次打卡都是给未来的自己一份礼物',
+  '已完成 🌱 坚持就是你最大的优势',
+  '加油 💪 今天的你正在成为更好的自己',
+  '很棒 🌟 小习惯改变大人生',
+  '完成 ☀️ 赢得早晨，赢得一天'
+];
+
+const MORNING_QUOTES = [
+  { text: '"赢得早晨，赢得整天。"', author: '— Hal Elrod《早起的奇迹》' },
+  { text: '"每天早起1小时，坚持一年，你会成为另一个人。"', author: '— 《早起的奇迹》' },
+  { text: '"成功是由你每天的习惯决定的，不是一次性的行动。"', author: '— Hal Elrod' },
+  { text: '"先喂饱自己，才能更好地照顾别人。"', author: '— 晨间修炼法则' },
+  { text: '"静心5分钟，胜过焦虑一整天。"', author: '— 冥想心法' },
+];
+
+function getTodayKey() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function loadData() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    return raw[getTodayKey()] || {};
+  } catch(e) { return {}; }
+}
+
+function saveData(data) {
+  try {
+    const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    all[getTodayKey()] = data;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+  } catch(e) {}
+}
+
+function toggleItem(id) {
+  const data = loadData();
+  data[id] = !data[id];
+  saveData(data);
+  render();
+  const done = data[id];
+  if (done) {
+    const msg = ENCOURAGEMENTS[Math.floor(Math.random() * ENCOURAGEMENTS.length)];
+    showToast(`✓ ${LABELS[id]} — ${msg}`);
+  } else {
+    showToast(`已取消 ${LABELS[id]}`);
+  }
+}
+
+function render() {
+  const data = loadData();
+  const doneCount = ITEMS.filter(id => data[id]).length;
+
+  ITEMS.forEach(id => {
+    const item = document.getElementById('item-' + id);
+    const dot = document.getElementById('dot-' + id);
+    if (data[id]) {
+      item.classList.add('done');
+      dot.textContent = '✓';
+    } else {
+      item.classList.remove('done');
+      dot.textContent = '';
+    }
+  });
+
+  const pct = Math.round(doneCount / ITEMS.length * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('pcount').textContent = `${doneCount} / ${ITEMS.length} 完成`;
+}
+
+function resetToday() {
+  if (confirm('确定重置今天的晨间打卡吗？')) {
+    saveData({});
+    render();
+    showToast('已重置，明天继续加油 💪');
+  }
+}
+
+// 每日名言
+function renderQuote() {
+  const idx = new Date().getDate() % MORNING_QUOTES.length;
+  const q = MORNING_QUOTES[idx];
+  document.getElementById('quoteText').textContent = q.text;
+  document.querySelector('.quote-author').textContent = q.author;
+}
+
+let toastTimer;
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+}
+
+// 初始化
+render();
+renderQuote();
+</script>
+
+</body>
+</html>
