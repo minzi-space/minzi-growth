@@ -414,6 +414,14 @@
         </div>
         <div class="module-arrow">›</div>
       </div>
+      <div class="module-card" onclick="window.location.href='morning.html'">
+        <div class="module-icon" style="background:#FFF3E8;">🌅</div>
+        <div class="module-info">
+          <div class="title">早起的奇迹</div>
+          <div class="desc">晨间计划 · S.A.V.E.R.S · 90分钟</div>
+        </div>
+        <div class="module-arrow">›</div>
+      </div>
       <div class="module-card" onclick="window.location.href='qixiannü/七仙女下凡_领读课件.html'">
         <div class="module-icon" style="background:#FFF0F5;">🎭</div>
         <div class="module-info">
@@ -575,6 +583,7 @@ function saveCheckin(data) {
 
 // ─── 打卡项定义 ───
 const CHECKIN_ITEMS = [
+  { id: 'morning', emoji: '🌅', label: '完成晨间计划', desc: '冥想+运动+阅读+书写', link: 'morning.html' },
   { id: 'reading', emoji: '📖', label: '阅读30分钟', desc: '每天至少阅读半小时' },
   { id: 'exercise', emoji: '🏃', label: '运动', desc: '散步/拉伸/瑜伽都算' },
   { id: 'mood', emoji: '🧠', label: '情绪日记', desc: '记录今天的心情和反思' },
@@ -704,12 +713,14 @@ function renderCheckinFull() {
   let html = '';
   CHECKIN_ITEMS.forEach(item => {
     const done = !!todayData[item.id];
-    html += `<div class="checkin-row ${done ? 'done' : ''}" onclick="toggleCheckin('${item.id}')">
+    const linkAttr = item.link ? `data-link="${item.link}"` : '';
+    html += `<div class="checkin-row ${done ? 'done' : ''}" ${linkAttr} onclick="handleCheckinClick(this, '${item.id}')">
       <div class="circle">${done ? '✓' : ''}</div>
       <div class="cinfo">
         <div class="clabel">${item.emoji} ${item.label}</div>
         <div class="cdesc">${item.desc}</div>
       </div>
+      ${item.link ? '<div style="font-size:12px;color:var(--text-muted);">打开 ›</div>' : ''}
     </div>`;
   });
   document.getElementById('checkinFull').innerHTML = html;
@@ -735,6 +746,16 @@ function renderCheckinProgress() {
       <div class="status">今日完成 ${doneCount}/${total} 项</div>
     </div>
   `;
+}
+
+// ─── 带链接的打卡行点击处理 ───
+function handleCheckinClick(el, itemId) {
+  const link = el.getAttribute('data-link');
+  if (link) {
+    window.location.href = link;
+  } else {
+    toggleCheckin(itemId);
+  }
 }
 
 // ─── 切换打卡 ───
