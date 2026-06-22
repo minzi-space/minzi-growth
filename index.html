@@ -382,6 +382,125 @@
   @media (min-width: 420px) {
     body { max-width: 480px; }
   }
+
+  /* ── Check-in View Switcher ── */
+  #btnCheckinToday.active, #btnCheckinCalendar.active, #btnCheckinStats.active {
+    background: var(--primary) !important;
+    color: #fff !important;
+    border-color: var(--primary) !important;
+  }
+
+  /* ── Calendar ── */
+  .calendar-dow {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+  .calendar-dow span {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+    padding: 4px 0;
+  }
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  .calendar-day {
+    aspect-ratio: 1;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    position: relative;
+    background: var(--bg);
+    user-select: none;
+  }
+  .calendar-day:active { transform: scale(0.92); }
+  .calendar-day.empty { background: transparent; cursor: default; }
+  .calendar-day.today { font-weight: 700; color: var(--primary); }
+  .calendar-day.has-data { background: #E8F0E9; }
+  .calendar-day.has-data.partial { background: #FFF3ED; }
+  .calendar-day.all-done { background: #D5E8D4; }
+  .calendar-day .day-num { font-size: 13px; font-weight: 500; }
+  .calendar-day .day-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--primary);
+    margin-top: 2px;
+  }
+  .calendar-day.all-done .day-dot { background: #4A7A48; }
+  .calendar-day.selected {
+    outline: 2.5px solid var(--primary);
+    outline-offset: -1px;
+  }
+
+  /* ── Calendar Detail ── */
+  .detail-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-row .d-emoji { font-size: 20px; }
+  .detail-row .d-label { flex: 1; font-size: 14px; }
+  .detail-row .d-status { font-size: 13px; }
+  .detail-row.done .d-label { color: var(--primary); }
+  .detail-row.done .d-status { color: var(--primary); font-weight: 600; }
+  .detail-row.undone .d-label { color: var(--text-muted); }
+  .detail-row.undone .d-status { color: var(--text-muted); }
+
+  /* ── Stats Week Bars ── */
+  .week-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .week-bar-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    width: 32px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+  .week-bar-track {
+    flex: 1;
+    height: 22px;
+    background: var(--bg);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+  .week-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #6B8F71, #8FB996);
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-size: 11px;
+    color: #fff;
+    font-weight: 600;
+  }
+  .week-bar-count {
+    font-size: 12px;
+    color: var(--text-secondary);
+    width: 40px;
+    flex-shrink: 0;
+    text-align: right;
+  }
 </style>
 </head>
 <body>
@@ -510,11 +629,63 @@
 
   <!-- 打卡清单页 -->
   <div class="page" id="page-checkin">
-    <div class="section-title">✅ 今日打卡</div>
-    <div class="weekday-strip" id="weekdayStrip"></div>
-    <div class="checkin-full" id="checkinFull"></div>
-    <div class="section-title" style="margin-top:20px;">📊 打卡统计</div>
-    <div class="progress-row" id="checkinProgressRow"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 12px;">
+      <div class="section-title" style="margin:0;">✅ 打卡</div>
+      <div style="display:flex;gap:6px;">
+        <button id="btnCheckinToday" onclick="switchCheckinView('today')" style="background:var(--primary);color:#fff;border:none;padding:6px 14px;border-radius:16px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;">今日</button>
+        <button id="btnCheckinCalendar" onclick="switchCheckinView('calendar')" style="background:var(--bg);color:var(--text-secondary);border:1.5px solid var(--border);padding:6px 14px;border-radius:16px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;">日历</button>
+        <button id="btnCheckinStats" onclick="switchCheckinView('stats')" style="background:var(--bg);color:var(--text-secondary);border:1.5px solid var(--border);padding:6px 14px;border-radius:16px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;">统计</button>
+      </div>
+    </div>
+
+    <!-- 今日打卡视图 -->
+    <div id="checkinViewToday">
+      <div class="weekday-strip" id="weekdayStrip"></div>
+      <div class="checkin-full" id="checkinFull"></div>
+    </div>
+
+    <!-- 日历视图 -->
+    <div id="checkinViewCalendar" style="display:none;">
+      <div id="calendarHeader" style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;margin-bottom:8px;">
+        <button onclick="changeCalendarMonth(-1)" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-secondary);padding:4px 8px;">‹</button>
+        <div id="calendarTitle" style="font-size:16px;font-weight:700;color:var(--text);"></div>
+        <button onclick="changeCalendarMonth(1)" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-secondary);padding:4px 8px;">›</button>
+      </div>
+      <div id="calendarGrid" style="background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow-sm);margin-bottom:16px;"></div>
+      <div id="calendarDetail" style="background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow-sm);display:none;">
+        <div id="calendarDetailDate" style="font-size:15px;font-weight:700;margin-bottom:12px;color:var(--text);"></div>
+        <div id="calendarDetailItems"></div>
+      </div>
+    </div>
+
+    <!-- 统计视图 -->
+    <div id="checkinViewStats" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+        <div class="stat-card" id="statStreak" style="background:var(--card);border-radius:var(--radius);padding:20px 16px;text-align:center;box-shadow:var(--shadow-sm);">
+          <div style="font-size:32px;font-weight:800;color:var(--accent);" id="statStreakNum">0</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">连续打卡天数</div>
+        </div>
+        <div class="stat-card" style="background:var(--card);border-radius:var(--radius);padding:20px 16px;text-align:center;box-shadow:var(--shadow-sm);">
+          <div style="font-size:32px;font-weight:800;color:var(--primary);" id="statTotal">0</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">累计打卡天数</div>
+        </div>
+        <div class="stat-card" style="background:var(--card);border-radius:var(--radius);padding:20px 16px;text-align:center;box-shadow:var(--shadow-sm);">
+          <div style="font-size:32px;font-weight:800;color:#4A90D9;" id="statRate">0%</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">本月打卡率</div>
+        </div>
+        <div class="stat-card" style="background:var(--card);border-radius:var(--radius);padding:20px 16px;text-align:center;box-shadow:var(--shadow-sm);">
+          <div style="font-size:32px;font-weight:800;color:#9B59B6;" id="statAvg">0</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">日均完成项数</div>
+        </div>
+      </div>
+      <div style="background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow-sm);">
+        <div style="font-size:15px;font-weight:700;margin-bottom:14px;color:var(--text);">📊 最近7天打卡详情</div>
+        <div id="statWeekBars" style="display:flex;flex-direction:column;gap:10px;"></div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:20px;display:none;" id="checkinProgressTitle">📊 打卡统计</div>
+    <div class="progress-row" id="checkinProgressRow" style="display:none;"></div>
   </div>
 
 </main>
@@ -646,6 +817,9 @@ function init() {
   renderNotes();
   renderProgress();
   renderCheckinProgress();
+
+  // 初始化打卡视图
+  switchCheckinView('today');
 }
 
 // ─── 周进度条 ───
@@ -772,7 +946,11 @@ function toggleCheckin(itemId) {
   renderProgress();
   renderCheckinProgress();
   renderWeekdayStrip();
-  
+
+  // 如果日历或统计视图正在显示，也刷新
+  if (currentCheckinView === 'calendar') renderCalendar();
+  if (currentCheckinView === 'stats') renderCheckinStats();
+
   const item = CHECKIN_ITEMS.find(i => i.id === itemId);
   const done = checkinData[todayKey][itemId];
   showToast(done ? `✓ 完成 ${item.label}` : `已取消 ${item.label}`);
@@ -884,9 +1062,8 @@ function switchTab(tabName) {
 
   // 刷新（打卡数据可能变化）
   if (tabName === 'checkin') {
-    renderWeekdayStrip();
-    renderCheckinFull();
-    renderCheckinProgress();
+    // 重置到今日视图
+    switchCheckinView(currentCheckinView || 'today');
   }
   if (tabName === 'notes') renderNotes();
   if (tabName === 'home') {
@@ -915,6 +1092,241 @@ function showMessage(msg) {
 document.getElementById('noteModal').addEventListener('click', function(e) {
   if (e.target === this) closeNoteModal();
 });
+
+// ─── 打卡视图切换 ───
+let currentCheckinView = 'today';
+let calendarYear, calendarMonth;
+let selectedDateKey = '';
+
+function switchCheckinView(view) {
+  currentCheckinView = view;
+
+  document.getElementById('checkinViewToday').style.display = view === 'today' ? 'block' : 'none';
+  document.getElementById('checkinViewCalendar').style.display = view === 'calendar' ? 'block' : 'none';
+  document.getElementById('checkinViewStats').style.display = view === 'stats' ? 'block' : 'none';
+
+  document.getElementById('btnCheckinToday').classList.toggle('active', view === 'today');
+  document.getElementById('btnCheckinCalendar').classList.toggle('active', view === 'calendar');
+  document.getElementById('btnCheckinStats').classList.toggle('active', view === 'stats');
+
+  // 进度条只在今日视图显示
+  document.getElementById('checkinProgressTitle').style.display = view === 'today' ? 'block' : 'none';
+  document.getElementById('checkinProgressRow').style.display = view === 'today' ? 'flex' : 'none';
+
+  if (view === 'calendar') {
+    if (!calendarYear) {
+      const now = new Date();
+      calendarYear = now.getFullYear();
+      calendarMonth = now.getMonth();
+    }
+    renderCalendar();
+  } else if (view === 'stats') {
+    renderCheckinStats();
+  } else {
+    renderWeekdayStrip();
+    renderCheckinFull();
+    renderCheckinProgress();
+  }
+}
+
+// ─── 日历渲染 ───
+function renderCalendar() {
+  const dowNames = ['日', '一', '二', '三', '四', '五', '六'];
+  const checkinData = loadCheckin();
+
+  // 标题
+  const monthNames = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  document.getElementById('calendarTitle').textContent = `${calendarYear}年${monthNames[calendarMonth]}`;
+
+  // 星期头
+  let dowHtml = '<div class="calendar-dow">';
+  dowNames.forEach(d => { dowHtml += `<span>${d}</span>`; });
+  dowHtml += '</div>';
+
+  // 计算日历格子
+  const firstDay = new Date(calendarYear, calendarMonth, 1).getDay();
+  const daysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+  const todayKey = getToday();
+
+  let gridHtml = '<div class="calendar-grid">';
+
+  // 空白格
+  for (let i = 0; i < firstDay; i++) {
+    gridHtml += '<div class="calendar-day empty"></div>';
+  }
+
+  // 日期格
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key = `${calendarYear}-${String(calendarMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const dayData = checkinData[key];
+    let cls = 'calendar-day';
+    let dotHtml = '';
+
+    if (key === todayKey) cls += ' today';
+    if (key === selectedDateKey) cls += ' selected';
+    if (dayData) {
+      const total = CHECKIN_ITEMS.length;
+      const doneCount = Object.values(dayData).filter(Boolean).length;
+      if (doneCount > 0) {
+        if (doneCount === total) { cls += ' all-done'; }
+        else if (doneCount >= total * 0.5) { cls += ' has-data'; }
+        else { cls += ' has-data partial'; }
+        dotHtml = '<div class="day-dot"></div>';
+      }
+    }
+    gridHtml += `<div class="${cls}" data-date="${key}" onclick="renderCalendarDetail('${key}')">
+      <span class="day-num">${d}</span>${dotHtml}
+    </div>`;
+  }
+  gridHtml += '</div>';
+
+  document.getElementById('calendarGrid').innerHTML = dowHtml + gridHtml;
+
+  // 默认选中今天
+  if (document.getElementById('calendarDetail').style.display !== 'block') {
+    renderCalendarDetail(todayKey);
+  }
+}
+
+function changeCalendarMonth(delta) {
+  calendarMonth += delta;
+  if (calendarMonth > 11) { calendarMonth = 0; calendarYear++; }
+  if (calendarMonth < 0) { calendarMonth = 11; calendarYear--; }
+  renderCalendar();
+}
+
+function renderCalendarDetail(dateKey) {
+  selectedDateKey = dateKey;
+  renderCalendar();
+  const checkinData = loadCheckin();
+  const dayData = checkinData[dateKey] || {};
+  const d = new Date(dateKey + 'T00:00:00');
+  const dowNames = ['周日','周一','周二','周三','周四','周五','周六'];
+
+  // 高亮选中日期
+  document.querySelectorAll('.calendar-day').forEach(el => {
+    el.classList.remove('selected');
+  });
+  // 找到对应日期的格子（通过 onclick 属性匹配）
+  // 简单处理：先不实现高亮，避免复杂选择器
+
+  document.getElementById('calendarDetail').style.display = 'block';
+  document.getElementById('calendarDetailDate').textContent =
+    `${dateKey.slice(5).replace('-','月')}日 ${dowNames[d.getDay()]}`;
+
+  let html = '';
+  CHECKIN_ITEMS.forEach(item => {
+    const done = !!dayData[item.id];
+    html += `<div class="detail-row ${done ? 'done' : 'undone'}">
+      <span class="d-emoji">${item.emoji}</span>
+      <span class="d-label">${item.label}</span>
+      <span class="d-status">${done ? '✓ 已完成' : '○ 未完成'}</span>
+    </div>`;
+  });
+  document.getElementById('calendarDetailItems').innerHTML = html;
+}
+
+// ─── 统计渲染 ───
+function renderCheckinStats() {
+  const checkinData = loadCheckin();
+  const keys = Object.keys(checkinData).sort();
+  const todayKey = getToday();
+
+  // 连续打卡天数
+  let streak = 0;
+  let d = new Date();
+  while (true) {
+    const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const dayData = checkinData[key];
+    if (dayData && Object.values(dayData).some(Boolean)) {
+      streak++;
+      d.setDate(d.getDate() - 1);
+    } else {
+      break;
+    }
+  }
+
+  // 累计打卡天数
+  let totalDays = 0;
+  keys.forEach(k => {
+    const dayData = checkinData[k];
+    if (dayData && Object.values(dayData).some(Boolean)) totalDays++;
+  });
+
+  // 本月打卡率
+  const now = new Date();
+  const curMonthKeys = keys.filter(k => k.startsWith(`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`));
+  const daysSoFar = now.getDate();
+  const monthRate = curMonthKeys.length > 0 ? Math.round(totalDaysThisMonth() / daysSoFar * 100) : 0;
+
+  function totalDaysThisMonth() {
+    let count = 0;
+    for (let i = 1; i <= daysSoFar; i++) {
+      const key = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+      const dayData = checkinData[key];
+      if (dayData && Object.values(dayData).some(Boolean)) count++;
+    }
+    return count;
+  }
+  const actualMonthRate = daysSoFar > 0 ? Math.round(totalDaysThisMonth() / daysSoFar * 100) : 0;
+
+  // 日均完成项数
+  let totalItems = 0;
+  let totalCheckedItems = 0;
+  keys.forEach(k => {
+    const dayData = checkinData[k];
+    if (dayData) {
+      totalItems += CHECKIN_ITEMS.length;
+      totalCheckedItems += Object.values(dayData).filter(Boolean).length;
+    }
+  });
+  const avgItems = totalDays > 0 ? (totalCheckedItems / totalDays).toFixed(1) : 0;
+
+  document.getElementById('statStreakNum').textContent = streak;
+  document.getElementById('statTotal').textContent = totalDays;
+  document.getElementById('statRate').textContent = actualMonthRate + '%';
+  document.getElementById('statAvg').textContent = avgItems;
+
+  // 最近7天柱状图
+  renderWeekBars();
+}
+
+function totalDaysThisMonth() {
+  const checkinData = loadCheckin();
+  const now = new Date();
+  let count = 0;
+  const daysSoFar = now.getDate();
+  for (let i = 1; i <= daysSoFar; i++) {
+    const key = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+    const dayData = checkinData[key];
+    if (dayData && Object.values(dayData).some(Boolean)) count++;
+  }
+  return count;
+}
+
+function renderWeekBars() {
+  const checkinData = loadCheckin();
+  const dowNames = ['日','一','二','三','四','五','六'];
+  let html = '';
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const dayData = checkinData[key];
+    const doneCount = dayData ? Object.values(dayData).filter(Boolean).length : 0;
+    const total = CHECKIN_ITEMS.length;
+    const pct = total > 0 ? Math.round(doneCount / total * 100) : 0;
+    const isToday = key === getToday();
+    html += `<div class="week-bar-row">
+      <span class="week-bar-label" style="font-weight:${isToday?'700':'400'};color:${isToday?'var(--primary)':'var(--text-secondary)'};">${d.getMonth()+1}/${d.getDate()}<br><span style="font-size:10px;color:var(--text-muted);">周${dowNames[d.getDay()]}</span></span>
+      <div class="week-bar-track">
+        <div class="week-bar-fill" style="width:${pct}%;">${pct > 15 ? pct + '%' : ''}</div>
+      </div>
+      <span class="week-bar-count">${doneCount}/${total}</span>
+    </div>`;
+  }
+  document.getElementById('statWeekBars').innerHTML = html;
+}
 
 // ─── 启动 ───
 init();
